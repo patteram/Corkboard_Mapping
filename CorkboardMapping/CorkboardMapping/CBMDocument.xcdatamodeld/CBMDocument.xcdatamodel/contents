@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3400" systemVersion="13B42" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Card" representedClassName="Card" syncable="YES">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="connections" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Thread" inverseName="cards" inverseEntity="Thread" syncable="YES"/>
+        <relationship name="myCardType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CardType" inverseName="cardsOfType" inverseEntity="CardType" syncable="YES"/>
+    </entity>
+    <entity name="CardType" representedClassName="CardType" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="cardsOfType" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Card" inverseName="myCardType" inverseEntity="Card" syncable="YES"/>
+    </entity>
+    <entity name="Thread" representedClassName="Thread" syncable="YES">
+        <relationship name="cards" optional="YES" toMany="YES" minCount="2" maxCount="2" deletionRule="Nullify" destinationEntity="Card" inverseName="connections" inverseEntity="Card" syncable="YES"/>
+        <relationship name="myThreadType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ThreadType" inverseName="threadsOfType" inverseEntity="ThreadType" syncable="YES"/>
+    </entity>
+    <entity name="ThreadType" representedClassName="ThreadType" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="threadsOfType" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Thread" inverseName="myThreadType" inverseEntity="Thread" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CardType" positionX="160" positionY="192" width="128" height="88"/>
+        <element name="ThreadType" positionX="81" positionY="0" width="128" height="88"/>
+        <element name="Thread" positionX="277" positionY="-9" width="128" height="73"/>
+        <element name="Card" positionX="493" positionY="45" width="128" height="118"/>
+    </elements>
+</model>
