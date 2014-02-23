@@ -222,7 +222,8 @@
 				5E1F1A2318BAA88400C89AE0 /* CustomViews */,
 				5E1F1A2218BAA84C00C89AE0 /* WindowControllers */,
 			);
-			path = CoreDoc;
+			name = CoreDoc;
+			path = CorkboardMapping;
 			sourceTree = "<group>";
 		};
 		5EABAC8818B6C86E00B52D24 /* Supporting Files */ = {
