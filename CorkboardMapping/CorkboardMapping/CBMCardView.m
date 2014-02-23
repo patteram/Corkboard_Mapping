@@ -14,9 +14,7 @@
 @synthesize cardObject;
 @synthesize title;
 @synthesize body;
-//const NSString *CARD_TITLE = @"title";
-//const NSString *CARD_COLOR = @"cardType.color";
-//const NSString *CARD_BODY = @"b"
+
 const int BUFFER_SPACE = 4;
 
 - (id)initWithFrame:(NSRect)frame
@@ -75,8 +73,9 @@ const int BUFFER_SPACE = 4;
     // Drawing code here.
 }
 - (void)mouseDragged:(NSEvent *)theEvent{
-    
-    CGFloat x = self.frame.origin.x + theEvent.deltaX;
+  //  NSPoint *s = theEvent.mouseLocation;
+
+    CGFloat x = self.frame.origin.x + theEvent.deltaY;
     CGFloat y = self.frame.origin.y - theEvent.deltaY;
     
     [self setFrameOrigin: NSMakePoint(x, y) ];

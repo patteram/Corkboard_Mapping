@@ -138,16 +138,16 @@
 				5EABAB4718B3045900B52D24 /* CBMCorkboard.m */,
 				5EABAB2118B3043D00B52D24 /* CBMAppDelegate.h */,
 				5EABAB2218B3043D00B52D24 /* CBMAppDelegate.m */,
-				5EABAB2418B3043D00B52D24 /* MainMenu.xib */,
-				5EABAB2A18B3043D00B52D24 /* Images.xcassets */,
-				5EABAB2718B3043D00B52D24 /* CorkboardMapping.xcdatamodeld */,
-				5EABAB1618B3043D00B52D24 /* Supporting Files */,
 				5EABAB4C18B3049400B52D24 /* CBMCardView.h */,
 				5EABAB4D18B3049400B52D24 /* CBMCardView.m */,
 				5EABAB4F18B304A900B52D24 /* CBMCard.h */,
 				5EABAB5018B304A900B52D24 /* CBMCard.m */,
 				5EABAB5218B304B700B52D24 /* CBMCardType.h */,
 				5EABAB5318B304B700B52D24 /* CBMCardType.m */,
+				5EABAB2418B3043D00B52D24 /* MainMenu.xib */,
+				5EABAB2718B3043D00B52D24 /* CorkboardMapping.xcdatamodeld */,
+				5EABAB2A18B3043D00B52D24 /* Images.xcassets */,
+				5EABAB1618B3043D00B52D24 /* Supporting Files */,
 			);
 			path = CorkboardMapping;
 			sourceTree = "<group>";
@@ -499,6 +499,7 @@
 				5EABAB4218B3043D00B52D24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5EABAB4318B3043D00B52D24 /* Build configuration list for PBXNativeTarget "CorkboardMappingTests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +508,7 @@
 				5EABAB4518B3043D00B52D24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
