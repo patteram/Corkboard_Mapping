@@ -48,6 +48,8 @@
 /* Begin PBXFileReference section */
 		5E1F1A1F18B9690400C89AE0 /* CBMCardTypeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBMCardTypeManager.h; path = ../CBMCardTypeManager.h; sourceTree = "<group>"; };
 		5E1F1A2018B9690400C89AE0 /* CBMCardTypeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CBMCardTypeManager.m; path = ../CBMCardTypeManager.m; sourceTree = "<group>"; };
+		5E1F1A2918BAB5FF00C89AE0 /* CBMThreadTypeProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBMThreadTypeProtocol.h; sourceTree = "<group>"; };
+		5E1F1A2A18BAB7C500C89AE0 /* CBMCardTypeProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBMCardTypeProtocol.h; sourceTree = "<group>"; };
 		5EABAC7E18B6C86E00B52D24 /* CorkboardMapping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CorkboardMapping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EABAC8118B6C86E00B52D24 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5EABAC8418B6C86E00B52D24 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -163,6 +165,8 @@
 				5E1F1A2018B9690400C89AE0 /* CBMCardTypeManager.m */,
 				5EABACD918B7C7E000B52D24 /* CBMCardManager.h */,
 				5EABACDA18B7C7E000B52D24 /* CBMCardManager.m */,
+				5E1F1A2918BAB5FF00C89AE0 /* CBMThreadTypeProtocol.h */,
+				5E1F1A2A18BAB7C500C89AE0 /* CBMCardTypeProtocol.h */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -170,7 +174,7 @@
 		5EABAC7518B6C86E00B52D24 = {
 			isa = PBXGroup;
 			children = (
-				5EABAC8718B6C86E00B52D24 /* CoreDoc */,
+				5EABAC8718B6C86E00B52D24 /* CorkboardMapping */,
 				5EABACAB18B6C86E00B52D24 /* CoreDocTests */,
 				5EABAC8018B6C86E00B52D24 /* Frameworks */,
 				5EABAC7F18B6C86E00B52D24 /* Products */,
@@ -206,7 +210,7 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		5EABAC8718B6C86E00B52D24 /* CoreDoc */ = {
+		5EABAC8718B6C86E00B52D24 /* CorkboardMapping */ = {
 			isa = PBXGroup;
 			children = (
 				5EABAC9318B6C86E00B52D24 /* CBMDocument.h */,
@@ -222,7 +226,6 @@
 				5E1F1A2318BAA88400C89AE0 /* CustomViews */,
 				5E1F1A2218BAA84C00C89AE0 /* WindowControllers */,
 			);
-			name = CoreDoc;
 			path = CorkboardMapping;
 			sourceTree = "<group>";
 		};
@@ -511,8 +514,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoreDoc/CorkboardMapping-Prefix.pch";
-				INFOPLIST_FILE = "CoreDoc/CorkboardMapping-Info.plist";
+				GCC_PREFIX_HEADER = "CorkboardMapping/CorkboardMapping-Prefix.pch";
+				INFOPLIST_FILE = "CorkboardMapping/CorkboardMapping-Info.plist";
 				PRODUCT_NAME = CorkboardMapping;
 				WRAPPER_EXTENSION = app;
 			};
@@ -524,8 +527,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoreDoc/CorkboardMapping-Prefix.pch";
-				INFOPLIST_FILE = "CoreDoc/CorkboardMapping-Info.plist";
+				GCC_PREFIX_HEADER = "CorkboardMapping/CorkboardMapping-Prefix.pch";
+				INFOPLIST_FILE = "CorkboardMapping/CorkboardMapping-Info.plist";
 				PRODUCT_NAME = CorkboardMapping;
 				WRAPPER_EXTENSION = app;
 			};

@@ -59,6 +59,11 @@
     return card;
 }
 
+/*! Creates A CardType
+ \param string : the name of the type
+ \param color : the color of the card type
+ \returns CardType if it was created or nil if there is already a cardType or an error occured.
+ */
 -(CardType *)createCardType:(NSString *)string AndColor:(NSColor *)color{
     NSEntityDescription *cardType = [NSEntityDescription
                                        entityForName:@"CardType"
