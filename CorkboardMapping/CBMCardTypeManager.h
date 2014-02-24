@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CardType.h";
-@interface CBMCardTypeManager : NSObject
+#import "CardType.h"
+#import "CBMCardTypeProtocol.h"
+@interface CBMCardTypeManager : NSObject <CBMCardTypeProtocol>
 @property NSManagedObjectContext* myContext;
 
 -(id) initWithModelContext:(NSManagedObjectContext *)context;
--(CardType *)createCardType:(NSString *)string AndColor:(NSColor *)color;
+
 @end

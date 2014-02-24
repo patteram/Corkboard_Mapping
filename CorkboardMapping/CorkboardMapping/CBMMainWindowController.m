@@ -68,7 +68,7 @@
     corkboardView  = [[CBMCorkboard alloc]initWithFrame:NSMakeRect(0, 0, 3000, 3000)];
     [centerView addSubview:corkboardView];
     
-    
+
     // create the scroll view so that it fills the entire window
     // to do that we'll grab the frame of the window's contentView
     // theWindow is an outlet connected to a window instance in Interface Builder

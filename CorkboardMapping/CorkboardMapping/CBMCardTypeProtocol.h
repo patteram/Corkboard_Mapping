@@ -14,5 +14,5 @@
 -(NSArray * )getAllCardTypes;
 -(CardType *)createCardTypeWithName:(NSString *)name andColor:(NSColor *)color;
 -(void)deleteCardType:(CardType *)type;
--(BOOL)cardTypeExistsWithName:(NSSTring *)name andColor:(NSColor *)color;
+-(BOOL)cardTypeExistsWithName:(NSString *)name andColor:(NSColor *)color;
 @end
