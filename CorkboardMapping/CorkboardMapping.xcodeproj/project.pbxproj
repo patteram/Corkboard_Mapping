@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5E1F1A2118B9690400C89AE0 /* CBMCardTypeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A2018B9690400C89AE0 /* CBMCardTypeManager.m */; };
 		5E1F1A3018BAE64B00C89AE0 /* CBMGrowingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A2F18BAE64B00C89AE0 /* CBMGrowingView.m */; };
+		5E1F1A3618BC1B5500C89AE0 /* CardType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A3518BC1B5500C89AE0 /* CardType.m */; };
+		5E1F1A3918BC1B7200C89AE0 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A3818BC1B7200C89AE0 /* Card.m */; };
 		5EABAC8218B6C86E00B52D24 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EABAC8118B6C86E00B52D24 /* Cocoa.framework */; };
 		5EABAC8C18B6C86E00B52D24 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EABAC8A18B6C86E00B52D24 /* InfoPlist.strings */; };
 		5EABAC8E18B6C86E00B52D24 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABAC8D18B6C86E00B52D24 /* main.m */; };
@@ -28,8 +30,6 @@
 		5EABACC818B6D62300B52D24 /* CBMCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACC518B6D62300B52D24 /* CBMCardView.m */; };
 		5EABACCC18B6D65000B52D24 /* ThreadType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACCB18B6D65000B52D24 /* ThreadType.m */; };
 		5EABACCF18B6D65000B52D24 /* Thread.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACCE18B6D65000B52D24 /* Thread.m */; };
-		5EABACD218B6D65000B52D24 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACD118B6D65000B52D24 /* Card.m */; };
-		5EABACD518B6D65000B52D24 /* CardType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACD418B6D65000B52D24 /* CardType.m */; };
 		5EABACDB18B7C7E000B52D24 /* CBMCardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACDA18B7C7E000B52D24 /* CBMCardManager.m */; };
 		5EABACE218B9093400B52D24 /* CreateCardType.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EABACE118B9093400B52D24 /* CreateCardType.xib */; };
 		5EABACF118B931F800B52D24 /* CBMSearchAndDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACEF18B931F800B52D24 /* CBMSearchAndDisplayController.m */; };
@@ -53,6 +53,10 @@
 		5E1F1A2A18BAB7C500C89AE0 /* CBMCardTypeProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBMCardTypeProtocol.h; sourceTree = "<group>"; };
 		5E1F1A2E18BAE64B00C89AE0 /* CBMGrowingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMGrowingView.h; sourceTree = "<group>"; };
 		5E1F1A2F18BAE64B00C89AE0 /* CBMGrowingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMGrowingView.m; sourceTree = "<group>"; };
+		5E1F1A3418BC1B5500C89AE0 /* CardType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardType.h; sourceTree = "<group>"; };
+		5E1F1A3518BC1B5500C89AE0 /* CardType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardType.m; sourceTree = "<group>"; };
+		5E1F1A3718BC1B7200C89AE0 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Card.h; path = ../Card.h; sourceTree = "<group>"; };
+		5E1F1A3818BC1B7200C89AE0 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Card.m; path = ../Card.m; sourceTree = "<group>"; };
 		5EABAC7E18B6C86E00B52D24 /* CorkboardMapping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CorkboardMapping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EABAC8118B6C86E00B52D24 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5EABAC8418B6C86E00B52D24 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -86,10 +90,6 @@
 		5EABACCB18B6D65000B52D24 /* ThreadType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadType.m; sourceTree = "<group>"; };
 		5EABACCD18B6D65000B52D24 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
 		5EABACCE18B6D65000B52D24 /* Thread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Thread.m; sourceTree = "<group>"; };
-		5EABACD018B6D65000B52D24 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
-		5EABACD118B6D65000B52D24 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
-		5EABACD318B6D65000B52D24 /* CardType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardType.h; sourceTree = "<group>"; };
-		5EABACD418B6D65000B52D24 /* CardType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardType.m; sourceTree = "<group>"; };
 		5EABACD918B7C7E000B52D24 /* CBMCardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMCardManager.h; sourceTree = "<group>"; };
 		5EABACDA18B7C7E000B52D24 /* CBMCardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMCardManager.m; sourceTree = "<group>"; };
 		5EABACDD18B7C92800B52D24 /* CardAndThreadProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CardAndThreadProtocol.h; path = ../CardAndThreadProtocol.h; sourceTree = "<group>"; };
@@ -150,10 +150,11 @@
 		5E1F1A2518BAA8F500C89AE0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5EABACD318B6D65000B52D24 /* CardType.h */,
-				5EABACD418B6D65000B52D24 /* CardType.m */,
-				5EABACD018B6D65000B52D24 /* Card.h */,
-				5EABACD118B6D65000B52D24 /* Card.m */,
+				5E1F1A3718BC1B7200C89AE0 /* Card.h */,
+				5E1F1A3818BC1B7200C89AE0 /* Card.m */,
+				5EABAC9C18B6C86E00B52D24 /* CBMDocument.xcdatamodeld */,
+				5E1F1A3418BC1B5500C89AE0 /* CardType.h */,
+				5E1F1A3518BC1B5500C89AE0 /* CardType.m */,
 				5EABACCD18B6D65000B52D24 /* Thread.h */,
 				5EABACCB18B6D65000B52D24 /* ThreadType.m */,
 				5EABACCA18B6D65000B52D24 /* ThreadType.h */,
@@ -224,7 +225,6 @@
 				5EABACE118B9093400B52D24 /* CreateCardType.xib */,
 				5EABAC9918B6C86E00B52D24 /* MainMenu.xib */,
 				5EABAC9F18B6C86E00B52D24 /* Images.xcassets */,
-				5EABAC9C18B6C86E00B52D24 /* CBMDocument.xcdatamodeld */,
 				5EABAC8818B6C86E00B52D24 /* Supporting Files */,
 				5E1F1A2618BAABB200C89AE0 /* Managers */,
 				5E1F1A2518BAA8F500C89AE0 /* Model */,
@@ -368,17 +368,17 @@
 			files = (
 				5E1F1A3018BAE64B00C89AE0 /* CBMGrowingView.m in Sources */,
 				5E1F1A2118B9690400C89AE0 /* CBMCardTypeManager.m in Sources */,
+				5E1F1A3618BC1B5500C89AE0 /* CardType.m in Sources */,
 				5EABACC318B6D61200B52D24 /* CBMCorkboard.m in Sources */,
 				5EABAC8E18B6C86E00B52D24 /* main.m in Sources */,
+				5E1F1A3918BC1B7200C89AE0 /* Card.m in Sources */,
 				5EABACCF18B6D65000B52D24 /* Thread.m in Sources */,
 				5EABACCC18B6D65000B52D24 /* ThreadType.m in Sources */,
-				5EABACD518B6D65000B52D24 /* CardType.m in Sources */,
 				5EABACC818B6D62300B52D24 /* CBMCardView.m in Sources */,
 				5EABACDB18B7C7E000B52D24 /* CBMCardManager.m in Sources */,
 				5EABAC9518B6C86E00B52D24 /* CBMDocument.m in Sources */,
 				5EABACBD18B6D3C400B52D24 /* CBMMainWindowController.m in Sources */,
 				5EABACC218B6D61200B52D24 /* CBMCenteringView.m in Sources */,
-				5EABACD218B6D65000B52D24 /* Card.m in Sources */,
 				5EABAC9E18B6C86E00B52D24 /* CBMDocument.xcdatamodeld in Sources */,
 				5EABACF118B931F800B52D24 /* CBMSearchAndDisplayController.m in Sources */,
 			);

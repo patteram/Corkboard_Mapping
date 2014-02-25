@@ -1,8 +1,8 @@
 //
 //  CardType.h
-//  CoreDoc
+//  CorkboardMapping
 //
-//  Created by Ashley Patterson on 2/20/14.
+//  Created by Ashley Patterson on 2/24/14.
 //  Copyright (c) 2014 Ashley Patterson. All rights reserved.
 //
 
@@ -13,8 +13,8 @@
 
 @interface CardType : NSManagedObject
 
-@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) id color;
+@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *cardsOfType;
 @end
 

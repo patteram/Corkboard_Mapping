@@ -1,23 +1,23 @@
 //
 //  Card.h
-//  CoreDoc
+//  CorkboardMapping
 //
-//  Created by Ashley Patterson on 2/20/14.
+//  Created by Ashley Patterson on 2/24/14.
 //  Copyright (c) 2014 Ashley Patterson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Thread;
+@class CardType, Thread;
 
 @interface Card : NSManagedObject
 
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) id location;
 @property (nonatomic, retain) NSString * body;
+@property (nonatomic, retain) NSString * rect;
+@property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSSet *connections;
-@property (nonatomic, retain) NSManagedObject *myCardType;
+@property (nonatomic, retain) CardType *myCardType;
 @end
 
 @interface Card (CoreDataGeneratedAccessors)

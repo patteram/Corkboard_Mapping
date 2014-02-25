@@ -1,8 +1,8 @@
 //
 //  CardType.m
-//  CoreDoc
+//  CorkboardMapping
 //
-//  Created by Ashley Patterson on 2/20/14.
+//  Created by Ashley Patterson on 2/24/14.
 //  Copyright (c) 2014 Ashley Patterson. All rights reserved.
 //
 
@@ -12,8 +12,8 @@
 
 @implementation CardType
 
-@dynamic name;
 @dynamic color;
+@dynamic name;
 @dynamic cardsOfType;
 
 @end
