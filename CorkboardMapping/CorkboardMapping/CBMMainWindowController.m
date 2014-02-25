@@ -37,28 +37,36 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+    [self drawCorkboard];
+
     if([[self document] isKindOfClass: [NSPersistentDocument class]]){
         NSPersistentDocument *doc = [self document];
         NSManagedObjectContext *myContext = [doc managedObjectContext];
         CBMCardManager *cardManager = [[CBMCardManager alloc]initWithModelContext:myContext];
+       // CardType *one = [cardManager createCardType:@"Character" AndColor:[NSColor blueColor]];
+       // CardType *two =[cardManager createCardType:@"Scene" AndColor: [NSColor greenColor]];
+       // [cardManager createCardWithType:one andTitle:@"Bilbo Baggins" andBody:@"Hobbit from the shire"];
+       // [cardManager createCardWithType:two andTitle:@"Game of Riddles" andBody:@"Where Bilbo and Golumn face Off"];
         NSArray *array = [cardManager getAllCardsAndThreads];
         if(array != nil){
             NSLog(@"Not Nil");
             NSLog(@"Size = %lu", (unsigned long)[array count] );
-            for(Card *aCard in [cardManager getAllCardsAndThreads]){
-                NSLog(@"Title %@", [aCard title]);
-            }
-        }
+            [self createCardViews:array];
+                }
     }
    
     
-    [self drawCorkboard];
-   
+    
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 -(NSArray *)createCardViews:(NSArray *)array{
+    CGFloat x = 30;
+    CGFloat y = 30;
     for(Card *aCard in array){
-       // CBMCardView cardView = [CBMCardView alloc]initWithFrame:<#(NSRect)#> AndCBMCard:<#(Card *)#>
+        CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(x, y, 190, 120) AndCBMCard:aCard];
+        x = x + 100;
+        y = y + 100;
+        [corkboardView addSubview:cardView];
     }
     return nil;
 }
@@ -68,7 +76,6 @@
     corkboardView  = [[CBMCorkboard alloc]initWithFrame:NSMakeRect(0, 0, 3000, 3000)];
     [centerView addSubview:corkboardView];
     
-
     // create the scroll view so that it fills the entire window
     // to do that we'll grab the frame of the window's contentView
     // theWindow is an outlet connected to a window instance in Interface Builder

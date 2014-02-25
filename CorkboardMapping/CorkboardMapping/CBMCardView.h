@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Card.h"
 
-@interface CBMCardView : NSView{
+@interface CBMCardView : NSView <NSTextViewDelegate>{
     BOOL higlight;
     BOOL dragging;
 }

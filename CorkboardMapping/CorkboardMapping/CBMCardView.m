@@ -30,16 +30,17 @@ const int BUFFER_SPACE = 4;
     if(self){
         
         if(card != nil){
-            cardColor = [card valueForKeyPath:@"cardType.color"];
+            cardColor = [card valueForKeyPath:@"myCardType.color"];
             [self CBMsetUpTrackingAreaOnSelf];
             [self addSubview:[self CBMsetUpBodyTextAreaWithText:[card body]]];
             [self addSubview:[self CBMsetUpTitleTextAreaWithText:[card title]]];
             
             highlight = NO;
             dragging = NO;
-            [card addObserver:self forKeyPath:@"cardType.color" options:NSKeyValueObservingOptionNew context:nil];
+            [card addObserver:self forKeyPath:@"myCardType.color" options:NSKeyValueObservingOptionNew context:nil];
             [card addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
             [card addObserver:self forKeyPath:@"body" options:NSKeyValueObservingOptionNew context:nil];
+            cardObject = card; 
         }
     }
     return self;
@@ -160,6 +161,7 @@ const int BUFFER_SPACE = 4;
     [title alignCenter:self];
     [[title textContainer] setContainerSize:NSMakeSize(width*2, height)];
     [[title textContainer] setWidthTracksTextView:NO];
+    [title setDelegate:self]; 
     //set up scroll view
     NSScrollView *scrollview = [[NSScrollView alloc]initWithFrame:NSMakeRect(x, y, width, height-BUFFER_SPACE)];
     [scrollview setHasHorizontalScroller:YES];
@@ -179,13 +181,29 @@ const int BUFFER_SPACE = 4;
             [view setBackgroundColor:cardColor];
         }
     }else if ([keyPath isEqualToString:@"title"]){
-        [title setString:[object valueForKey:keyPath]];
+        //[title setString:[object valueForKey:keyPath]];
     }else if([keyPath isEqualToString:keyPath]){
-        [body setString:[object valueForKey:keyPath]];
+        //[body setString:[object valueForKey:keyPath]];
     }
     
     [self setNeedsDisplay:YES];
     
+}
+
+-(void)textDidChange:(NSNotification *)notification{
+    if( notification.object == title){
+        [cardObject setValue:[title string] forKey:@"title"]; 
+    }else if(notification.object == body){
+        [cardObject setValue:[body string] forKey:@"body"];
+    }
+}
+
+-(void)textDidBeginEditing:(NSNotification *)notification{
+
+}
+
+-(void)textDidEndEditing:(NSNotification *)notification{
+  
 }
 
 @end
