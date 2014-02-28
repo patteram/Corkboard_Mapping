@@ -9,6 +9,7 @@
 #import "CBMCardManager.h"
 #import "CardType.h"
 #import "Card.h"
+#import "Thread.h"
 
 @implementation CBMCardManager
 @synthesize myContext;
@@ -22,6 +23,13 @@
     return self;
 }
 -(NSArray*)getAllCardsAndThreads{
+    NSMutableArray *combinedArray = [[NSMutableArray alloc]init];
+    [combinedArray addObjectsFromArray:[self getAllCards]];
+    [combinedArray addObjectsFromArray:[self getAllThreads]];
+    return combinedArray;
+}
+
+-(NSArray *)getAllCards{
     NSEntityDescription *description = [NSEntityDescription entityForName:@"Card" inManagedObjectContext: myContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:description];
@@ -29,19 +37,74 @@
     NSArray *array = [myContext executeFetchRequest:request error:&error];
     if (array == nil)
     {
-        NSLog(@"There was an error %@", [error description]); // Deal with error...
+        NSLog(@"There was an error %@", [error description]);
     }
-    
-                                        
     return array;
 }
 
+-(NSArray *)getAllCardsAndAvoid:(NSArray *)criteria{
+    //first get array of all cards
+    NSEntityDescription *description = [NSEntityDescription entityForName:@"Card" inManagedObjectContext: myContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:description];
+    NSError *error;
+    NSArray *array = [myContext executeFetchRequest:request error:&error];
+    if (array == nil)
+    {
+        NSLog(@"There was an error %@", [error description]);
+    }
+    //now get cards that are not in avoiding criteria
+    NSMutableArray *filteredArray = [[NSMutableArray alloc]init];
+    for(Card *aCard in array){
+        if(![criteria containsObject:[aCard myCardType]]){
+            [filteredArray addObject:aCard];
+        }
+    }
+    return filteredArray;
+}
+
+-(NSArray *)getAllThreads{
+    NSEntityDescription *description = [NSEntityDescription entityForName:@"Thread" inManagedObjectContext:myContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    [request setEntity:description];
+    NSError *error;
+    NSArray *array = [myContext executeFetchRequest:request error:&error];
+    if (array == nil)
+    {
+        NSLog(@"There was an error in retrieving Cards%@", [error description]);
+    }
+    return array;
+}
+
+-(NSArray *)getAllThreadsAndAvoid:(NSArray *)criteria{
+    NSEntityDescription *description = [NSEntityDescription entityForName:@"Thread" inManagedObjectContext:myContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    [request setEntity:description];
+    NSError *error;
+    NSArray *array = [myContext executeFetchRequest:request error:&error];
+    if (array == nil)
+    {
+        NSLog(@"There was an error in retrieving Threads%@", [error description]);
+    }
+
+    NSMutableArray *filteredArray = [[NSMutableArray alloc]init];
+    for(Thread *aThread in array){
+        if(![criteria containsObject:[aThread myThreadType]]){
+            [filteredArray addObject:aThread];
+        }
+    }
+    return filteredArray;
+}
+
 -(NSArray*)getAllCardsAndThreadsAndAvoid:(NSArray *)criteria{
-    return nil;
+    NSMutableArray *array = [[NSMutableArray alloc]initWithArray:[self getAllCardsAndAvoid:criteria]];
+    [array addObjectsFromArray:[self getAllThreadsAndAvoid:criteria]];
+    return array;
 }
 -(NSArray*)searchOnCard:(Card *)card AndWithDepth:(NSInteger)depth{
     return nil;
 }
+
 
 -(Card *)createCardWithType:(CardType *)type{
     return [self createCardWithType:type andTitle:@"Title" andBody:@"Body"];
@@ -59,11 +122,7 @@
     return card;
 }
 
-/*! Creates A CardType
- \param string : the name of the type
- \param color : the color of the card type
- \returns CardType if it was created or nil if there is already a cardType or an error occured.
- */
+
 -(CardType *)createCardType:(NSString *)string AndColor:(NSColor *)color{
     NSEntityDescription *cardType = [NSEntityDescription
                                        entityForName:@"CardType"
@@ -76,6 +135,6 @@
  
     return type;
 }
-//-(BOOL)creatCardWithType:(CardType *)type
+
 
 @end
