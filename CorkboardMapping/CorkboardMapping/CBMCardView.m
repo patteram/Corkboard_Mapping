@@ -74,14 +74,10 @@ const int BUFFER_SPACE = 4;
     // Drawing code here.
 }
 - (void)mouseDragged:(NSEvent *)theEvent{
-  //  NSPoint *s = theEvent.mouseLocation;
-
-    CGFloat x = self.frame.origin.x + theEvent.deltaY;
-    CGFloat y = self.frame.origin.y - theEvent.deltaY;
-    
+    CGFloat x = self.frame.origin.x + theEvent.deltaX;
+    CGFloat y = self.frame.origin.y + theEvent.deltaY;
     [self setFrameOrigin: NSMakePoint(x, y) ];
     dragging = YES;
-    
     [self setNeedsDisplay:YES];
 }
 
