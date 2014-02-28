@@ -12,9 +12,39 @@
 @protocol CardAndThreadProtocol <NSObject>
 
 @required
+/*!
+ \returns NSArray of all threads and cards in the managed object context
+ */
 -(NSArray*)getAllCardsAndThreads;
+
+/*!
+ Returns all cards and thread that do not match the criteria. 
+ \param criteria: Array of CardType or ThreadType objects
+ \returns NSArray of all cards and threads.
+ */
 -(NSArray*)getAllCardsAndThreadsAndAvoid:(NSArray*)criteria;
+
+/*!
+ Returns an array of all cards and threads connected to this card between the thread
+ depth 0 to depth. Note: Array includes the original card.
+ \param card: the card you wish to search on. 
+ \param depth: how many thread connections to follow
+ \returns NSArray of all cards and threads that are connected to the original card
+ */
 -(NSArray*)searchOnCard:(Card *)card AndWithDepth:(NSInteger) depth;
+
+/*! Creates a card inside the managed context
+ Title of the card will be "Title" and body "Body" by default. To set at creation use other method.
+ \param type: the CardType of this card (should be a valid Card Type inside of managed context)
+ \returns the managed object card
+ */
 -(Card *)createCardWithType:(CardType *)cardType;
+
+/*! Creates a card inside the managed context
+ \param type: the CardType of this card (should be a valid Card Type inside of managed context)
+ \param title: the title of the card
+ \param body: the body of the card
+ \returns the managed object card
+ */
 -(Card *)createCardWithType:(CardType *)cardType andTitle:(NSString*)title andBody:(NSString *)body;
 @end
