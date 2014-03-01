@@ -38,6 +38,16 @@
                ReferencedContainer = "container:CorkboardMapping.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5EF611A418C26E8A00A7AD7F"
+               BuildableName = "CorkboardMapping_Tests.xctest"
+               BlueprintName = "CorkboardMapping_Tests"
+               ReferencedContainer = "container:CorkboardMapping.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

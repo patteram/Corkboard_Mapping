@@ -13,7 +13,7 @@
 #import "CardAndThreadProtocol.h"
 #import "CBMCardView.h"
 
-#import "CBMCardManager.h"
+#import "CBMCardAndThreadManager.h"
 
 
 @interface CBMMainWindowController ()
@@ -42,7 +42,7 @@
     if([[self document] isKindOfClass: [NSPersistentDocument class]]){
         NSPersistentDocument *doc = [self document];
         NSManagedObjectContext *myContext = [doc managedObjectContext];
-        CBMCardManager *cardManager = [[CBMCardManager alloc]initWithModelContext:myContext];
+        CBMCardAndThreadManager *cardManager = [[CBMCardAndThreadManager alloc]initWithModelContext:myContext];
        // CardType *one = [cardManager createCardType:@"Character" AndColor:[NSColor blueColor]];
        // CardType *two =[cardManager createCardType:@"Scene" AndColor: [NSColor greenColor]];
        // [cardManager createCardWithType:one andTitle:@"Bilbo Baggins" andBody:@"Hobbit from the shire"];

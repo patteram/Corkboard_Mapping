@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "Card.h"
 #import "CardType.h"
+#import "ThreadType.h"
+#import "ThreadType.h"
 @protocol CardAndThreadProtocol <NSObject>
 
 @required
@@ -46,5 +48,23 @@
  \param body: the body of the card
  \returns the managed object card
  */
--(Card *)createCardWithType:(CardType *)cardType andTitle:(NSString*)title andBody:(NSString *)body;
+-(Card *)createCardWithType:(CardType *)cardType AndTitle:(NSString*)title AndBody:(NSString *)body;
+/*!
+ Deletes the given card
+ \param cardToDelete:the card that will be deleted
+ */
+-(void)deleteCard:(Card *)cardToDelete;
+/*!
+Deletes the given thread
+ \param threadToDelete:thread that will be deleted
+*/
+-(void)deleteThread:(Thread *)threadToDelete;
+/*!
+ Creates a thread in the managed context
+ \param type: the thread type this thread should be
+ \param card: a card that is connected
+ \param card2: the other card that is connected
+ returns the newly created thread
+ */
+-(Thread *)createThreadWithType:(ThreadType *)threadType BetweenCard:(Card *)card AndCard:(Card *)card2;
 @end
