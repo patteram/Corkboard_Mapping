@@ -13,7 +13,7 @@ extern const float VARIES;
 }
 
 
-/*
+/*!
  The current magnification/minification of the view 
  */
 @property float currentScaleFactor;

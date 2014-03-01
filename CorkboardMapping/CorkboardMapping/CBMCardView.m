@@ -52,7 +52,6 @@ const int BUFFER_SPACE = 4;
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    
     NSBezierPath *cardPath = [NSBezierPath bezierPathWithRoundedRect:self.bounds xRadius:5 yRadius:5];
     [cardColor set];
     [cardPath fill];
@@ -73,7 +72,8 @@ const int BUFFER_SPACE = 4;
 	
     // Drawing code here.
 }
-- (void)mouseDragged:(NSEvent *)theEvent{
+
+- (void)mouseDragged:(NSEvent *)theEvent{ 
     CGFloat x = self.frame.origin.x + theEvent.deltaX;
     CGFloat y = self.frame.origin.y + theEvent.deltaY;
     [self setFrameOrigin: NSMakePoint(x, y) ];
@@ -87,7 +87,6 @@ const int BUFFER_SPACE = 4;
     [self setNeedsDisplay:YES];
 }
 - (void) mouseEntered:(NSEvent *)theEvent{
-    NSLog(@"Entered");
     highlight = YES;
     [self setNeedsDisplay:YES];
 }
@@ -106,10 +105,10 @@ const int BUFFER_SPACE = 4;
     [self addTrackingArea:areaToTrack];
 }
 
-/**
- Sets up the body text area of the card view
- Text view is on lower half of card and should have a space between the outer edges of card
- Returns a view that contains the body text area
+/*!
+ Sets up the body text area of the card view. Text view is on lower half of card and should have a space between the outer edges of card
+ \param text: the text to put on the body of the card
+ \returns a view that contains the body text area
  */
 -(NSView*) CBMsetUpBodyTextAreaWithText:(NSString*)text{
     CGFloat x = self.bounds.origin.x+BUFFER_SPACE;
@@ -136,10 +135,10 @@ const int BUFFER_SPACE = 4;
     return scrollview;
 }
 
-/**
- Sets up the title text area of the card view
- Title is at the top of the card.
- Returns a view that contains the title area
+/*!
+ Sets up the title text area of the card view. Title is at the top of the card.
+ \param text: the text to put as the title of the card
+ \returns a view that contains the title area
  */
 -(NSView*) CBMsetUpTitleTextAreaWithText:(NSString*)text{
     CGFloat x = self.bounds.origin.x+BUFFER_SPACE;
@@ -155,10 +154,11 @@ const int BUFFER_SPACE = 4;
     [title setBackgroundColor:[NSColor clearColor]];
     [title setString:text];
     [title alignCenter:self];
+    //text container is nessart for controlling size
     [[title textContainer] setContainerSize:NSMakeSize(width*2, height)];
     [[title textContainer] setWidthTracksTextView:NO];
     [title setDelegate:self]; 
-    //set up scroll view
+    //set up scroll view soif text gets to large
     NSScrollView *scrollview = [[NSScrollView alloc]initWithFrame:NSMakeRect(x, y, width, height-BUFFER_SPACE)];
     [scrollview setHasHorizontalScroller:YES];
     [scrollview setAutoresizingMask:NSViewWidthSizable |
@@ -177,9 +177,9 @@ const int BUFFER_SPACE = 4;
             [view setBackgroundColor:cardColor];
         }
     }else if ([keyPath isEqualToString:@"title"]){
-        //[title setString:[object valueForKey:keyPath]];
-    }else if([keyPath isEqualToString:keyPath]){
-        //[body setString:[object valueForKey:keyPath]];
+        [title setString:[object valueForKey:keyPath]];
+    }else if([keyPath isEqualToString:@"body"]){
+        [body setString:[object valueForKey:keyPath]];
     }
     
     [self setNeedsDisplay:YES];
@@ -194,13 +194,7 @@ const int BUFFER_SPACE = 4;
     }
 }
 
--(void)textDidBeginEditing:(NSNotification *)notification{
 
-}
-
--(void)textDidEndEditing:(NSNotification *)notification{
-  
-}
 
 @end
 

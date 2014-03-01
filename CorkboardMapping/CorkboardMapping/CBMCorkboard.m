@@ -22,7 +22,6 @@ const float MIN_ZOOM = .23;
     self = [super initWithFrame:frame];
     if (self) {
         NSLog(@"View is being created");
-        
         self.currentScaleFactor = 1.0f;
     }
     return self;
@@ -45,6 +44,7 @@ const float MIN_ZOOM = .23;
     [self resizeAndPositionFrame]; 
 }
 
+
 - (void) magnifyWithEvent:(NSEvent *)event{
     
     if([event magnification] > 0){
@@ -56,12 +56,9 @@ const float MIN_ZOOM = .23;
             self.currentScaleFactor += -.05;
         }
     }
-    
-    NSLog(@"%@",
-          [NSString stringWithFormat:@"ScaleFactor is %f", self.currentScaleFactor]);
     [self resizeAndPositionFrame];
 }
-/*
+/*!
  resizes the view based on current scale factor and centers the view within the the super view.
  */
 -(void)resizeAndPositionFrame{
@@ -87,8 +84,9 @@ const float MIN_ZOOM = .23;
     
 }
 
+
 -(void)rightMouseDown:(NSEvent *)theEvent{
-    
+    //plan would be to have a pop up menu
 }
 
 

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E1F1A2118B9690400C89AE0 /* CBMCardTypeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A2018B9690400C89AE0 /* CBMCardTypeManager.m */; };
+		5E1F1A2118B9690400C89AE0 /* CBMTypeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A2018B9690400C89AE0 /* CBMTypeManager.m */; };
 		5E1F1A3018BAE64B00C89AE0 /* CBMGrowingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A2F18BAE64B00C89AE0 /* CBMGrowingView.m */; };
 		5E1F1A3618BC1B5500C89AE0 /* CardType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A3518BC1B5500C89AE0 /* CardType.m */; };
 		5E1F1A3918BC1B7200C89AE0 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A3818BC1B7200C89AE0 /* Card.m */; };
@@ -46,8 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5E1F1A1F18B9690400C89AE0 /* CBMCardTypeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBMCardTypeManager.h; path = ../CBMCardTypeManager.h; sourceTree = "<group>"; };
-		5E1F1A2018B9690400C89AE0 /* CBMCardTypeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CBMCardTypeManager.m; path = ../CBMCardTypeManager.m; sourceTree = "<group>"; };
+		5E1F1A1F18B9690400C89AE0 /* CBMTypeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBMTypeManager.h; path = ../CBMTypeManager.h; sourceTree = "<group>"; };
+		5E1F1A2018B9690400C89AE0 /* CBMTypeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CBMTypeManager.m; path = ../CBMTypeManager.m; sourceTree = "<group>"; };
 		5E1F1A2918BAB5FF00C89AE0 /* CBMThreadTypeProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBMThreadTypeProtocol.h; sourceTree = "<group>"; };
 		5E1F1A2A18BAB7C500C89AE0 /* CBMCardTypeProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBMCardTypeProtocol.h; sourceTree = "<group>"; };
 		5E1F1A2E18BAE64B00C89AE0 /* CBMGrowingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMGrowingView.h; sourceTree = "<group>"; };
@@ -166,8 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				5EABACDD18B7C92800B52D24 /* CardAndThreadProtocol.h */,
-				5E1F1A1F18B9690400C89AE0 /* CBMCardTypeManager.h */,
-				5E1F1A2018B9690400C89AE0 /* CBMCardTypeManager.m */,
+				5E1F1A1F18B9690400C89AE0 /* CBMTypeManager.h */,
+				5E1F1A2018B9690400C89AE0 /* CBMTypeManager.m */,
 				5EABACD918B7C7E000B52D24 /* CBMCardAndThreadManager.h */,
 				5EABACDA18B7C7E000B52D24 /* CBMCardAndThreadManager.m */,
 				5E1F1A2918BAB5FF00C89AE0 /* CBMThreadTypeProtocol.h */,
@@ -367,7 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E1F1A3018BAE64B00C89AE0 /* CBMGrowingView.m in Sources */,
-				5E1F1A2118B9690400C89AE0 /* CBMCardTypeManager.m in Sources */,
+				5E1F1A2118B9690400C89AE0 /* CBMTypeManager.m in Sources */,
 				5E1F1A3618BC1B5500C89AE0 /* CardType.m in Sources */,
 				5EABACC318B6D61200B52D24 /* CBMCorkboard.m in Sources */,
 				5EABAC8E18B6C86E00B52D24 /* main.m in Sources */,

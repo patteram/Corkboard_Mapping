@@ -9,7 +9,7 @@
 #import "CBMSearchAndDisplayController.h"
 #import "CBMGrowingView.h"
 #import "CardType.h"
-#import "CBMCardTypeManager.h"
+#import "CBMTypeManager.h"
 @interface CBMSearchAndDisplayController ()
 
 @end
@@ -61,7 +61,7 @@
 }
 
 -(void)generateCardTypeButtons{
-    CBMCardTypeManager * generator = [[CBMCardTypeManager alloc]initWithModelContext:context];
+    CBMTypeManager * generator = [[CBMTypeManager alloc]initWithModelContext:context];
     [generator createCardTypeWithName:@"Title" andColor:[NSColor yellowColor] ];
     [generator createCardTypeWithName:@"Character" andColor:[NSColor blueColor]];
     [generator createCardTypeWithName:@"Scene" andColor:[NSColor redColor]];
