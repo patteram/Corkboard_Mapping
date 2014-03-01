@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "CardType.h"
 #import "CBMCardTypeProtocol.h"
-@interface CBMCardTypeManager : NSObject <CBMCardTypeProtocol>
+#import "CBMThreadTypeProtocol.h"
+@interface CBMTypeManager : NSObject <CBMCardTypeProtocol, CBMThreadTypeProtocol>
 @property NSManagedObjectContext* myContext;
 
 -(id) initWithModelContext:(NSManagedObjectContext *)context;

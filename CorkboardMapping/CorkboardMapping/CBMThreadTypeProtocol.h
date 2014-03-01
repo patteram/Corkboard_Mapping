@@ -26,7 +26,7 @@
  Deletes a thread type
  \param threadtype: the thread type to delete
  */
--(void)deleteThreadType:(ThreadType *) threadType;
+-(void)deleteThreadType:(ThreadType *) type;
 /*!
  Returns whether a thread type already exists with the name or color
  \param name: name of a type

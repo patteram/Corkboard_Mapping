@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Ashley Patterson. All rights reserved.
 //
 
-#import "CBMCardTypeManager.h"
+#import "CBMTypeManager.h"
 
-@implementation CBMCardTypeManager
+@implementation CBMTypeManager
 
 -(id)initWithModelContext:(NSManagedObjectContext *)context{
     self = [super init];
@@ -25,11 +25,11 @@
     if(cardEntity == nil){
         NSLog(@"Is nil");
     }
-   // CardType *cardType = [[CardType alloc]initWithEntity:cardEntity insertIntoManagedObjectContext:[self myContext]];
-    //[cardType setName:string];
-   // [cardType setColor:color];
+    CardType *cardType = [[CardType alloc]initWithEntity:cardEntity insertIntoManagedObjectContext:[self myContext]];
+    [cardType setName:string];
+    [cardType setColor:color];
 
-    return nil;
+    return cardType;
 }
 
 -(NSArray *)getAllCardTypes{
@@ -50,7 +50,27 @@
 }
 
 -(void)deleteCardType:(CardType *)type{
-    
+    [ [self myContext] deleteObject:type];
 }
 
+-(BOOL)threadTypeExistsWithName:(NSString *)name andColor:(NSColor *)color{
+    return NO;
+}
+
+-(void)deleteThreadType:(ThreadType *)type{
+    [ [self myContext] deleteObject:type];
+}
+
+-(ThreadType *)createThreadTypeWithName:(NSString *)name andColor:(NSColor *)color{
+    NSEntityDescription *threadEntity = [NSEntityDescription
+                                       entityForName:@"ThreadType"
+                                       inManagedObjectContext:[self myContext]];
+    if(threadEntity == nil){
+        NSLog(@"Is nil");
+    }
+    ThreadType *threadT = [[ThreadType alloc]initWithEntity:threadEntity insertIntoManagedObjectContext:[self myContext]];
+    [threadT setName:name];
+    [threadT setColor:color];
+    return threadT;
+}
 @end

@@ -10,6 +10,7 @@
 #import "CardType.h"
 #import "Card.h"
 #import "Thread.h"
+#import "ThreadType.h"
 
 @implementation CBMCardAndThreadManager
 @synthesize myContext;
@@ -22,6 +23,25 @@
     }
     return self;
 }
+
+-(void)deleteCard:(Card *)cardToDelete{
+    
+}
+-(void)deleteThread:(Thread *)threadToDelete{
+    
+}
+
+-(Thread *)createThreadWithType:(ThreadType *)threadType BetweenCard:(Card *)card AndCard:(Card *)card2{
+    NSEntityDescription *threadEntity = [NSEntityDescription
+                                       entityForName:@"Thread"
+                                       inManagedObjectContext:myContext];
+     Thread *thread = [[Thread alloc]
+                  initWithEntity:threadEntity insertIntoManagedObjectContext:myContext];
+   // [[thread setCards:[NSSet alloc]initW] ];
+    [thread setMyThreadType: threadType];
+       return thread;
+}
+
 -(NSArray*)getAllCardsAndThreads{
     NSMutableArray *combinedArray = [[NSMutableArray alloc]init];
     [combinedArray addObjectsFromArray:[self getAllCards]];
