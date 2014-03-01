@@ -22,11 +22,22 @@ CBMCardTypeManager *cardTypeManager;
 
 - (void)setUp
 {
+    NSString *STORE_TYPE = NSXMLStoreType;
+    NSString *STORE_FILENAME = @"CBMCardManagerTestXML.xml";
+    NSError *error;
+    NSURL *url = [NSURL URLWithString:STORE_FILENAME];
+    //NSURL *url = [applicationLogDirectory()
+          //        URLByAppendingPathComponent:STORE_FILENAME];
     [super setUp];
     NSArray *bundles = [NSArray arrayWithObject:[NSBundle bundleForClass:[self class]]];
     NSManagedObjectModel *objectModel = [NSManagedObjectModel mergedModelFromBundles:bundles];
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:objectModel];
-  
+    [psc addPersistentStoreWithType:NSXMLStoreType configuration:STORE_TYPE URL:url options:nil error:nil];
+    if(objectModel == nil || psc == nil){
+        NSLog(@"\n\nModel or store is nil\n\n");
+    }else{
+        NSLog(@"\n\nModel or store is not nil\n\n");
+    }
     context = [[NSManagedObjectContext alloc] init];
     context.persistentStoreCoordinator = psc;
     cardManager = [[CBMCardManager alloc]initWithModelContext:context];
@@ -46,9 +57,9 @@ CBMCardTypeManager *cardTypeManager;
 - (void)testExample
 {
     [cardTypeManager createCardTypeWithName:@"Character" andColor:[NSColor greenColor]];
-    NSArray *array = [cardTypeManager getAllCardTypes];
-    NSLog(@"%@", array);
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+   // NSArray *array = [cardTypeManager getAllCardTypes];
+  //  NSLog(@"%@", array);
+    //XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 }
 
 @end

@@ -23,7 +23,6 @@
 		5EABACA718B6C86E00B52D24 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EABACA618B6C86E00B52D24 /* XCTest.framework */; };
 		5EABACA818B6C86E00B52D24 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EABAC8118B6C86E00B52D24 /* Cocoa.framework */; };
 		5EABACB018B6C86E00B52D24 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EABACAE18B6C86E00B52D24 /* InfoPlist.strings */; };
-		5EABACB218B6C86E00B52D24 /* CoreDocTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACB118B6C86E00B52D24 /* CoreDocTests.m */; };
 		5EABACBD18B6D3C400B52D24 /* CBMMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACBC18B6D3C400B52D24 /* CBMMainWindowController.m */; };
 		5EABACC218B6D61200B52D24 /* CBMCenteringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACBF18B6D61200B52D24 /* CBMCenteringView.m */; };
 		5EABACC318B6D61200B52D24 /* CBMCorkboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACC118B6D61200B52D24 /* CBMCorkboard.m */; };
@@ -34,6 +33,7 @@
 		5EABACE218B9093400B52D24 /* CreateCardType.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EABACE118B9093400B52D24 /* CreateCardType.xib */; };
 		5EABACF118B931F800B52D24 /* CBMSearchAndDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACEF18B931F800B52D24 /* CBMSearchAndDisplayController.m */; };
 		5EABACF218B931F800B52D24 /* CBMSearchAndDisplayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EABACF018B931F800B52D24 /* CBMSearchAndDisplayController.xib */; };
+		5EF611A018C2596800A7AD7F /* CBMCardManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6119F18C2596800A7AD7F /* CBMCardManagerTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +42,7 @@
 			containerPortal = 5EABAC7618B6C86E00B52D24 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 5EABAC7D18B6C86E00B52D24;
-			remoteInfo = CoreDoc;
+			remoteInfo = CorkboardMapping;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -77,7 +77,6 @@
 		5EABACA618B6C86E00B52D24 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5EABACAD18B6C86E00B52D24 /* CorkboardMappingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CorkboardMappingTests-Info.plist"; sourceTree = "<group>"; };
 		5EABACAF18B6C86E00B52D24 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		5EABACB118B6C86E00B52D24 /* CoreDocTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDocTests.m; sourceTree = "<group>"; };
 		5EABACBB18B6D3C400B52D24 /* CBMMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMMainWindowController.h; sourceTree = "<group>"; };
 		5EABACBC18B6D3C400B52D24 /* CBMMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMMainWindowController.m; sourceTree = "<group>"; };
 		5EABACBE18B6D61200B52D24 /* CBMCenteringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMCenteringView.h; sourceTree = "<group>"; };
@@ -97,6 +96,7 @@
 		5EABACEE18B931F800B52D24 /* CBMSearchAndDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMSearchAndDisplayController.h; sourceTree = "<group>"; };
 		5EABACEF18B931F800B52D24 /* CBMSearchAndDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMSearchAndDisplayController.m; sourceTree = "<group>"; };
 		5EABACF018B931F800B52D24 /* CBMSearchAndDisplayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBMSearchAndDisplayController.xib; sourceTree = "<group>"; };
+		5EF6119F18C2596800A7AD7F /* CBMCardManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMCardManagerTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				5EABAC8718B6C86E00B52D24 /* CorkboardMapping */,
-				5EABACAB18B6C86E00B52D24 /* CoreDocTests */,
+				5EABACAB18B6C86E00B52D24 /* CorkboardMappingTests */,
 				5EABAC8018B6C86E00B52D24 /* Frameworks */,
 				5EABAC7F18B6C86E00B52D24 /* Products */,
 			);
@@ -246,13 +246,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5EABACAB18B6C86E00B52D24 /* CoreDocTests */ = {
+		5EABACAB18B6C86E00B52D24 /* CorkboardMappingTests */ = {
 			isa = PBXGroup;
 			children = (
-				5EABACB118B6C86E00B52D24 /* CoreDocTests.m */,
+				5EF6119F18C2596800A7AD7F /* CBMCardManagerTest.m */,
 				5EABACAC18B6C86E00B52D24 /* Supporting Files */,
 			);
-			path = CoreDocTests;
+			path = CorkboardMappingTests;
 			sourceTree = "<group>";
 		};
 		5EABACAC18B6C86E00B52D24 /* Supporting Files */ = {
@@ -280,7 +280,7 @@
 			dependencies = (
 			);
 			name = CorkboardMapping;
-			productName = CoreDoc;
+			productName = CorkboardMapping;
 			productReference = 5EABAC7E18B6C86E00B52D24 /* CorkboardMapping.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -298,7 +298,7 @@
 				5EABACAA18B6C86E00B52D24 /* PBXTargetDependency */,
 			);
 			name = CorkboardMappingTests;
-			productName = CoreDocTests;
+			productName = CorkboardMappingTests;
 			productReference = 5EABACA518B6C86E00B52D24 /* CorkboardMappingTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -388,7 +388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EABACB218B6C86E00B52D24 /* CoreDocTests.m in Sources */,
+				5EF611A018C2596800A7AD7F /* CBMCardManagerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,19 +543,19 @@
 		5EABACB918B6C86E00B52D24 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CoreDoc.app/Contents/MacOS/CoreDoc";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CorkboardMapping.app/Contents/MacOS/CorkboardMapping";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoreDoc/CoreDoc-Prefix.pch";
+				GCC_PREFIX_HEADER = "CorkboardMapping/CorkboardMapping-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "CoreDocTests/CorkboardMappingTests-Info.plist";
+				INFOPLIST_FILE = "CorkboardMappingTests/CorkboardMappingTests-Info.plist";
 				PRODUCT_NAME = CorkboardMappingTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -565,15 +565,15 @@
 		5EABACBA18B6C86E00B52D24 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CoreDoc.app/Contents/MacOS/CoreDoc";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CorkboardMapping.app/Contents/MacOS/CorkboardMapping";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoreDoc/CoreDoc-Prefix.pch";
-				INFOPLIST_FILE = "CoreDocTests/CorkboardMappingTests-Info.plist";
+				GCC_PREFIX_HEADER = "CorkboardMapping/CorkboardMapping-Prefix.pch";
+				INFOPLIST_FILE = "CorkboardMappingTests/CorkboardMappingTests-Info.plist";
 				PRODUCT_NAME = CorkboardMappingTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

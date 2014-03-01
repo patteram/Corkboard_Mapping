@@ -22,11 +22,14 @@
     NSEntityDescription *cardEntity = [NSEntityDescription
                                        entityForName:@"CardType"
                                        inManagedObjectContext:[self myContext]];
-    CardType *cardType = [[CardType alloc]initWithEntity:cardEntity insertIntoManagedObjectContext:[self myContext]];
-    [cardType setName:string];
-    [cardType setColor:color];
+    if(cardEntity == nil){
+        NSLog(@"Is nil");
+    }
+   // CardType *cardType = [[CardType alloc]initWithEntity:cardEntity insertIntoManagedObjectContext:[self myContext]];
+    //[cardType setName:string];
+   // [cardType setColor:color];
 
-    return cardType;
+    return nil;
 }
 
 -(NSArray *)getAllCardTypes{
