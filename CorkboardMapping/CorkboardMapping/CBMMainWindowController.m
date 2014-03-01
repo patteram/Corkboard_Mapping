@@ -37,7 +37,7 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    [self drawCorkboard];
+    [self setUpViews];
 
     if([[self document] isKindOfClass: [NSPersistentDocument class]]){
         NSPersistentDocument *doc = [self document];
@@ -71,33 +71,20 @@
     return nil;
 }
 
--(void)drawCorkboard{
+-(void)setUpViews{
     CBMCenteringView *centerView = [[CBMCenteringView alloc]initWithFrame:NSMakeRect(0, 0, 3000, 3000)];
     corkboardView  = [[CBMCorkboard alloc]initWithFrame:NSMakeRect(0, 0, 3000, 3000)];
     [centerView addSubview:corkboardView];
     
-    // create the scroll view so that it fills the entire window
-    // to do that we'll grab the frame of the window's contentView
-    // theWindow is an outlet connected to a window instance in Interface Builder
+    //create scrollView
     NSScrollView *scrollView = [[NSScrollView alloc] initWithFrame:
                                 [[[super window] contentView] frame]];
-    
-    // the scroll view should have both horizontal
-    // and vertical scrollers
     [scrollView setHasVerticalScroller:YES];
     [scrollView setHasHorizontalScroller:YES];
-    
-    // configure the scroller to have no visible border
-    [scrollView setBorderType:NSNoBorder];
-    //contentRectForFrameRect:
-    // set the autoresizing mask so that the scroll view will
-    // resize with the window
     [scrollView setAutoresizingMask:NSViewLayerContentsPlacementCenter];
-    
-    // set theImageView as the documentView of the scroll view
+  
     [scrollView setDocumentView:centerView];
-    // [scrollView setAllowsMagnification:YES];
-    [scrollView setDrawsBackground:NO];
+       [scrollView setDrawsBackground:NO];
     
    [[NSNotificationCenter defaultCenter]addObserver:centerView selector:@selector(viewFrameChanged:) name:NSViewFrameDidChangeNotification object:corkboardView];
     [[NSNotificationCenter defaultCenter]addObserver:centerView selector:@selector(viewFrameChanged:) name:NSViewFrameDidChangeNotification object:scrollView];
