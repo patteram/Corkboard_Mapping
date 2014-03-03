@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5EABAC7D18B6C86E00B52D24"
-               BuildableName = "CorkboardMapping.app"
-               BlueprintName = "CorkboardMapping"
+               BlueprintIdentifier = "5EF611BB18C2B16800A7AD7F"
+               BuildableName = "CorkboardMapping_.app"
+               BlueprintName = "CorkboardMapping_"
                ReferencedContainer = "container:CorkboardMapping.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,43 +28,13 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5EABACA418B6C86E00B52D24"
-               BuildableName = "CorkboardMappingTests.xctest"
-               BlueprintName = "CorkboardMappingTests"
-               ReferencedContainer = "container:CorkboardMapping.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5EF611A418C26E8A00A7AD7F"
-               BuildableName = "CorkboardMapping_Tests.xctest"
-               BlueprintName = "CorkboardMapping_Tests"
-               ReferencedContainer = "container:CorkboardMapping.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5EF611DB18C2B16800A7AD7F"
-               BuildableName = "CorkboardMapping_Tests.xctest"
-               BlueprintName = "CorkboardMapping_Tests"
-               ReferencedContainer = "container:CorkboardMapping.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5EABAC7D18B6C86E00B52D24"
-            BuildableName = "CorkboardMapping.app"
-            BlueprintName = "CorkboardMapping"
+            BlueprintIdentifier = "5EF611BB18C2B16800A7AD7F"
+            BuildableName = "CorkboardMapping_.app"
+            BlueprintName = "CorkboardMapping_"
             ReferencedContainer = "container:CorkboardMapping.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -81,9 +51,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5EABAC7D18B6C86E00B52D24"
-            BuildableName = "CorkboardMapping.app"
-            BlueprintName = "CorkboardMapping"
+            BlueprintIdentifier = "5EF611BB18C2B16800A7AD7F"
+            BuildableName = "CorkboardMapping_.app"
+            BlueprintName = "CorkboardMapping_"
             ReferencedContainer = "container:CorkboardMapping.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -99,9 +69,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5EABAC7D18B6C86E00B52D24"
-            BuildableName = "CorkboardMapping.app"
-            BlueprintName = "CorkboardMapping"
+            BlueprintIdentifier = "5EF611BB18C2B16800A7AD7F"
+            BuildableName = "CorkboardMapping_.app"
+            BlueprintName = "CorkboardMapping_"
             ReferencedContainer = "container:CorkboardMapping.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

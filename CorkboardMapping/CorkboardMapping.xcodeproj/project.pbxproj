@@ -33,6 +33,11 @@
 		5EF611A618C26E8A00A7AD7F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EABACA618B6C86E00B52D24 /* XCTest.framework */; };
 		5EF611AC18C26E8A00A7AD7F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EF611AA18C26E8A00A7AD7F /* InfoPlist.strings */; };
 		5EF611AE18C26E8A00A7AD7F /* CorkboardMapping_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF611AD18C26E8A00A7AD7F /* CorkboardMapping_Tests.m */; };
+		5EF611B718C29B7600A7AD7F /* CBMCreateCardTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF611B618C29B7600A7AD7F /* CBMCreateCardTypeController.m */; };
+		5EF611DD18C2B16800A7AD7F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EABACA618B6C86E00B52D24 /* XCTest.framework */; };
+		5EF611DE18C2B16800A7AD7F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EABAC8118B6C86E00B52D24 /* Cocoa.framework */; };
+		5EF611E618C2B16800A7AD7F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EF611E418C2B16800A7AD7F /* InfoPlist.strings */; };
+		5EF611E818C2B16800A7AD7F /* CorkboardMapping_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF611E718C2B16800A7AD7F /* CorkboardMapping_Tests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +102,23 @@
 		5EF611AB18C26E8A00A7AD7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5EF611AD18C26E8A00A7AD7F /* CorkboardMapping_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CorkboardMapping_Tests.m; sourceTree = "<group>"; };
 		5EF611AF18C26E8A00A7AD7F /* CorkboardMapping_Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CorkboardMapping_Tests-Prefix.pch"; sourceTree = "<group>"; };
+		5EF611B518C29B7600A7AD7F /* CBMCreateCardTypeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMCreateCardTypeController.h; sourceTree = "<group>"; };
+		5EF611B618C29B7600A7AD7F /* CBMCreateCardTypeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMCreateCardTypeController.m; sourceTree = "<group>"; };
+		5EF611C018C2B16800A7AD7F /* CorkboardMapping_-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CorkboardMapping_-Info.plist"; sourceTree = "<group>"; };
+		5EF611C218C2B16800A7AD7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5EF611C418C2B16800A7AD7F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5EF611C618C2B16800A7AD7F /* CorkboardMapping_-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CorkboardMapping_-Prefix.pch"; sourceTree = "<group>"; };
+		5EF611C818C2B16800A7AD7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		5EF611CA18C2B16800A7AD7F /* CBMDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBMDocument.h; sourceTree = "<group>"; };
+		5EF611CB18C2B16800A7AD7F /* CBMDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CBMDocument.m; sourceTree = "<group>"; };
+		5EF611CE18C2B16800A7AD7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CBMDocument.xib; sourceTree = "<group>"; };
+		5EF611D118C2B16800A7AD7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		5EF611D418C2B16800A7AD7F /* CBMDocument.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CBMDocument.xcdatamodel; sourceTree = "<group>"; };
+		5EF611D618C2B16800A7AD7F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5EF611DC18C2B16800A7AD7F /* CorkboardMapping_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CorkboardMapping_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EF611E318C2B16800A7AD7F /* CorkboardMapping_Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CorkboardMapping_Tests-Info.plist"; sourceTree = "<group>"; };
+		5EF611E518C2B16800A7AD7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5EF611E718C2B16800A7AD7F /* CorkboardMapping_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CorkboardMapping_Tests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,17 +138,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5EF611D918C2B16800A7AD7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EF611DE18C2B16800A7AD7F /* Cocoa.framework in Frameworks */,
+				5EF611DD18C2B16800A7AD7F /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		5E1F1A2218BAA84C00C89AE0 /* WindowControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5EF611B618C29B7600A7AD7F /* CBMCreateCardTypeController.m */,
+				5EF611B518C29B7600A7AD7F /* CBMCreateCardTypeController.h */,
 				5EABACBB18B6D3C400B52D24 /* CBMMainWindowController.h */,
 				5EABACBC18B6D3C400B52D24 /* CBMMainWindowController.m */,
 				5EABACEE18B931F800B52D24 /* CBMSearchAndDisplayController.h */,
 				5EABACEF18B931F800B52D24 /* CBMSearchAndDisplayController.m */,
 				5EABACF018B931F800B52D24 /* CBMSearchAndDisplayController.xib */,
+				5EABACE118B9093400B52D24 /* CreateCardType.xib */,
 			);
 			name = WindowControllers;
 			sourceTree = "<group>";
@@ -181,6 +215,8 @@
 			children = (
 				5EABAC8718B6C86E00B52D24 /* CorkboardMapping */,
 				5EF611A718C26E8A00A7AD7F /* CorkboardMapping_Tests */,
+				5EF611BE18C2B16800A7AD7F /* CorkboardMapping_ */,
+				5EF611E118C2B16800A7AD7F /* CorkboardMapping_Tests */,
 				5EABAC8018B6C86E00B52D24 /* Frameworks */,
 				5EABAC7F18B6C86E00B52D24 /* Products */,
 			);
@@ -191,6 +227,7 @@
 			children = (
 				5EABAC7E18B6C86E00B52D24 /* CorkboardMapping.app */,
 				5EF611A518C26E8A00A7AD7F /* CorkboardMapping_Tests.xctest */,
+				5EF611DC18C2B16800A7AD7F /* CorkboardMapping_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -221,7 +258,6 @@
 				5EABAC9318B6C86E00B52D24 /* CBMDocument.h */,
 				5EABAC9418B6C86E00B52D24 /* CBMDocument.m */,
 				5EABAC9618B6C86E00B52D24 /* CBMDocument.xib */,
-				5EABACE118B9093400B52D24 /* CreateCardType.xib */,
 				5EABAC9918B6C86E00B52D24 /* MainMenu.xib */,
 				5EABAC9F18B6C86E00B52D24 /* Images.xcassets */,
 				5EABAC8818B6C86E00B52D24 /* Supporting Files */,
@@ -264,6 +300,50 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		5EF611BE18C2B16800A7AD7F /* CorkboardMapping_ */ = {
+			isa = PBXGroup;
+			children = (
+				5EF611CA18C2B16800A7AD7F /* CBMDocument.h */,
+				5EF611CB18C2B16800A7AD7F /* CBMDocument.m */,
+				5EF611CD18C2B16800A7AD7F /* CBMDocument.xib */,
+				5EF611D018C2B16800A7AD7F /* MainMenu.xib */,
+				5EF611D618C2B16800A7AD7F /* Images.xcassets */,
+				5EF611D318C2B16800A7AD7F /* CBMDocument.xcdatamodeld */,
+				5EF611BF18C2B16800A7AD7F /* Supporting Files */,
+			);
+			path = CorkboardMapping_;
+			sourceTree = "<group>";
+		};
+		5EF611BF18C2B16800A7AD7F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5EF611C018C2B16800A7AD7F /* CorkboardMapping_-Info.plist */,
+				5EF611C118C2B16800A7AD7F /* InfoPlist.strings */,
+				5EF611C418C2B16800A7AD7F /* main.m */,
+				5EF611C618C2B16800A7AD7F /* CorkboardMapping_-Prefix.pch */,
+				5EF611C718C2B16800A7AD7F /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5EF611E118C2B16800A7AD7F /* CorkboardMapping_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				5EF611E718C2B16800A7AD7F /* CorkboardMapping_Tests.m */,
+				5EF611E218C2B16800A7AD7F /* Supporting Files */,
+			);
+			path = CorkboardMapping_Tests;
+			sourceTree = "<group>";
+		};
+		5EF611E218C2B16800A7AD7F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5EF611E318C2B16800A7AD7F /* CorkboardMapping_Tests-Info.plist */,
+				5EF611E418C2B16800A7AD7F /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -302,6 +382,23 @@
 			productReference = 5EF611A518C26E8A00A7AD7F /* CorkboardMapping_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		5EF611DB18C2B16800A7AD7F /* CorkboardMapping_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5EF611EC18C2B16800A7AD7F /* Build configuration list for PBXNativeTarget "CorkboardMapping_Tests" */;
+			buildPhases = (
+				5EF611D818C2B16800A7AD7F /* Sources */,
+				5EF611D918C2B16800A7AD7F /* Frameworks */,
+				5EF611DA18C2B16800A7AD7F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CorkboardMapping_Tests;
+			productName = CorkboardMapping_Tests;
+			productReference = 5EF611DC18C2B16800A7AD7F /* CorkboardMapping_Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -313,6 +410,9 @@
 				ORGANIZATIONNAME = "Ashley Patterson";
 				TargetAttributes = {
 					5EF611A418C26E8A00A7AD7F = {
+						TestTargetID = 5EABAC7D18B6C86E00B52D24;
+					};
+					5EF611DB18C2B16800A7AD7F = {
 						TestTargetID = 5EABAC7D18B6C86E00B52D24;
 					};
 				};
@@ -332,6 +432,7 @@
 			targets = (
 				5EABAC7D18B6C86E00B52D24 /* CorkboardMapping */,
 				5EF611A418C26E8A00A7AD7F /* CorkboardMapping_Tests */,
+				5EF611DB18C2B16800A7AD7F /* CorkboardMapping_Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -359,6 +460,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5EF611DA18C2B16800A7AD7F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EF611E618C2B16800A7AD7F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -374,6 +483,7 @@
 				5E1F1A3918BC1B7200C89AE0 /* Card.m in Sources */,
 				5EABACCF18B6D65000B52D24 /* Thread.m in Sources */,
 				5EABACCC18B6D65000B52D24 /* ThreadType.m in Sources */,
+				5EF611B718C29B7600A7AD7F /* CBMCreateCardTypeController.m in Sources */,
 				5EABACC818B6D62300B52D24 /* CBMCardView.m in Sources */,
 				5EABACDB18B7C7E000B52D24 /* CBMCardAndThreadManager.m in Sources */,
 				5EABAC9518B6C86E00B52D24 /* CBMDocument.m in Sources */,
@@ -389,6 +499,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EF611AE18C26E8A00A7AD7F /* CorkboardMapping_Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5EF611D818C2B16800A7AD7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EF611E818C2B16800A7AD7F /* CorkboardMapping_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +557,46 @@
 			isa = PBXVariantGroup;
 			children = (
 				5EF611AB18C26E8A00A7AD7F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5EF611C118C2B16800A7AD7F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5EF611C218C2B16800A7AD7F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5EF611C718C2B16800A7AD7F /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5EF611C818C2B16800A7AD7F /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		5EF611CD18C2B16800A7AD7F /* CBMDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5EF611CE18C2B16800A7AD7F /* Base */,
+			);
+			name = CBMDocument.xib;
+			sourceTree = "<group>";
+		};
+		5EF611D018C2B16800A7AD7F /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5EF611D118C2B16800A7AD7F /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		5EF611E418C2B16800A7AD7F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5EF611E518C2B16800A7AD7F /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -578,6 +736,46 @@
 			};
 			name = Release;
 		};
+		5EF611ED18C2B16800A7AD7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CorkboardMapping.app/Contents/MacOS/CorkboardMapping";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CorkboardMapping_/CorkboardMapping_-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "CorkboardMapping_Tests/CorkboardMapping_Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		5EF611EE18C2B16800A7AD7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CorkboardMapping.app/Contents/MacOS/CorkboardMapping";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CorkboardMapping_/CorkboardMapping_-Prefix.pch";
+				INFOPLIST_FILE = "CorkboardMapping_Tests/CorkboardMapping_Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -606,6 +804,16 @@
 				5EF611B418C26E8A00A7AD7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5EF611EC18C2B16800A7AD7F /* Build configuration list for PBXNativeTarget "CorkboardMapping_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5EF611ED18C2B16800A7AD7F /* Debug */,
+				5EF611EE18C2B16800A7AD7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
@@ -616,6 +824,16 @@
 				5EABAC9D18B6C86E00B52D24 /* CBMDocument.xcdatamodel */,
 			);
 			currentVersion = 5EABAC9D18B6C86E00B52D24 /* CBMDocument.xcdatamodel */;
+			path = CBMDocument.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		5EF611D318C2B16800A7AD7F /* CBMDocument.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5EF611D418C2B16800A7AD7F /* CBMDocument.xcdatamodel */,
+			);
+			currentVersion = 5EF611D418C2B16800A7AD7F /* CBMDocument.xcdatamodel */;
 			path = CBMDocument.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>CorkboardMapping_.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -23,6 +28,16 @@
 			<true/>
 		</dict>
 		<key>5EF611A418C26E8A00A7AD7F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5EF611BB18C2B16800A7AD7F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5EF611DB18C2B16800A7AD7F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

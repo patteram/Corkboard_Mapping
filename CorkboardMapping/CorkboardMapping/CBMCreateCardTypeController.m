@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Ashley Patterson. All rights reserved.
 //
 
-#import "CBMCreateCardController.h"
+#import "CBMCreateCardTypeController.h"
 
-@interface CBMCreateCardController ()
+@interface CBMCreateCardTypeController ()
 
 @end
 
-@implementation CBMCreateCardController
+@implementation CBMCreateCardTypeController
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -21,6 +21,20 @@
         // Initialization code here.
     }
     return self;
+}
+- (IBAction)colorSelection:(NSColorWell *)sender {
+}
+- (IBAction)textNameChanged:(NSTextField *)sender {
+}
+- (IBAction)create:(NSButton *)sender {
+    
+}
+
+
+
+
+- (IBAction)cancel:(NSButton *)sender {
+    [self close];
 }
 
 - (void)windowDidLoad

@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface CBMCreateCardController : NSWindowController
+@interface CBMCreateCardTypeController : NSWindowController
+@property (weak) IBOutlet NSButton *createButton;
 
 @end

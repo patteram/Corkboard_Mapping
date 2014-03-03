@@ -11,7 +11,8 @@
 #import "CBMSearchAndDisplayController.h"
 
 @implementation CBMDocument
-
+@synthesize cardAndThreadManager;
+@synthesize typeManager;
 - (id)init
 {
     self = [super init];
@@ -42,8 +43,20 @@
 -(void)makeWindowControllers{
     CBMMainWindowController    *window = [[CBMMainWindowController alloc]initWithWindowNibName:@"CBMDocument"];
     CBMSearchAndDisplayController *otherController = [[CBMSearchAndDisplayController alloc]initWithWindowNibName:@"CBMSearchAndDisplayController"];
+    cardAndThreadManager = [[CBMCardAndThreadManager alloc] initWithModelContext:[self managedObjectContext]];
+    typeManager = [[CBMTypeManager alloc]initWithModelContext:[self managedObjectContext]]; 
     [self addWindowController:window];
     [self addWindowController:otherController];
    // CBMMainWindowController    *window = [[CBM]]
+}
+
+-(IBAction)showSearchAndDisplay:(id)sender{
+  
+}
+-(IBAction)createThreadType:(id)sender{
+    
+}
+-(IBAction)createCardType:(id)sender{
+    
 }
 @end

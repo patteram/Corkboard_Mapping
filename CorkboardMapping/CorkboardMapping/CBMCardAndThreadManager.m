@@ -121,6 +121,7 @@
     [array addObjectsFromArray:[self getAllThreadsAndAvoid:criteria]];
     return array;
 }
+
 -(NSArray*)searchOnCard:(Card *)card AndWithDepth:(NSInteger)depth{
     return nil;
 }

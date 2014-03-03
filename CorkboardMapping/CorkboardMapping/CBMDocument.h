@@ -7,7 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "CBMCardAndThreadManager.h"
+#import "CBMTypeManager.h"
 @interface CBMDocument : NSPersistentDocument
-
+@property CBMTypeManager * typeManager;
+@property CBMCardAndThreadManager * cardAndThreadManager;
 @end
