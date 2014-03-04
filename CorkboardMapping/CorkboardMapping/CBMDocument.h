@@ -12,4 +12,8 @@
 @interface CBMDocument : NSPersistentDocument
 @property CBMTypeManager * typeManager;
 @property CBMCardAndThreadManager * cardAndThreadManager;
+@property NSWindowController *corkboard;
+@property NSWindowController *searchAndDisplay;
+@property NSWindowController *createCardType;
+@property NSWindowController *createThreadType; 
 @end

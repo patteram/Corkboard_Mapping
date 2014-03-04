@@ -13,6 +13,10 @@
 @implementation CBMDocument
 @synthesize cardAndThreadManager;
 @synthesize typeManager;
+@synthesize corkboard;
+@synthesize createCardType;
+@synthesize createThreadType;
+@synthesize searchAndDisplay;
 - (id)init
 {
     self = [super init];
@@ -41,17 +45,23 @@
 }
 
 -(void)makeWindowControllers{
-    CBMMainWindowController    *window = [[CBMMainWindowController alloc]initWithWindowNibName:@"CBMDocument"];
-    CBMSearchAndDisplayController *otherController = [[CBMSearchAndDisplayController alloc]initWithWindowNibName:@"CBMSearchAndDisplayController"];
+   corkboard = [[CBMMainWindowController alloc]initWithWindowNibName:@"CBMDocument"];
+   searchAndDisplay = [[CBMSearchAndDisplayController alloc]initWithWindowNibName:@"CBMSearchAndDisplayController"];
+    [searchAndDisplay windowTitleForDocumentDisplayName:[self displayName]];
+  //  NSLog(@"%@",[self displayName]);
     cardAndThreadManager = [[CBMCardAndThreadManager alloc] initWithModelContext:[self managedObjectContext]];
     typeManager = [[CBMTypeManager alloc]initWithModelContext:[self managedObjectContext]]; 
-    [self addWindowController:window];
-    [self addWindowController:otherController];
+    [self addWindowController:corkboard];
+    [self addWindowController:searchAndDisplay];
    // CBMMainWindowController    *window = [[CBM]]
 }
 
 -(IBAction)showSearchAndDisplay:(id)sender{
-  
+    if([[searchAndDisplay window] isVisible]){
+        [[searchAndDisplay window]orderOut:self];
+    }else{
+        [[searchAndDisplay window]orderFront:self];
+    }
 }
 -(IBAction)createThreadType:(id)sender{
     

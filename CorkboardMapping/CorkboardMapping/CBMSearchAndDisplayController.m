@@ -26,11 +26,12 @@
         NSPersistentDocument *doc = [self document];
         self.context = [doc managedObjectContext];
     }
-    [cardTable setDataSource:self];
-    [cardTable setDelegate:self];
-    boxHolder = [[CBMGrowingView alloc] initWithFrame:NSMakeRect(0.0, 0.0, scrollView.frame.size.width, 0.0)];
-    [scrollView setDocumentView:boxHolder];
-    [self generateCardTypeButtons];
+    [[self window]setTitle:@"HI"]; 
+//    [cardTable setDataSource:self];
+//    [cardTable setDelegate:self];
+//    boxHolder = [[CBMGrowingView alloc] initWithFrame:NSMakeRect(0.0, 0.0, scrollView.frame.size.width, 0.0)];
+//    [scrollView setDocumentView:boxHolder];
+//    [self generateCardTypeButtons];
     
 }
 - (IBAction)getNum:(NSSlider *)sender {

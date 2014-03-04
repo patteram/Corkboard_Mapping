@@ -22,14 +22,13 @@
     NSEntityDescription *cardEntity = [NSEntityDescription
                                        entityForName:@"CardType"
                                        inManagedObjectContext:[self myContext]];
-    if(cardEntity == nil){
-        NSLog(@"Is nil");
-    }
+  
     CardType *cardType = [[CardType alloc]initWithEntity:cardEntity insertIntoManagedObjectContext:[self myContext]];
     [cardType setName:string];
     [cardType setColor:color];
 
     return cardType;
+    return nil;
 }
 
 -(NSArray *)getAllCardTypes{
@@ -43,9 +42,28 @@
         NSLog(@"There was an error %@", [error description]); // Deal with error...
     }
     return array;
+    return nil;
+}
+
+-(NSArray *)getAllThreadTypes{
+    NSEntityDescription *description = [NSEntityDescription entityForName:@"ThreadType" inManagedObjectContext: [self myContext]];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:description];
+    NSError *error;
+    NSArray *array = [[self myContext] executeFetchRequest:request error:&error];
+    if (array == nil)
+    {
+        NSLog(@"There was an error %@", [error description]); // Deal with error...
+    }
+    return array;
 }
 
 -(BOOL)cardTypeExistsWithName:(id)name andColor:(NSColor *)color{
+    NSArray *cardTypes = [self getAllCardTypes];
+    for(CardType *aType in cardTypes){
+        if([[aType name] isEqualToString:name]){
+            return YES;
+        } }
     return NO;
 }
 
@@ -54,6 +72,16 @@
 }
 
 -(BOOL)threadTypeExistsWithName:(NSString *)name andColor:(NSColor *)color{
+    NSArray *threadTypes = [self getAllThreadTypes];
+    for(ThreadType *aType in threadTypes){
+        if([[aType name] isEqualToString:name]){
+                       return YES;
+            }
+        else if([[aType color]isEqualTo:color]){
+            return YES;
+        }
+    }
+
     return NO;
 }
 

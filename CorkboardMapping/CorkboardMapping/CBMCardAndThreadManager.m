@@ -25,10 +25,12 @@
 }
 
 -(void)deleteCard:(Card *)cardToDelete{
-    
+    [ [self myContext] deleteObject:cardToDelete];
+
 }
 -(void)deleteThread:(Thread *)threadToDelete{
-    
+    [ [self myContext] deleteObject:threadToDelete];
+
 }
 
 -(Thread *)createThreadWithType:(ThreadType *)threadType BetweenCard:(Card *)card AndCard:(Card *)card2{
