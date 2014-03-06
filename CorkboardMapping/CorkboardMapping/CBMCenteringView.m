@@ -45,7 +45,7 @@
         width = subView.frame.size.width;
     }
     [self setFrameSize:NSMakeSize(width, height)];
-    NSLog(@"CenteringView is now %f and %f", [self superview].frame.origin.x, [self superview].frame.origin.y);
+   // NSLog(@"CenteringView is now %f and %f", [self superview].frame.origin.x, [self superview].frame.origin.y);
     [self setNeedsDisplay:YES];
 }
 

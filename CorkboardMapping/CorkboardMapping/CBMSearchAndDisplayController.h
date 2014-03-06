@@ -8,14 +8,30 @@
 
 #import <Cocoa/Cocoa.h>
 #import "CBMGrowingView.h"
+#import "CBMTypeManager.h"
 
-@interface CBMSearchAndDisplayController : NSWindowController <NSTableViewDataSource, NSTableViewDelegate>
+@interface CBMSearchAndDisplayController : NSWindowController
 @property NSManagedObjectContext *context; 
-@property (weak) IBOutlet NSScrollView *scrollView;
 
+@property (weak) IBOutlet NSScrollView *cardDisplayScrollView;
+@property (weak) IBOutlet NSScrollView *threadDisplayScrollView;
+@property (weak) IBOutlet NSScrollView *threadSearchScrollView;
+@property (weak) IBOutlet NSScrollView *cardSearchScrollView;
+
+@property (strong) IBOutlet NSWindow *windowToName;
 
 @property (weak) IBOutlet NSSlider *threadSlider;
 @property (weak) IBOutlet NSTextField *sliderLabel;
-@property (weak) IBOutlet NSTableView *cardTable;
-@property CBMGrowingView * boxHolder;
+
+
+@property CBMGrowingView * cardDisplayHolder;
+@property CBMGrowingView * threadDisplayHolder;
+@property CBMGrowingView * cardSearchHolder;
+@property CBMGrowingView * threadSearchHolder;
+
+@property CBMTypeManager * typeManager;
+
+-(BOOL)isWindowVisible;
+-(void)setIsVisible:(BOOL)isVisible;
+
 @end

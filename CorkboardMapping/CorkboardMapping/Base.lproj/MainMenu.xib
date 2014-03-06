@@ -348,10 +348,16 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="mbT-xB-ZeH"/>
-                            <menuItem title="Show Search And Display" keyEquivalent="S" id="WmM-Xg-NAB">
+                            <menuItem title="Search And Display Window" alternate="YES" keyEquivalent="S" id="WmM-Xg-NAB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="showSearchAndDisplay:" target="-1" id="DIc-ay-lL3"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Create Card Type" alternate="YES" keyEquivalent="C" id="Miq-ZE-TnC">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showSearchAndDisplay:" target="-1" id="b45-24-oCk"/>
                                 </connections>
                             </menuItem>
                         </items>

@@ -38,8 +38,7 @@
 {
     [super windowDidLoad];
     [self setUpViews];
-
-    if([[self document] isKindOfClass: [NSPersistentDocument class]]){
+       if([[self document] isKindOfClass: [NSPersistentDocument class]]){
         NSPersistentDocument *doc = [self document];
         NSManagedObjectContext *myContext = [doc managedObjectContext];
         CBMCardAndThreadManager *cardManager = [[CBMCardAndThreadManager alloc]initWithModelContext:myContext];
@@ -49,15 +48,21 @@
        // [cardManager createCardWithType:two andTitle:@"Game of Riddles" andBody:@"Where Bilbo and Golumn face Off"];
         NSArray *array = [cardManager getAllCardsAndThreads];
         if(array != nil){
-            NSLog(@"Not Nil");
-            NSLog(@"Size = %lu", (unsigned long)[array count] );
+//            NSLog(@"Not Nil");
+//            NSLog(@"Size = %lu", (unsigned long)[array count] );
             [self createCardViews:array];
                 }
     }
    
     
-    
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+}
+/**
+ Stops window from closings and asks the document to handle a save and stop document
+ */
+-(BOOL)windowShouldClose:(id)sender{
+[[self document]canCloseDocumentWithDelegate:[self document] shouldCloseSelector:@selector(close) contextInfo:nil];
+    return NO;
 }
 -(NSArray *)createCardViews:(NSArray *)array{
     CGFloat x = 30;

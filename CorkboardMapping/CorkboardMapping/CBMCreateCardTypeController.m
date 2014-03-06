@@ -34,7 +34,7 @@
 
 
 - (IBAction)cancel:(NSButton *)sender {
-    [self close];
+    [[super window] performClose:self]; 
 }
 
 - (void)windowDidLoad

@@ -10,6 +10,7 @@
 #import "CBMGrowingView.h"
 #import "CardType.h"
 #import "CBMTypeManager.h"
+#import "CBMDocument.h"
 @interface CBMSearchAndDisplayController ()
 
 @end
@@ -17,65 +18,49 @@
 @implementation CBMSearchAndDisplayController
 @synthesize sliderLabel;
 @synthesize context;
-@synthesize cardTable;
-@synthesize scrollView;
-@synthesize boxHolder;
+@synthesize typeManager;
+@synthesize cardDisplayScrollView, cardSearchHolder, cardSearchScrollView, cardDisplayHolder;
+@synthesize threadDisplayHolder, threadDisplayScrollView, threadSearchHolder, threadSearchScrollView;
+
+@synthesize windowToName;
+
+
 -(void)windowDidLoad{
     [super windowDidLoad];
-    if([[self document] isKindOfClass: [NSPersistentDocument class]]){
-        NSPersistentDocument *doc = [self document];
-        self.context = [doc managedObjectContext];
+    if([[self document] isKindOfClass: [CBMDocument class]]){
+       CBMDocument *doc = [self document];
+        self.typeManager = [doc typeManager];
+        [windowToName setTitle:[doc displayName]];
     }
-    [[self window]setTitle:@"HI"]; 
-//    [cardTable setDataSource:self];
-//    [cardTable setDelegate:self];
-//    boxHolder = [[CBMGrowingView alloc] initWithFrame:NSMakeRect(0.0, 0.0, scrollView.frame.size.width, 0.0)];
-//    [scrollView setDocumentView:boxHolder];
-//    [self generateCardTypeButtons];
+    cardDisplayHolder =[[CBMGrowingView alloc]initWithFrame:NSMakeRect(0,0,cardDisplayScrollView.frame.size.width, 0.0)];
+    cardSearchHolder = [[CBMGrowingView alloc]initWithFrame:NSMakeRect(0,0, cardSearchScrollView.frame.size.width, 0.0)];
+    [cardSearchScrollView setDocumentView:cardSearchHolder];
+    [cardDisplayScrollView setDocumentView:cardDisplayHolder];
+    [self generateCardTypeButtons:cardDisplayHolder];
+    [self generateCardTypeButtons:cardSearchHolder];
     
 }
 - (IBAction)getNum:(NSSlider *)sender {
     NSLog(@"Num: %d ",[sender intValue]);
     [sliderLabel setStringValue:[NSString stringWithFormat:@"%i", [sender intValue]]];
-    
 }
 
--(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
-    return 5;
-}
-
--(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
-    NSButton * button = [[NSButton alloc]initWithFrame:NSMakeRect(0,0,tableView.frame.size.width,0)];
-
-  
-       [button setButtonType:NSSwitchButton];
-    [button setTarget:self];
-    [button setAction:@selector(actionSelectorCard:) ];
-    [button setTitle:@"This is title"];
-    [button setState:NSOnState];
-    
-    return button;
-}
 
 -(void)actionSelectorCard:(id)sender{
     NSLog(@"Was hit");
 }
 
--(void)generateCardTypeButtons{
-    CBMTypeManager * generator = [[CBMTypeManager alloc]initWithModelContext:context];
-    [generator createCardTypeWithName:@"Title" andColor:[NSColor yellowColor] ];
-    [generator createCardTypeWithName:@"Character" andColor:[NSColor blueColor]];
-    [generator createCardTypeWithName:@"Scene" andColor:[NSColor redColor]];
-    for(CardType *aType in [generator getAllCardTypes]){
-    [boxHolder addSubview:[self getButton:aType]];
+-(void)generateCardTypeButtons:(CBMGrowingView *)view{
+    [typeManager createCardTypeWithName:@"Scene" andColor:[NSColor yellowColor]];
+    [typeManager createCardTypeWithName:@"Character" andColor:[NSColor redColor]]; 
+    for(CardType *aType in [typeManager getAllCardTypes]){
+    [view addSubview:[self getButton:aType]];
     }
     
 }
 
 -(NSView *)getButton:(CardType *)aType{
-    NSButton * button = [[NSButton alloc]initWithFrame:NSMakeRect(0,0,boxHolder.frame.size.width,0)];
-    
-    
+    NSButton * button = [[NSButton alloc]initWithFrame:NSMakeRect(0,0,cardDisplayHolder.frame.size.width,0)];
     [button setButtonType:NSSwitchButton];
     [button setTarget:self];
     [button setAction:@selector(actionSelectorCard:) ];
@@ -84,5 +69,23 @@
     
     return button;
 }
+
+-(BOOL)isWindowVisible{
+   return [windowToName isVisible];
+}
+
+-(void)setIsVisible:(BOOL)isVisible{
+    //strange bug, have to use super window to orderfront is it isn't visible
+    //else you have to use the windowToName 
+    //but self connection to order out x.x 
+    if(isVisible){
+        [windowToName orderFront:self];
+        NSLog(@"Make visible");
+        [[super window] orderFront:self];
+    }else{
+        [windowToName orderOut:self]; 
+    }
+}
+
 
 @end

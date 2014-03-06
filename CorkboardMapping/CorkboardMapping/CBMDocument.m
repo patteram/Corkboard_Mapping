@@ -47,23 +47,30 @@
 -(void)makeWindowControllers{
    corkboard = [[CBMMainWindowController alloc]initWithWindowNibName:@"CBMDocument"];
    searchAndDisplay = [[CBMSearchAndDisplayController alloc]initWithWindowNibName:@"CBMSearchAndDisplayController"];
-    [searchAndDisplay windowTitleForDocumentDisplayName:[self displayName]];
-  //  NSLog(@"%@",[self displayName]);
+   [searchAndDisplay windowTitleForDocumentDisplayName:[self displayName]];
     cardAndThreadManager = [[CBMCardAndThreadManager alloc] initWithModelContext:[self managedObjectContext]];
     typeManager = [[CBMTypeManager alloc]initWithModelContext:[self managedObjectContext]]; 
     [self addWindowController:corkboard];
     [self addWindowController:searchAndDisplay];
-   // CBMMainWindowController    *window = [[CBM]]
 }
 
+-(void)close{
+    
+    [super close];
+}
 -(IBAction)showSearchAndDisplay:(id)sender{
-    if([[searchAndDisplay window] isVisible]){
-        [[searchAndDisplay window]orderOut:self];
+    NSLog(@"SearchAndDisplay");
+    
+    if([searchAndDisplay isWindowVisible]){
+        NSLog(@"Is Visible");
+        [ searchAndDisplay setIsVisible:NO];
     }else{
-        [[searchAndDisplay window]orderFront:self];
+        NSLog(@"Is Not Visible");
+        [searchAndDisplay setIsVisible:YES];
     }
 }
 -(IBAction)createThreadType:(id)sender{
+    
     
 }
 -(IBAction)createCardType:(id)sender{
