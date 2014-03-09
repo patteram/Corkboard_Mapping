@@ -9,12 +9,12 @@
 #import "CBMDocument.h"
 #import "CBMMainWindowController.h"
 #import "CBMSearchAndDisplayController.h"
+#import "CBMCreateCardTypeController.h"
 
 @implementation CBMDocument
 @synthesize cardAndThreadManager;
 @synthesize typeManager;
 @synthesize corkboard;
-@synthesize createCardType;
 @synthesize createThreadType;
 @synthesize searchAndDisplay;
 - (id)init
@@ -45,8 +45,11 @@
 }
 
 -(void)makeWindowControllers{
+    
    corkboard = [[CBMMainWindowController alloc]initWithWindowNibName:@"CBMDocument"];
    searchAndDisplay = [[CBMSearchAndDisplayController alloc]initWithWindowNibName:@"CBMSearchAndDisplayController"];
+    CBMCreateCardTypeController * createCardType =[[CBMCreateCardTypeController alloc]initWithWindowNibName:@"CreateCardType"];
+    [self addWindowController:createCardType];
    [searchAndDisplay windowTitleForDocumentDisplayName:[self displayName]];
     cardAndThreadManager = [[CBMCardAndThreadManager alloc] initWithModelContext:[self managedObjectContext]];
     typeManager = [[CBMTypeManager alloc]initWithModelContext:[self managedObjectContext]]; 
@@ -54,18 +57,14 @@
     [self addWindowController:searchAndDisplay];
 }
 
--(void)close{
-    
-    [super close];
-}
 -(IBAction)showSearchAndDisplay:(id)sender{
-    NSLog(@"SearchAndDisplay");
+  
     
     if([searchAndDisplay isWindowVisible]){
-        NSLog(@"Is Visible");
+  
         [ searchAndDisplay setIsVisible:NO];
     }else{
-        NSLog(@"Is Not Visible");
+  
         [searchAndDisplay setIsVisible:YES];
     }
 }
@@ -73,7 +72,39 @@
     
     
 }
+//-(void)close{
+//    typeManager removeAlertObservers
+//    [super close];
+//}
 -(IBAction)createCardType:(id)sender{
+    NSLog(@"%lu", (unsigned long)[[self windowControllers]count]);
+    BOOL cardTypeExists = NO;
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"self isKindOfClass: %@", [CBMCreateCardTypeController class]];
+    NSArray* arrayOfCardWindows = [[self windowControllers] filteredArrayUsingPredicate:predicate];
     
+   // NSLog(@"%lu", [arrayOfStrings count]);
+    CBMCreateCardTypeController * createCardType;
+//    for(CBMCreateCardTypeController *windowController in [self windowControllers]){
+//        NSLog(@"window controller"); 
+//              createCardType = windowController;
+//    }
+//    [self removeWindowController:createCardType];
+
+    
+//    for(CBMCreateCardTypeController *windowController in [self windowControllers]){
+//        createCardType = windowController;
+//        cardTypeExists = YES;
+//    }
+    
+    if([arrayOfCardWindows count] != 0 ){
+        NSLog(@"card type window exists");
+        [[[arrayOfCardWindows objectAtIndex:0]  window] orderFront:self];
+    }else{
+        NSLog(@"Creating card type window");
+        createCardType = [[CBMCreateCardTypeController alloc]initWithWindowNibName:@"CreateCardType"];
+       
+        [self addWindowController:createCardType];
+         [[createCardType window] orderFront:self];
+    }
 }
 @end

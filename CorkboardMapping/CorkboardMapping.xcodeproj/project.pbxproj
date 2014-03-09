@@ -97,6 +97,7 @@
 		5EABACEE18B931F800B52D24 /* CBMSearchAndDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMSearchAndDisplayController.h; sourceTree = "<group>"; };
 		5EABACEF18B931F800B52D24 /* CBMSearchAndDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMSearchAndDisplayController.m; sourceTree = "<group>"; };
 		5EABACF018B931F800B52D24 /* CBMSearchAndDisplayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBMSearchAndDisplayController.xib; sourceTree = "<group>"; };
+		5EDB05C018CAEA0100DB3D54 /* CBMTypeAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBMTypeAlert.h; sourceTree = "<group>"; };
 		5EF611A518C26E8A00A7AD7F /* CorkboardMapping_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CorkboardMapping_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EF611A918C26E8A00A7AD7F /* CorkboardMapping_Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CorkboardMapping_Tests-Info.plist"; sourceTree = "<group>"; };
 		5EF611AB18C26E8A00A7AD7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -206,6 +207,7 @@
 				5EABACDA18B7C7E000B52D24 /* CBMCardAndThreadManager.m */,
 				5E1F1A2918BAB5FF00C89AE0 /* CBMThreadTypeProtocol.h */,
 				5E1F1A2A18BAB7C500C89AE0 /* CBMCardTypeProtocol.h */,
+				5EDB05C018CAEA0100DB3D54 /* CBMTypeAlert.h */,
 			);
 			name = Managers;
 			sourceTree = "<group>";

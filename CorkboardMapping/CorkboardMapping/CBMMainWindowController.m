@@ -57,13 +57,12 @@
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
-/**
- Stops window from closings and asks the document to handle a save and stop document
- */
--(BOOL)windowShouldClose:(id)sender{
-[[self document]canCloseDocumentWithDelegate:[self document] shouldCloseSelector:@selector(close) contextInfo:nil];
-    return NO;
+
+
+-(BOOL)shouldCloseDocument{
+    return YES;
 }
+
 -(NSArray *)createCardViews:(NSArray *)array{
     CGFloat x = 30;
     CGFloat y = 30;

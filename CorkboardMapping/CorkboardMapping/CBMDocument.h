@@ -15,6 +15,6 @@
 @property CBMCardAndThreadManager * cardAndThreadManager;
 @property NSWindowController *corkboard;
 @property CBMSearchAndDisplayController *searchAndDisplay;
-@property NSWindowController *createCardType;
+
 @property NSWindowController *createThreadType; 
 @end
