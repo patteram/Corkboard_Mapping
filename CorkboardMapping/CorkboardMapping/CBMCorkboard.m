@@ -67,7 +67,7 @@ const float MIN_ZOOM = .23;
     frame.size.width = bounds.size.width * self.currentScaleFactor;
     frame.size.height = bounds.size.height * self.currentScaleFactor;
     [self setFrameSize: frame.size];
-    [self setBoundsSize: bounds.size];  // Restore the view's bounds, which causes the view to be scaled.
+    [self setBoundsSize: bounds.size];  
     
     CGFloat differenceX = 0;
     CGFloat differenceY = 0; //change position of view, so that if it is smaller than view it will need to got to center of view

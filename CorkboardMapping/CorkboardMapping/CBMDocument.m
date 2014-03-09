@@ -72,29 +72,18 @@
     
     
 }
-//-(void)close{
-//    typeManager removeAlertObservers
-//    [super close];
-//}
+-(void)close{
+    
+    [super close];
+    //[searchAndDisplay close];
+}
 -(IBAction)createCardType:(id)sender{
     NSLog(@"%lu", (unsigned long)[[self windowControllers]count]);
-    BOOL cardTypeExists = NO;
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"self isKindOfClass: %@", [CBMCreateCardTypeController class]];
     NSArray* arrayOfCardWindows = [[self windowControllers] filteredArrayUsingPredicate:predicate];
     
-   // NSLog(@"%lu", [arrayOfStrings count]);
-    CBMCreateCardTypeController * createCardType;
-//    for(CBMCreateCardTypeController *windowController in [self windowControllers]){
-//        NSLog(@"window controller"); 
-//              createCardType = windowController;
-//    }
-//    [self removeWindowController:createCardType];
+      CBMCreateCardTypeController * createCardType;
 
-    
-//    for(CBMCreateCardTypeController *windowController in [self windowControllers]){
-//        createCardType = windowController;
-//        cardTypeExists = YES;
-//    }
     
     if([arrayOfCardWindows count] != 0 ){
         NSLog(@"card type window exists");

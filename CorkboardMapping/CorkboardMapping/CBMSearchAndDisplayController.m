@@ -11,11 +11,13 @@
 #import "CardType.h"
 #import "CBMTypeManager.h"
 #import "CBMDocument.h"
+#import "CBMCheckboxCard.h"
 @interface CBMSearchAndDisplayController ()
 
 @end
 
 @implementation CBMSearchAndDisplayController
+NSString *CARD_TYPE_ARRAY = @"cardTypes";
 @synthesize sliderLabel;
 @synthesize context;
 @synthesize typeManager;
@@ -30,7 +32,7 @@
     if([[self document] isKindOfClass: [CBMDocument class]]){
        CBMDocument *doc = [self document];
         self.typeManager = [doc typeManager];
-        [typeManager addObserver:self forKeyPath:@"cardTypes" options:NSKeyValueChangeInsertion|NSKeyValueChangeRemoval context:nil];
+        [typeManager addObserver:self forKeyPath:CARD_TYPE_ARRAY options:NSKeyValueChangeInsertion|NSKeyValueChangeRemoval context:nil];
         [windowToName setTitle:[doc displayName]];
     }
     cardDisplayHolder =[[CBMGrowingView alloc]initWithFrame:NSMakeRect(0,0,cardDisplayScrollView.frame.size.width, 0.0)];
@@ -61,14 +63,12 @@
 }
 
 -(NSView *)getButton:(CardType *)aType{
-    NSButton * button = [[NSButton alloc]initWithFrame:NSMakeRect(0,0,cardDisplayHolder.frame.size.width,0)];
-    [button setButtonType:NSSwitchButton];
-    [button setTarget:self];
-    [button setAction:@selector(actionSelectorCard:) ];
-    [button setTitle:[aType name]];
-    [button setState:NSOnState];
+    CBMCheckboxCard * cardSection = [[CBMCheckboxCard alloc]initWithFrame:NSMakeRect(0,0,cardDisplayHolder.frame.size.width,0) andCardType:aType];
+    [[cardSection checkbox] setTarget:self];
+    [[cardSection checkbox] setAction:@selector(actionSelectorCard:) ];
+  
     
-    return button;
+    return cardSection;
 }
 
 -(BOOL)isWindowVisible{
@@ -89,25 +89,26 @@
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    NSLog(@"key path: %@", keyPath);
-    if([keyPath isEqualToString:@"cardTypes"]){
-    NSSet *old =  [change objectForKey:NSKeyValueChangeOldKey];
-    NSSet *new = [change objectForKey:NSKeyValueChangeNewKey];
-    NSLog(@"%lu %lu", [old count], [new count]);
+    if([keyPath isEqualToString:CARD_TYPE_ARRAY]){
+        NSSet *old =  [change objectForKey:NSKeyValueChangeOldKey];
+        NSSet *new = [change objectForKey:NSKeyValueChangeNewKey];
         if([old count] > [new count]){
-            //remove code
+                //remove code
         }else{
             NSSet* changed = [new filteredSetUsingPredicate:
-                                          [NSPredicate predicateWithFormat:@"NOT objectID IN %@",old]];
+                              [NSPredicate predicateWithFormat:@"NOT objectID IN %@",old]];
             for( CardType *aCard in changed){
                 [cardDisplayHolder addSubview:[self getButton:aCard]];
-                [cardSearchHolder addSubview:[self getButton:aCard]]; 
+                [cardSearchHolder addSubview:[self getButton:aCard]];
             }
         }
     }
     
 }
 
-
+-(void)close{
+    [typeManager removeObserver:self forKeyPath:CARD_TYPE_ARRAY];
+    [super close];
+}
 
 @end

@@ -37,7 +37,9 @@
     NSColor * color = [colorWell color];
     if(![manager cardTypeExistsWithName:typeName andColor:color]){
         NSLog(@"Type created");
-        [manager createCardTypeWithName:typeName andColor:color]; 
+        [manager createCardTypeWithName:typeName andColor:color];
+        [[self window]performClose:self];
+        [[self document]removeWindowController:self];
     }
     
 }

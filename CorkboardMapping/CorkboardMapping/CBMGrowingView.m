@@ -34,7 +34,7 @@ const int ROW_HEIGHT = 25;
     [view setFrameOrigin:point];
     [view setFrameSize:NSMakeSize(view.frame.size.width, ROW_HEIGHT+0.0)];
     [super addSubview:view];
-    [self setFrameSize:NSMakeSize(self.frame.size.width, height)];
+    [self setFrameSize:NSMakeSize(self.frame.size.width, height+ROW_HEIGHT/4)];
 }
 
 -(BOOL)isFlipped{

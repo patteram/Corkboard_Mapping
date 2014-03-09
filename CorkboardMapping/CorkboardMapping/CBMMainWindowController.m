@@ -23,7 +23,8 @@
 @implementation CBMMainWindowController
 
 @synthesize corkboardView;
-
+CardType *one;
+CBMCardAndThreadManager * cardManager;
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
@@ -41,8 +42,8 @@
        if([[self document] isKindOfClass: [NSPersistentDocument class]]){
         NSPersistentDocument *doc = [self document];
         NSManagedObjectContext *myContext = [doc managedObjectContext];
-        CBMCardAndThreadManager *cardManager = [[CBMCardAndThreadManager alloc]initWithModelContext:myContext];
-       // CardType *one = [cardManager createCardType:@"Character" AndColor:[NSColor blueColor]];
+        cardManager = [[CBMCardAndThreadManager alloc]initWithModelContext:myContext];
+        one = [cardManager createCardType:@"Character" AndColor:[NSColor blueColor]];
        // CardType *two =[cardManager createCardType:@"Scene" AndColor: [NSColor greenColor]];
        // [cardManager createCardWithType:one andTitle:@"Bilbo Baggins" andBody:@"Hobbit from the shire"];
        // [cardManager createCardWithType:two andTitle:@"Game of Riddles" andBody:@"Where Bilbo and Golumn face Off"];
@@ -55,12 +56,20 @@
     }
    
     
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+   
 }
 
 
 -(BOOL)shouldCloseDocument{
     return YES;
+}
+
+-(IBAction)mouseDown:(NSEvent *)theEvent{
+    NSLog(@"mouse down"); 
+    [cardManager createCardWithType:one];
+   // NSPoint p = [theEvent ];
+   // CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(p.x,p.y, 190, 120)];
+    //[corkboardView addSubview:cardView];
 }
 
 -(NSArray *)createCardViews:(NSArray *)array{
