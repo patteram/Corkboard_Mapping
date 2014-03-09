@@ -7,13 +7,15 @@
 //
 
 #import "CBMTypeManager.h"
-
+#import "CBMTypeAlert.h"
 @implementation CBMTypeManager
+@synthesize cardTypes; 
 
 -(id)initWithModelContext:(NSManagedObjectContext *)context{
     self = [super init];
     if(self){
         self.myContext = context;
+        
     }
     return self;
 }
@@ -27,22 +29,24 @@
     [cardType setName:string];
     [cardType setColor:color];
 
+    [self addCardTypesObject:cardType];
     return cardType;
-    return nil;
 }
 
 -(NSArray *)getAllCardTypes{
-    NSEntityDescription *description = [NSEntityDescription entityForName:@"CardType" inManagedObjectContext: [self myContext]];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:description];
-    NSError *error;
-    NSArray *array = [[self myContext] executeFetchRequest:request error:&error];
-    if (array == nil)
-    {
-        NSLog(@"There was an error %@", [error description]); // Deal with error...
+    if(cardTypes == nil){
+        NSEntityDescription *description = [NSEntityDescription entityForName:@"CardType" inManagedObjectContext: [self myContext]];
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        [request setEntity:description];
+        NSError *error;
+        NSArray *array = [[self myContext] executeFetchRequest:request error:&error];
+        if (array == nil)
+        {
+            NSLog(@"There was an error %@", [error description]); // Deal with error...
+        }
+        cardTypes = [[NSMutableSet alloc]initWithArray:array];
     }
-    return array;
-    return nil;
+    return [cardTypes allObjects];
 }
 
 -(NSArray *)getAllThreadTypes{
@@ -59,8 +63,8 @@
 }
 
 -(BOOL)cardTypeExistsWithName:(id)name andColor:(NSColor *)color{
-    NSArray *cardTypes = [self getAllCardTypes];
-    for(CardType *aType in cardTypes){
+    NSArray *cardTypesArray = [self getAllCardTypes];
+    for(CardType *aType in cardTypesArray){
         if([[aType name] isEqualToString:name]){
             return YES;
         } }
@@ -69,6 +73,7 @@
 
 -(void)deleteCardType:(CardType *)type{
     [ [self myContext] deleteObject:type];
+    [self removeCardTypesObject:type];
 }
 
 -(BOOL)threadTypeExistsWithName:(NSString *)name andColor:(NSColor *)color{
@@ -100,5 +105,18 @@
     [threadT setName:name];
     [threadT setColor:color];
     return threadT;
+}
+
+
+-(void)addCardTypesObject:(CardType *)object{
+    [[self cardTypes]addObject:object];
+}
+
+-(void)removeCardTypesObject:(CardType *)object{
+    [[self cardTypes]removeObject:object]; 
+}
+
+- (void)intersectCardTypes:(NSSet *)otherObjects {
+    [self.cardTypes intersectSet:otherObjects]; 
 }
 @end

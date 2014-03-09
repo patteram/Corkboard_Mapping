@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "CBMGrowingView.h"
 #import "CBMTypeManager.h"
+#import "CBMTypeAlert.h"
 
 @interface CBMSearchAndDisplayController : NSWindowController
 @property NSManagedObjectContext *context; 

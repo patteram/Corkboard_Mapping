@@ -30,6 +30,7 @@
     if([[self document] isKindOfClass: [CBMDocument class]]){
        CBMDocument *doc = [self document];
         self.typeManager = [doc typeManager];
+        [typeManager addObserver:self forKeyPath:@"cardTypes" options:NSKeyValueChangeInsertion|NSKeyValueChangeRemoval context:nil];
         [windowToName setTitle:[doc displayName]];
     }
     cardDisplayHolder =[[CBMGrowingView alloc]initWithFrame:NSMakeRect(0,0,cardDisplayScrollView.frame.size.width, 0.0)];
@@ -51,8 +52,8 @@
 }
 
 -(void)generateCardTypeButtons:(CBMGrowingView *)view{
-    [typeManager createCardTypeWithName:@"Scene" andColor:[NSColor yellowColor]];
-    [typeManager createCardTypeWithName:@"Character" andColor:[NSColor redColor]]; 
+   // [typeManager createCardTypeWithName:@"Scene" andColor:[NSColor yellowColor]];
+   // [typeManager createCardTypeWithName:@"Character" andColor:[NSColor redColor]];
     for(CardType *aType in [typeManager getAllCardTypes]){
     [view addSubview:[self getButton:aType]];
     }
@@ -86,6 +87,27 @@
         [windowToName orderOut:self]; 
     }
 }
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    NSLog(@"key path: %@", keyPath);
+    if([keyPath isEqualToString:@"cardTypes"]){
+    NSSet *old =  [change objectForKey:NSKeyValueChangeOldKey];
+    NSSet *new = [change objectForKey:NSKeyValueChangeNewKey];
+    NSLog(@"%lu %lu", [old count], [new count]);
+        if([old count] > [new count]){
+            //remove code
+        }else{
+            NSSet* changed = [new filteredSetUsingPredicate:
+                                          [NSPredicate predicateWithFormat:@"NOT objectID IN %@",old]];
+            for( CardType *aCard in changed){
+                [cardDisplayHolder addSubview:[self getButton:aCard]];
+                [cardSearchHolder addSubview:[self getButton:aCard]]; 
+            }
+        }
+    }
+    
+}
+
 
 
 @end

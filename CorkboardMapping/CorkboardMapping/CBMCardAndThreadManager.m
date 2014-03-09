@@ -11,6 +11,8 @@
 #import "Card.h"
 #import "Thread.h"
 #import "ThreadType.h"
+#import "CBMTypeAlert.h"
+
 
 @implementation CBMCardAndThreadManager
 @synthesize myContext;

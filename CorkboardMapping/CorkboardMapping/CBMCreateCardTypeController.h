@@ -7,8 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "CBMTypeManager.h"
 @interface CBMCreateCardTypeController : NSWindowController
 @property (weak) IBOutlet NSButton *createButton;
+@property (weak) IBOutlet NSColorWell *colorWell;
+@property (weak) IBOutlet NSTextField *text;
+@property CBMTypeManager *manager;
 
 @end

@@ -357,7 +357,13 @@
                             <menuItem title="Create Card Type" alternate="YES" keyEquivalent="C" id="Miq-ZE-TnC">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="showSearchAndDisplay:" target="-1" id="b45-24-oCk"/>
+                                    <action selector="createCardType:" target="-1" id="0t2-P2-fZU"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Create Thread Type" alternate="YES" keyEquivalent="T" id="wPg-oK-kRr">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="createThreadType:" target="-1" id="08x-dT-RYo"/>
                                 </connections>
                             </menuItem>
                         </items>

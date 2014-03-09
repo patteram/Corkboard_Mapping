@@ -12,7 +12,7 @@
 #import "CBMThreadTypeProtocol.h"
 @interface CBMTypeManager : NSObject <CBMCardTypeProtocol, CBMThreadTypeProtocol>
 @property NSManagedObjectContext* myContext;
-
+@property NSMutableSet * cardTypes;
 -(id) initWithModelContext:(NSManagedObjectContext *)context;
 
 @end

@@ -6,7 +6,9 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CBMCreateCardTypeController">
             <connections>
+                <outlet property="colorWell" destination="yaK-j6-nBo" id="30X-1D-HUK"/>
                 <outlet property="createButton" destination="zDf-HN-j59" id="RUT-MT-RjY"/>
+                <outlet property="text" destination="bYX-Zl-Le9" id="LB0-wn-JUt"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -88,6 +90,26 @@
                             <action selector="create:" target="-2" id="If3-F2-kxW"/>
                         </connections>
                     </button>
+                    <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yaK-j6-nBo">
+                        <rect key="frame" x="146" y="68" width="44" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <connections>
+                            <action selector="colorSelection:" target="-2" id="GMd-mI-49b"/>
+                        </connections>
+                    </colorWell>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bYX-Zl-Le9">
+                        <rect key="frame" x="146" y="121" width="112" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Card Type Name" drawsBackground="YES" id="7VS-Te-fes">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <action selector="textNameChanged:" target="-2" id="4mh-ju-h5e"/>
+                        </connections>
+                    </textField>
                 </subviews>
             </view>
         </window>
