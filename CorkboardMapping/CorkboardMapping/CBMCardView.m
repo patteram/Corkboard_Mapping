@@ -48,6 +48,13 @@ const int BUFFER_SPACE = 4;
 }
 
 
+-(void)dealloc{
+    [cardObject removeObserver:self forKeyPath:@"myCardType.color"];
+    [cardObject removeObserver:self forKeyPath:@"title"];
+    [cardObject removeObserver:self forKeyPath:@"body"]; 
+}
+
+
 
 
 - (void)drawRect:(NSRect)dirtyRect

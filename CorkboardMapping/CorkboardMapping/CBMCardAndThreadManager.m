@@ -131,11 +131,11 @@
 }
 
 
--(Card *)createCardWithType:(CardType *)type{
-    return [self createCardWithType:type AndTitle:@"Title" AndBody:@"Body"];
+-(Card *)createCardWithType:(CardType *)type AtLocation:(NSPoint)aPoint{
+    return [self createCardWithType:type AtLocation:aPoint AndTitle:@"Title" AndBody:@"Body"];
 }
 
--(Card *)createCardWithType:(CardType *)type AndTitle:(NSString *) title AndBody:(NSString *)body{
+-(Card *)createCardWithType:(CardType *)type AtLocation:(NSPoint)aPoint AndTitle:(NSString *) title AndBody:(NSString *)body{
     NSEntityDescription *cardEntity = [NSEntityDescription
                                            entityForName:@"Card"
                                            inManagedObjectContext:myContext];
@@ -144,6 +144,7 @@
     [card setTitle:title];
     [card setBody:body];
     [card setMyCardType:type];
+    [card setRect:[NSValue valueWithPoint:aPoint]]; 
     return card;
 }
 

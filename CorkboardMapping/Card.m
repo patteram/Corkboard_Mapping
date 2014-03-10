@@ -19,4 +19,7 @@
 @dynamic connections;
 @dynamic myCardType;
 
+
+
+
 @end

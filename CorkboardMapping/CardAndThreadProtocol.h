@@ -40,7 +40,7 @@
  \param type: the CardType of this card (should be a valid Card Type inside of managed context)
  \returns the managed object card
  */
--(Card *)createCardWithType:(CardType *)cardType;
+-(Card *)createCardWithType:(CardType *)cardType AtLocation:(NSPoint)aPoint;
 
 /*! Creates a card inside the managed context
  \param type: the CardType of this card (should be a valid Card Type inside of managed context)
@@ -48,7 +48,7 @@
  \param body: the body of the card
  \returns the managed object card
  */
--(Card *)createCardWithType:(CardType *)cardType AndTitle:(NSString*)title AndBody:(NSString *)body;
+-(Card *)createCardWithType:(CardType *)cardType AtLocation:(NSPoint)aPoint AndTitle:(NSString*)title AndBody:(NSString *)body;
 /*!
  Deletes the given card
  \param cardToDelete:the card that will be deleted

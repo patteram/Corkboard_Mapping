@@ -46,11 +46,11 @@ BOOL createCard = YES;
         NSManagedObjectContext *myContext = [doc managedObjectContext];
         cardManager = [[CBMCardAndThreadManager alloc]initWithModelContext:myContext];
         one = [cardManager createCardType:@"Character" AndColor:[NSColor greenColor]];
-           CardType *two =[cardManager createCardType:@"Scene" AndColor: [NSColor greenColor]];
+           CardType *two =[cardManager createCardType:@"Scene" AndColor: [NSColor blueColor]];
           
-           [cardManager createCardWithType:one AndTitle:@"Wick Lamplighter" AndBody:@"3rd level libriarian"];
+          [cardManager createCardWithType:one AtLocation:NSMakePoint(20, 20) AndTitle:@"Wick Lamplighter" AndBody:@"3rd level libriarian"];
          
-           [cardManager createCardWithType:two AndTitle:@"The One-Eyes Peggy" AndBody:@"Where Wick awakes shaighaied"]; 
+           [cardManager createCardWithType:two AtLocation:NSMakePoint(150,180) AndTitle:@"The One-Eyes Peggy" AndBody:@"Where Wick awakes shaighaied"];
         NSArray *array = [cardManager getAllCardsAndThreads];
         if(array != nil){
 //            NSLog(@"Not Nil");
@@ -67,22 +67,23 @@ BOOL createCard = YES;
 
 -(IBAction)mouseDown:(NSEvent *)theEvent{
    
-    if(createCard){
-  NSPoint p =  [corkboardView convertPoint:[theEvent locationInWindow] fromView:nil];
-    Card *acard = [cardManager createCardWithType:one];
-    CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(p.x-(190/2),p.y-(120/2), 190, 120) AndCBMCard:acard];
-    [corkboardView addSubview:cardView];
-        createCard = NO;
-    }
+//    if(createCard){
+//  NSPoint p =  [corkboardView convertPoint:[theEvent locationInWindow] fromView:nil];
+//        Card *acard = [cardManager createCardWithType:one AtLocation:NSMakePoint(p.x, p.y)];
+//    CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(p.x-(190/2),p.y-(120/2), 190, 120) AndCBMCard:acard];
+//    [corkboardView addSubview:cardView];
+//        createCard = NO;
+//    }
 }
 
 -(NSArray *)createCardViews:(NSArray *)array{
-    CGFloat x = 30;
-    CGFloat y = 30;
+  
+ 
     for(Card *aCard in array){
-        CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(x, y, 190, 120) AndCBMCard:aCard];
-        x = x + 100;
-        y = y + 100;
+        NSValue *j = [aCard rect];
+        NSPoint point = j.pointValue;
+        CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(point.x, point.y, 190, 120) AndCBMCard:aCard];
+       
         [corkboardView addSubview:cardView];
     }
     return nil;
@@ -127,6 +128,7 @@ BOOL createCard = YES;
 
 -(void)avoidDisplay:(NSArray *)criteria{
     NSArray *anArray;
+    NSLog(@"%lu", [criteria count]);
     [corkboardView setSubviews:[[NSArray alloc]initWithObjects:nil]];
     if([criteria count] == 0){
         anArray = [cardManager getAllCardsAndThreads];

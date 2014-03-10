@@ -58,7 +58,11 @@ NSMutableArray * displayArray;
         NSButton *box = sender;
         if([[box superview] isKindOfClass: [CBMCheckboxCard class]]){
             CBMCheckboxCard *c = (CBMCheckboxCard * )[box superview];
+            if([displayArray containsObject:[c type]]){
+                [displayArray removeObject:[c type]];
+            }else{
             [displayArray addObject:[c type]];
+            }
         }
         [controller avoidDisplay:displayArray]; 
     }

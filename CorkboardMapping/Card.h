@@ -14,10 +14,11 @@
 @interface Card : NSManagedObject
 
 @property (nonatomic, retain) NSString * body;
-@property (nonatomic, retain) NSString * rect;
+@property (nonatomic, retain) id rect;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSSet *connections;
 @property (nonatomic, retain) CardType *myCardType;
+
 @end
 
 @interface Card (CoreDataGeneratedAccessors)

@@ -93,9 +93,9 @@ const float MIN_ZOOM = .23;
 //   NSLog(@"Mouse Location %lu, %lu", [theEvent mouseLocation] )
 //}
 
-//-(BOOL)isFlipped{
-//    return YES; 
-//}
+-(BOOL)isFlipped{
+    return YES; 
+}
 
 
 @end
