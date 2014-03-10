@@ -21,9 +21,10 @@ NSString *CARD_TYPE_ARRAY = @"cardTypes";
 @synthesize sliderLabel;
 @synthesize context;
 @synthesize typeManager;
+@synthesize controller;
 @synthesize cardDisplayScrollView, cardSearchHolder, cardSearchScrollView, cardDisplayHolder;
 @synthesize threadDisplayHolder, threadDisplayScrollView, threadSearchHolder, threadSearchScrollView;
-
+NSMutableArray * displayArray;
 @synthesize windowToName;
 
 
@@ -32,40 +33,55 @@ NSString *CARD_TYPE_ARRAY = @"cardTypes";
     if([[self document] isKindOfClass: [CBMDocument class]]){
        CBMDocument *doc = [self document];
         self.typeManager = [doc typeManager];
+        controller = [doc corkboard];
         [typeManager addObserver:self forKeyPath:CARD_TYPE_ARRAY options:NSKeyValueChangeInsertion|NSKeyValueChangeRemoval context:nil];
         [windowToName setTitle:[doc displayName]];
     }
+    displayArray = [[NSMutableArray alloc]init];
     cardDisplayHolder =[[CBMGrowingView alloc]initWithFrame:NSMakeRect(0,0,cardDisplayScrollView.frame.size.width, 0.0)];
     cardSearchHolder = [[CBMGrowingView alloc]initWithFrame:NSMakeRect(0,0, cardSearchScrollView.frame.size.width, 0.0)];
     [cardSearchScrollView setDocumentView:cardSearchHolder];
     [cardDisplayScrollView setDocumentView:cardDisplayHolder];
-    [self generateCardTypeButtons:cardDisplayHolder];
-    [self generateCardTypeButtons:cardSearchHolder];
+    [self generateCardTypeButtons:cardDisplayHolder withSelector:@selector(actionDisplayCard:)];
+    [self generateCardTypeButtons:cardSearchHolder withSelector:@selector(actionSearchCard:)];
     
 }
 - (IBAction)getNum:(NSSlider *)sender {
     NSLog(@"Num: %d ",[sender intValue]);
     [sliderLabel setStringValue:[NSString stringWithFormat:@"%i", [sender intValue]]];
+   
 }
 
 
--(void)actionSelectorCard:(id)sender{
+-(void)actionDisplayCard:(id)sender{
+    if([sender isKindOfClass: [NSButton class]]){
+        NSButton *box = sender;
+        if([[box superview] isKindOfClass: [CBMCheckboxCard class]]){
+            CBMCheckboxCard *c = (CBMCheckboxCard * )[box superview];
+            [displayArray addObject:[c type]];
+        }
+        [controller avoidDisplay:displayArray]; 
+    }
     NSLog(@"Was hit");
 }
 
--(void)generateCardTypeButtons:(CBMGrowingView *)view{
+-(void)actionSearchCard:(id)sender{
+    
+}
+
+-(void)generateCardTypeButtons:(CBMGrowingView *)view withSelector:(SEL)selector{
    // [typeManager createCardTypeWithName:@"Scene" andColor:[NSColor yellowColor]];
    // [typeManager createCardTypeWithName:@"Character" andColor:[NSColor redColor]];
     for(CardType *aType in [typeManager getAllCardTypes]){
-    [view addSubview:[self getButton:aType]];
+        [view addSubview:[self getButton:aType setAction:selector] ];
     }
     
 }
 
--(NSView *)getButton:(CardType *)aType{
+-(NSView *)getButton:(CardType *)aType setAction:(SEL)selector{
     CBMCheckboxCard * cardSection = [[CBMCheckboxCard alloc]initWithFrame:NSMakeRect(0,0,cardDisplayHolder.frame.size.width,0) andCardType:aType];
     [[cardSection checkbox] setTarget:self];
-    [[cardSection checkbox] setAction:@selector(actionSelectorCard:) ];
+    [[cardSection checkbox] setAction:selector ];
   
     
     return cardSection;
@@ -98,8 +114,8 @@ NSString *CARD_TYPE_ARRAY = @"cardTypes";
             NSSet* changed = [new filteredSetUsingPredicate:
                               [NSPredicate predicateWithFormat:@"NOT objectID IN %@",old]];
             for( CardType *aCard in changed){
-                [cardDisplayHolder addSubview:[self getButton:aCard]];
-                [cardSearchHolder addSubview:[self getButton:aCard]];
+                [cardDisplayHolder addSubview:[self getButton:aCard setAction:@selector(actionDisplayCard:)]];
+                [cardSearchHolder addSubview:[self getButton:aCard setAction:@selector(actionSearchCard:)]];
             }
         }
     }

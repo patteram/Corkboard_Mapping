@@ -25,6 +25,8 @@
 @synthesize corkboardView;
 CardType *one;
 CBMCardAndThreadManager * cardManager;
+BOOL createCard = YES;
+
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
@@ -43,10 +45,12 @@ CBMCardAndThreadManager * cardManager;
         NSPersistentDocument *doc = [self document];
         NSManagedObjectContext *myContext = [doc managedObjectContext];
         cardManager = [[CBMCardAndThreadManager alloc]initWithModelContext:myContext];
-        one = [cardManager createCardType:@"Character" AndColor:[NSColor blueColor]];
-       // CardType *two =[cardManager createCardType:@"Scene" AndColor: [NSColor greenColor]];
-       // [cardManager createCardWithType:one andTitle:@"Bilbo Baggins" andBody:@"Hobbit from the shire"];
-       // [cardManager createCardWithType:two andTitle:@"Game of Riddles" andBody:@"Where Bilbo and Golumn face Off"];
+        one = [cardManager createCardType:@"Character" AndColor:[NSColor greenColor]];
+           CardType *two =[cardManager createCardType:@"Scene" AndColor: [NSColor greenColor]];
+          
+           [cardManager createCardWithType:one AndTitle:@"Wick Lamplighter" AndBody:@"3rd level libriarian"];
+         
+           [cardManager createCardWithType:two AndTitle:@"The One-Eyes Peggy" AndBody:@"Where Wick awakes shaighaied"]; 
         NSArray *array = [cardManager getAllCardsAndThreads];
         if(array != nil){
 //            NSLog(@"Not Nil");
@@ -54,9 +58,6 @@ CBMCardAndThreadManager * cardManager;
             [self createCardViews:array];
                 }
     }
-   
-    
-   
 }
 
 
@@ -65,11 +66,14 @@ CBMCardAndThreadManager * cardManager;
 }
 
 -(IBAction)mouseDown:(NSEvent *)theEvent{
-    NSLog(@"mouse down"); 
-    [cardManager createCardWithType:one];
-   // NSPoint p = [theEvent ];
-   // CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(p.x,p.y, 190, 120)];
-    //[corkboardView addSubview:cardView];
+   
+    if(createCard){
+  NSPoint p =  [corkboardView convertPoint:[theEvent locationInWindow] fromView:nil];
+    Card *acard = [cardManager createCardWithType:one];
+    CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(p.x-(190/2),p.y-(120/2), 190, 120) AndCBMCard:acard];
+    [corkboardView addSubview:cardView];
+        createCard = NO;
+    }
 }
 
 -(NSArray *)createCardViews:(NSArray *)array{
@@ -98,7 +102,7 @@ CBMCardAndThreadManager * cardManager;
   
     [scrollView setDocumentView:centerView];
        [scrollView setDrawsBackground:NO];
-    
+
    [[NSNotificationCenter defaultCenter]addObserver:centerView selector:@selector(viewFrameChanged:) name:NSViewFrameDidChangeNotification object:corkboardView];
     [[NSNotificationCenter defaultCenter]addObserver:centerView selector:@selector(viewFrameChanged:) name:NSViewFrameDidChangeNotification object:scrollView];
     [[NSNotificationCenter defaultCenter]addObserver:corkboardView selector:@selector(viewFrameChanged:) name:NSViewFrameDidChangeNotification object:scrollView];
@@ -107,6 +111,29 @@ CBMCardAndThreadManager * cardManager;
  
 }
 
+-(void)avoidSearchCriteria:(NSArray *)criteria{
+    NSArray *anArray;
+    [corkboardView setSubviews:[[NSArray alloc]initWithObjects:nil]];
+    if([criteria count] == 0){
+        anArray = [cardManager getAllCardsAndThreads];
+    }else{
+        anArray = [cardManager getAllCardsAndThreadsAndAvoid:criteria];
+    }
+    [self createCardViews:anArray];
+}
+-(void)avoidSearchDisplayCritieria:(NSArray *)criteria andDepth:(NSInteger)integer{
+    
+}
 
+-(void)avoidDisplay:(NSArray *)criteria{
+    NSArray *anArray;
+    [corkboardView setSubviews:[[NSArray alloc]initWithObjects:nil]];
+    if([criteria count] == 0){
+        anArray = [cardManager getAllCardsAndThreads];
+    }else{
+        anArray = [cardManager getAllCardsAndThreadsAndAvoid:criteria];
+    }
+    [self createCardViews:anArray];
+}
 
 @end

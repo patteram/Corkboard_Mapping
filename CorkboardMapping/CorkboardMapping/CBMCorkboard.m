@@ -89,10 +89,13 @@ const float MIN_ZOOM = .23;
     //plan would be to have a pop up menu
 }
 
+//-(void)mouseDown:(NSEvent *)theEvent{
+//   NSLog(@"Mouse Location %lu, %lu", [theEvent mouseLocation] )
+//}
 
--(BOOL)isFlipped{
-    return YES; 
-}
+//-(BOOL)isFlipped{
+//    return YES; 
+//}
 
 
 @end

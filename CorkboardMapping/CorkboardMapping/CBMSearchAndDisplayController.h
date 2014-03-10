@@ -10,10 +10,12 @@
 #import "CBMGrowingView.h"
 #import "CBMTypeManager.h"
 #import "CBMTypeAlert.h"
+#import "CBMMainWindowController.h"
+
 
 @interface CBMSearchAndDisplayController : NSWindowController
 @property NSManagedObjectContext *context; 
-
+@property CBMMainWindowController *controller; 
 @property (weak) IBOutlet NSScrollView *cardDisplayScrollView;
 @property (weak) IBOutlet NSScrollView *threadDisplayScrollView;
 @property (weak) IBOutlet NSScrollView *threadSearchScrollView;

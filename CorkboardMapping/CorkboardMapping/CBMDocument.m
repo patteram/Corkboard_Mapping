@@ -75,7 +75,8 @@
 -(void)close{
     
     [super close];
-    //[searchAndDisplay close];
+    searchAndDisplay = nil;
+    corkboard = nil; 
 }
 -(IBAction)createCardType:(id)sender{
     NSLog(@"%lu", (unsigned long)[[self windowControllers]count]);
