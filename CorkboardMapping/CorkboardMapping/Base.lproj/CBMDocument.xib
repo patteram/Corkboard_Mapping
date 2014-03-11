@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
@@ -20,16 +20,28 @@
                 <rect key="frame" x="0.0" y="0.0" width="507" height="413"/>
                 <autoresizingMask key="autoresizingMask"/>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="D3C4066E-AE78-475A-8DDF-C844A3059E7A" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="6N8-B6-7zH">
+            <toolbar key="toolbar" implicitIdentifier="BF4EAC27-7D0A-4456-AB09-A425BBBD9E09" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="DBO-zU-uMH">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="xma-EZ-8uC"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="CqY-Qk-tNo"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="eaN-gK-Dkv"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="jho-S6-Ge5"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="AX5-8b-Xh7"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="Ste-9l-OmR"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="ZeI-ME-QJv"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="nAe-zp-n26"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="qXA-Gq-c9B"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="B42-lw-oCr"/>
+                    <toolbarItem implicitItemIdentifier="72B265B6-A9D0-498C-9542-68B971C0F863" label="Create CardType" paletteLabel="Toolbar Item" tag="-1" image="add" id="vH9-Z2-37T">
+                        <connections>
+                            <action selector="createCardType:" target="-1" id="gzY-FP-nFp"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSeparatorItem" id="XGB-oo-BFR"/>
+                    <toolbarItem implicitItemIdentifier="6B3E619E-41A5-4EDD-B913-CE6F340BB95E" label="" paletteLabel="Toolbar Item" tag="-1" image="rightArrow" id="Dxs-jR-3Rf"/>
+                    <toolbarItem implicitItemIdentifier="59C172F9-AA23-446C-9915-A97101C6B5E8" label="" paletteLabel="Toolbar Item" tag="-1" image="leftArrow" id="3XJ-f1-2Y6"/>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
-                    <toolbarItem reference="AX5-8b-Xh7"/>
+                    <toolbarItem reference="vH9-Z2-37T"/>
+                    <toolbarItem reference="3XJ-f1-2Y6"/>
+                    <toolbarItem reference="Dxs-jR-3Rf"/>
+                    <toolbarItem reference="XGB-oo-BFR"/>
+                    <toolbarItem reference="B42-lw-oCr"/>
                 </defaultToolbarItems>
             </toolbar>
             <connections>
@@ -38,4 +50,9 @@
         </window>
         <customObject id="-3" userLabel="Application"/>
     </objects>
+    <resources>
+        <image name="add" width="203.75999450683594" height="167"/>
+        <image name="leftArrow" width="385.20001220703125" height="306.72000122070312"/>
+        <image name="rightArrow" width="418.32000732421875" height="317.51998901367188"/>
+    </resources>
 </document>

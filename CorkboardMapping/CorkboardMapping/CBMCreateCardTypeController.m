@@ -16,12 +16,13 @@
 @synthesize colorWell;
 @synthesize text;
 @synthesize manager;
+@synthesize currentWindow;
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
     if (self) {
         // Initialization code here.
-        
+        currentWindow = window;
         NSLog(@"Should be on screen");
     }
     return self;
@@ -38,24 +39,28 @@
     if(![manager cardTypeExistsWithName:typeName andColor:color]){
         NSLog(@"Type created");
         [manager createCardTypeWithName:typeName andColor:color];
-        [[self window]performClose:self];
-        [[self document]removeWindowController:self];
-    }
+        [currentWindow performClose:self];
+        }
     
 }
 
 
 
-
-- (IBAction)cancel:(NSButton *)sender {
-    [[self window] performClose:self];
-    [[self document] removeWindowController:self];
+-(void)windowWillClose:(NSNotification *)notification{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    [[self document]removeWindowController:self];
 
 }
-
--(BOOL)windowShouldClose:(id)sender{
-    return NO; 
+-(IBAction)cancel:(id)sender{
+    [currentWindow performClose:self];
 }
+
+
+
+//-(BOOL)windowShouldClose:(id)sender{
+//    NSLog(@"Window closing");
+//    return NO; 
+//}
 
 - (void)windowDidLoad
 {
@@ -64,7 +69,8 @@
          CBMDocument *doc = [self document];
          manager = [doc typeManager];
     }
-     NSLog(@"Window did Load");
+    
+    [[ NSNotificationCenter defaultCenter]addObserver:self selector:@selector(windowWillClose:) name:NSWindowWillCloseNotification object:currentWindow];
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 

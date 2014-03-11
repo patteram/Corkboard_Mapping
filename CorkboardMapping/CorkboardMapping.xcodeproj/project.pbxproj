@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E16831218CE69E200EEC4E6 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E16831118CE69E200EEC4E6 /* add.png */; };
+		5E16831418CE74BC00EEC4E6 /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E16831318CE74BC00EEC4E6 /* rightArrow.png */; };
+		5E16831618CE74C700EEC4E6 /* leftArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E16831518CE74C700EEC4E6 /* leftArrow.png */; };
 		5E1F1A2118B9690400C89AE0 /* CBMTypeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A2018B9690400C89AE0 /* CBMTypeManager.m */; };
 		5E1F1A3018BAE64B00C89AE0 /* CBMGrowingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A2F18BAE64B00C89AE0 /* CBMGrowingView.m */; };
 		5E1F1A3618BC1B5500C89AE0 /* CardType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A3518BC1B5500C89AE0 /* CardType.m */; };
@@ -52,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E16831118CE69E200EEC4E6 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
+		5E16831318CE74BC00EEC4E6 /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightArrow.png; sourceTree = "<group>"; };
+		5E16831518CE74C700EEC4E6 /* leftArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftArrow.png; sourceTree = "<group>"; };
 		5E1F1A1F18B9690400C89AE0 /* CBMTypeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBMTypeManager.h; path = ../CBMTypeManager.h; sourceTree = "<group>"; };
 		5E1F1A2018B9690400C89AE0 /* CBMTypeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CBMTypeManager.m; path = ../CBMTypeManager.m; sourceTree = "<group>"; };
 		5E1F1A2918BAB5FF00C89AE0 /* CBMThreadTypeProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBMThreadTypeProtocol.h; sourceTree = "<group>"; };
@@ -226,6 +232,9 @@
 				5EF611E118C2B16800A7AD7F /* CorkboardMapping_Tests */,
 				5EABAC8018B6C86E00B52D24 /* Frameworks */,
 				5EABAC7F18B6C86E00B52D24 /* Products */,
+				5E16831118CE69E200EEC4E6 /* add.png */,
+				5E16831318CE74BC00EEC4E6 /* rightArrow.png */,
+				5E16831518CE74C700EEC4E6 /* leftArrow.png */,
 			);
 			sourceTree = "<group>";
 		};
@@ -451,10 +460,13 @@
 			files = (
 				5EABAC8C18B6C86E00B52D24 /* InfoPlist.strings in Resources */,
 				5EABACA018B6C86E00B52D24 /* Images.xcassets in Resources */,
+				5E16831618CE74C700EEC4E6 /* leftArrow.png in Resources */,
 				5EABAC9218B6C86E00B52D24 /* Credits.rtf in Resources */,
+				5E16831218CE69E200EEC4E6 /* add.png in Resources */,
 				5EABACE218B9093400B52D24 /* CreateCardType.xib in Resources */,
 				5EABACF218B931F800B52D24 /* CBMSearchAndDisplayController.xib in Resources */,
 				5EABAC9818B6C86E00B52D24 /* CBMDocument.xib in Resources */,
+				5E16831418CE74BC00EEC4E6 /* rightArrow.png in Resources */,
 				5EABAC9B18B6C86E00B52D24 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

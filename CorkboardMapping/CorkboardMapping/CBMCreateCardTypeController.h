@@ -12,6 +12,8 @@
 @property (weak) IBOutlet NSButton *createButton;
 @property (weak) IBOutlet NSColorWell *colorWell;
 @property (weak) IBOutlet NSTextField *text;
+
 @property CBMTypeManager *manager;
 
+@property (strong) IBOutlet NSWindow *currentWindow;
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="colorWell" destination="yaK-j6-nBo" id="30X-1D-HUK"/>
                 <outlet property="createButton" destination="zDf-HN-j59" id="RUT-MT-RjY"/>
+                <outlet property="currentWindow" destination="1" id="aKj-4k-Ka0"/>
                 <outlet property="text" destination="bYX-Zl-Le9" id="LB0-wn-JUt"/>
             </connections>
         </customObject>

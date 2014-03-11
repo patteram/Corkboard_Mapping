@@ -37,6 +37,16 @@ NSMutableArray * displayArray;
         [typeManager addObserver:self forKeyPath:CARD_TYPE_ARRAY options:NSKeyValueChangeInsertion|NSKeyValueChangeRemoval context:nil];
         [windowToName setTitle:[doc displayName]];
     }
+    [self setUpViews];
+}
+
+- (IBAction)getNum:(NSSlider *)sender {
+    NSLog(@"Num: %d ",[sender intValue]);
+    [sliderLabel setStringValue:[NSString stringWithFormat:@"%i", [sender intValue]]];
+   
+}
+
+-(void)setUpViews{
     displayArray = [[NSMutableArray alloc]init];
     cardDisplayHolder =[[CBMGrowingView alloc]initWithFrame:NSMakeRect(0,0,cardDisplayScrollView.frame.size.width, 0.0)];
     cardSearchHolder = [[CBMGrowingView alloc]initWithFrame:NSMakeRect(0,0, cardSearchScrollView.frame.size.width, 0.0)];
@@ -44,14 +54,7 @@ NSMutableArray * displayArray;
     [cardDisplayScrollView setDocumentView:cardDisplayHolder];
     [self generateCardTypeButtons:cardDisplayHolder withSelector:@selector(actionDisplayCard:)];
     [self generateCardTypeButtons:cardSearchHolder withSelector:@selector(actionSearchCard:)];
-    
 }
-- (IBAction)getNum:(NSSlider *)sender {
-    NSLog(@"Num: %d ",[sender intValue]);
-    [sliderLabel setStringValue:[NSString stringWithFormat:@"%i", [sender intValue]]];
-   
-}
-
 
 -(void)actionDisplayCard:(id)sender{
     if([sender isKindOfClass: [NSButton class]]){
@@ -74,8 +77,6 @@ NSMutableArray * displayArray;
 }
 
 -(void)generateCardTypeButtons:(CBMGrowingView *)view withSelector:(SEL)selector{
-   // [typeManager createCardTypeWithName:@"Scene" andColor:[NSColor yellowColor]];
-   // [typeManager createCardTypeWithName:@"Character" andColor:[NSColor redColor]];
     for(CardType *aType in [typeManager getAllCardTypes]){
         [view addSubview:[self getButton:aType setAction:selector] ];
     }
