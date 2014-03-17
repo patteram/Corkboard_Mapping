@@ -30,9 +30,10 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
 	[super drawRect:dirtyRect];
-	NSBezierPath *path = [NSBezierPath bezierPathWithRect:NSMakeRect(self.frame.size.width*3/4-2, 2, self.frame.size.width/6, self.frame.size.height-2)];
+	NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(self.frame.size.width*3/4-2, 2, self.frame.size.width/6, self.frame.size.height-2) xRadius:3 yRadius:3];
     [[type color] setFill];
     [path fill];
+    [path stroke]; 
 }
 
 -(void)setFrameSize:(NSSize)newSize{

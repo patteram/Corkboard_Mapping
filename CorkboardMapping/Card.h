@@ -27,5 +27,6 @@
 - (void)removeConnectionsObject:(Thread *)value;
 - (void)addConnections:(NSSet *)values;
 - (void)removeConnections:(NSSet *)values;
-
+-(void)setLocation:(NSPoint)aPoint;
+-(NSPoint)getLocation; 
 @end

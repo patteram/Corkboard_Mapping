@@ -18,6 +18,7 @@
 @synthesize createThreadType;
 @synthesize searchAndDisplay;
 @synthesize createCardType;
+
 - (id)init
 {
     self = [super init];
@@ -49,8 +50,8 @@
     
    corkboard = [[CBMMainWindowController alloc]initWithWindowNibName:@"CBMDocument"];
    searchAndDisplay = [[CBMSearchAndDisplayController alloc]initWithWindowNibName:@"CBMSearchAndDisplayController"];
-    createCardType =[[CBMCreateCardTypeController alloc]initWithWindowNibName:@"CreateCardType"];
-    [self addWindowController:createCardType];
+//    createCardType =[[CBMCreateCardTypeController alloc]initWithWindowNibName:@"CreateCardType"];
+//    [self addWindowController:createCardType];
    [searchAndDisplay windowTitleForDocumentDisplayName:[self displayName]];
     cardAndThreadManager = [[CBMCardAndThreadManager alloc] initWithModelContext:[self managedObjectContext]];
     typeManager = [[CBMTypeManager alloc]initWithModelContext:[self managedObjectContext]]; 
@@ -60,9 +61,8 @@
 
 -(IBAction)showSearchAndDisplay:(id)sender{
   
-    
+   // if(searchAndDisplay )
     if([searchAndDisplay isWindowVisible]){
-  
         [ searchAndDisplay setIsVisible:NO];
     }else{
   
@@ -70,11 +70,24 @@
     }
 }
 -(IBAction)createThreadType:(id)sender{
-    
+    NSLog(@"create Thread Type");
+    if(createThreadType != nil){
+        if([[self windowControllers] containsObject:createThreadType]){
+            [[createThreadType window] orderFrontRegardless];
+        }else{
+            createThreadType = [[CBMCreateThreadTypeController alloc]initWithWindowNibName:@"CBMCreateThreadTypeController"];
+            [self addWindowController:createThreadType];
+            [[createThreadType window] orderFront:self];
+        }
+    }else{
+        createThreadType = [[CBMCreateThreadTypeController alloc]initWithWindowNibName:@"CBMCreateThreadTypeController"];
+        [self addWindowController:createThreadType];
+        [[createThreadType window] orderFront:self];
+    }
+
     
 }
 -(void)close{
-    
     [super close];
     searchAndDisplay = nil;
     corkboard = nil;
@@ -90,22 +103,5 @@
             [[createCardType window] orderFront:self];
         }
     }
-//    NSLog(@"%lu", (unsigned long)[[self windowControllers]count]);
-//    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"self isKindOfClass: %@", [CBMCreateCardTypeController class]];
-//    NSArray* arrayOfCardWindows = [[self windowControllers] filteredArrayUsingPredicate:predicate];
-//    
-//    CBMCreateCardTypeController * createCardType;
-//
-//    
-//    if([arrayOfCardWindows count] != 0 ){
-//        NSLog(@"card type window exists");
-//        [[[arrayOfCardWindows objectAtIndex:0]  window] orderFront:self];
-//    }else{
-//        NSLog(@"Creating card type window");
-//        createCardType = [[CBMCreateCardTypeController alloc]initWithWindowNibName:@"CreateCardType"];
-//       
-//        [self addWindowController:createCardType];
-//         [[createCardType window] orderFront:self];
-//    }
 }
 @end

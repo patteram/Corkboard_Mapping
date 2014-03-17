@@ -12,12 +12,14 @@
 #import "CBMTypeManager.h"
 #import "CBMDocument.h"
 #import "CBMCheckboxCard.h"
+#import "CBMCheckboxThread.h"
 @interface CBMSearchAndDisplayController ()
 
 @end
 
 @implementation CBMSearchAndDisplayController
 NSString *CARD_TYPE_ARRAY = @"cardTypes";
+NSString *THREAD_SET = @"threadTypes";
 @synthesize sliderLabel;
 @synthesize context;
 @synthesize typeManager;
@@ -35,6 +37,7 @@ NSMutableArray * displayArray;
         self.typeManager = [doc typeManager];
         controller = [doc corkboard];
         [typeManager addObserver:self forKeyPath:CARD_TYPE_ARRAY options:NSKeyValueChangeInsertion|NSKeyValueChangeRemoval context:nil];
+        [typeManager addObserver:self forKeyPath:THREAD_SET options:NSKeyValueChangeInsertion|NSKeyValueChangeRemoval context:nil];
         [windowToName setTitle:[doc displayName]];
     }
     [self setUpViews];
@@ -54,6 +57,13 @@ NSMutableArray * displayArray;
     [cardDisplayScrollView setDocumentView:cardDisplayHolder];
     [self generateCardTypeButtons:cardDisplayHolder withSelector:@selector(actionDisplayCard:)];
     [self generateCardTypeButtons:cardSearchHolder withSelector:@selector(actionSearchCard:)];
+    
+    threadSearchHolder = [[CBMGrowingView alloc]initWithFrame:NSMakeRect(0,0,threadSearchScrollView.frame.size.width, 0.0)];
+    threadDisplayHolder = [[CBMGrowingView alloc]initWithFrame:NSMakeRect(0,0,threadDisplayScrollView.frame.size.width, 0)];
+    [threadSearchScrollView setDocumentView:threadSearchHolder];
+    [threadDisplayScrollView setDocumentView:threadDisplayHolder]; 
+    [self generateThreadTypeButtons:threadDisplayHolder withSelector:@selector(actionDisplayThread:)];
+    [self generateThreadTypeButtons:threadSearchHolder withSelector:@selector(actionSearchThread:)];
 }
 
 -(void)actionDisplayCard:(id)sender{
@@ -72,23 +82,41 @@ NSMutableArray * displayArray;
     NSLog(@"Was hit");
 }
 
+
+
 -(void)actionSearchCard:(id)sender{
     
 }
 
--(void)generateCardTypeButtons:(CBMGrowingView *)view withSelector:(SEL)selector{
-    for(CardType *aType in [typeManager getAllCardTypes]){
-        [view addSubview:[self getButton:aType setAction:selector] ];
-    }
+-(void)actionSearchThread:(id)sender{
     
 }
 
--(NSView *)getButton:(CardType *)aType setAction:(SEL)selector{
+-(void)actionDisplayThread:(id)sender{
+    
+}
+-(void)generateCardTypeButtons:(CBMGrowingView *)view withSelector:(SEL)selector{
+    for(CardType *aType in [typeManager getAllCardTypes]){
+        [view addSubview:[self getCardButton:aType setAction:selector] ];
+    }
+}
+
+-(void)generateThreadTypeButtons:(CBMGrowingView *)view withSelector:(SEL)selector{
+    for(ThreadType *aType in [typeManager getAllThreadTypes]){
+        [view addSubview:[self getThreadButton:aType setAction:selector]];
+    }
+}
+
+-(NSView *)getThreadButton:(ThreadType *)aType setAction:(SEL)selector{
+    CBMCheckboxThread *threadSection = [[CBMCheckboxThread alloc]initWithFrame:NSMakeRect(0, 0, threadDisplayHolder.frame.size.width, 0) andThreadType:aType];
+    [[threadSection checkbox]setTarget:self];
+    [[threadSection checkbox]setAction:selector];
+    return threadSection;
+}
+-(NSView *)getCardButton:(CardType *)aType setAction:(SEL)selector{
     CBMCheckboxCard * cardSection = [[CBMCheckboxCard alloc]initWithFrame:NSMakeRect(0,0,cardDisplayHolder.frame.size.width,0) andCardType:aType];
     [[cardSection checkbox] setTarget:self];
     [[cardSection checkbox] setAction:selector ];
-  
-    
     return cardSection;
 }
 
@@ -119,16 +147,35 @@ NSMutableArray * displayArray;
             NSSet* changed = [new filteredSetUsingPredicate:
                               [NSPredicate predicateWithFormat:@"NOT objectID IN %@",old]];
             for( CardType *aCard in changed){
-                [cardDisplayHolder addSubview:[self getButton:aCard setAction:@selector(actionDisplayCard:)]];
-                [cardSearchHolder addSubview:[self getButton:aCard setAction:@selector(actionSearchCard:)]];
+                [cardDisplayHolder addSubview:[self getCardButton:aCard setAction:@selector(actionDisplayCard:)]];
+                [cardSearchHolder addSubview:[self getCardButton:aCard setAction:@selector(actionSearchCard:)]];
             }
         }
+    }else if([keyPath isEqualToString:THREAD_SET]){
+        NSSet *old =  [change objectForKey:NSKeyValueChangeOldKey];
+        NSSet *new = [change objectForKey:NSKeyValueChangeNewKey];
+        [self threadKeyPathChangedSetNew:new andOldSet:old];
+      
     }
     
 }
 
+-(void)threadKeyPathChangedSetNew:(NSSet *)new andOldSet:(NSSet *)old{
+    if([old count] > [new count]){
+        //remove code
+    }else{
+               NSSet* changed = [new filteredSetUsingPredicate:
+                          [NSPredicate predicateWithFormat:@"NOT objectID IN %@",old]];
+        for( ThreadType *aType in changed){
+            [threadDisplayHolder addSubview:[self getThreadButton:aType setAction:@selector(actionDisplayThread:)]];
+            [threadSearchHolder addSubview:[self getThreadButton:aType setAction:@selector(actionSearchThread:)]];
+        }
+    }
+}
+
 -(void)close{
     [typeManager removeObserver:self forKeyPath:CARD_TYPE_ARRAY];
+    [typeManager removeObserver:self forKeyPath:THREAD_SET];
     [super close];
 }
 

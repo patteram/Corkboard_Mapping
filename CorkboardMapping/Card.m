@@ -19,7 +19,11 @@
 @dynamic connections;
 @dynamic myCardType;
 
-
-
+-(void)setLocation:(NSPoint)aPoint{
+    [self setRect:[NSValue valueWithPoint:aPoint]];
+}
+-(NSPoint)getLocation{
+    return [[self rect] pointValue];
+}
 
 @end

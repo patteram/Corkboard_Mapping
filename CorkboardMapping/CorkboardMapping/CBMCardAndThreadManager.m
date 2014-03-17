@@ -41,9 +41,14 @@
                                        inManagedObjectContext:myContext];
      Thread *thread = [[Thread alloc]
                   initWithEntity:threadEntity insertIntoManagedObjectContext:myContext];
+    NSSet *set = [[NSSet alloc]initWithObjects:card,card2, nil];
+//    [thread addCardsObject:card];
+//    [thread addCardsObject:card2];
+    //[thread setCards:set];
    // [[thread setCards:[NSSet alloc]initW] ];
+    thread.cards = set;
     [thread setMyThreadType: threadType];
-       return thread;
+    return thread;
 }
 
 -(NSArray*)getAllCardsAndThreads{

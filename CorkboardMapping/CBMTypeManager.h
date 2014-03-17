@@ -13,6 +13,7 @@
 @interface CBMTypeManager : NSObject <CBMCardTypeProtocol, CBMThreadTypeProtocol>
 @property NSManagedObjectContext* myContext;
 
+@property NSMutableSet * threadTypes; 
 @property NSMutableSet * cardTypes;
 
 -(id) initWithModelContext:(NSManagedObjectContext *)context;

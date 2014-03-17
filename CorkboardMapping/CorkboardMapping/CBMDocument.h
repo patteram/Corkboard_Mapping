@@ -11,12 +11,13 @@
 #import "CBMTypeManager.h"
 #import "CBMSearchAndDisplayController.h"
 #import "CBMCreateCardTypeController.h"
+#import "CBMCreateThreadTypeController.h"
 @interface CBMDocument : NSPersistentDocument
 @property CBMTypeManager * typeManager;
 @property CBMCardAndThreadManager * cardAndThreadManager;
 @property CBMMainWindowController  *corkboard;
 @property CBMSearchAndDisplayController *searchAndDisplay;
-@property CBMCreateCardTypeController *createCardType; 
+@property CBMCreateCardTypeController *createCardType;
+@property CBMCreateThreadTypeController *createThreadType;
 
-@property NSWindowController *createThreadType; 
 @end

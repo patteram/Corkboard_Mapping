@@ -60,15 +60,15 @@ const int BUFFER_SPACE = 4;
 - (void)drawRect:(NSRect)dirtyRect
 {
     NSBezierPath *cardPath = [NSBezierPath bezierPathWithRoundedRect:self.bounds xRadius:5 yRadius:5];
-    [cardColor set];
+    [cardColor setFill];
     [cardPath fill];
     if(highlight | dragging){
         NSColor *color = [NSColor blueColor];
         [cardPath setLineWidth:3];
-        [color set];
+        [color setStroke];
     }else{
         NSColor *color = [NSColor blackColor];
-        [color set];
+        [color setStroke];
     }
     [cardPath stroke];
     NSColor *color = [NSColor blackColor];
@@ -83,6 +83,7 @@ const int BUFFER_SPACE = 4;
 - (void)mouseDragged:(NSEvent *)theEvent{ 
     CGFloat x = self.frame.origin.x + theEvent.deltaX;
     CGFloat y = self.frame.origin.y + theEvent.deltaY;
+    [cardObject setLocation:NSMakePoint(x + self.frame.size.width/2, y + self.frame.size.height/2)];
     [self setFrameOrigin: NSMakePoint(x, y) ];
     dragging = YES;
     [self setNeedsDisplay:YES];

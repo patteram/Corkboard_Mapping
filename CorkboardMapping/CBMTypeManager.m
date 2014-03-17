@@ -9,7 +9,8 @@
 #import "CBMTypeManager.h"
 #import "CBMTypeAlert.h"
 @implementation CBMTypeManager
-@synthesize cardTypes; 
+@synthesize cardTypes;
+@synthesize threadTypes;
 
 -(id)initWithModelContext:(NSManagedObjectContext *)context{
     self = [super init];
@@ -50,6 +51,7 @@
 }
 
 -(NSArray *)getAllThreadTypes{
+    if(threadTypes == nil){
     NSEntityDescription *description = [NSEntityDescription entityForName:@"ThreadType" inManagedObjectContext: [self myContext]];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:description];
@@ -59,7 +61,9 @@
     {
         NSLog(@"There was an error %@", [error description]); // Deal with error...
     }
-    return array;
+    threadTypes = [[NSMutableSet alloc]initWithArray:array];
+    }
+    return [threadTypes allObjects];
 }
 
 -(BOOL)cardTypeExistsWithName:(id)name andColor:(NSColor *)color{
@@ -77,8 +81,8 @@
 }
 
 -(BOOL)threadTypeExistsWithName:(NSString *)name andColor:(NSColor *)color{
-    NSArray *threadTypes = [self getAllThreadTypes];
-    for(ThreadType *aType in threadTypes){
+    NSArray *threadTypesArray = [self getAllThreadTypes];
+    for(ThreadType *aType in threadTypesArray){
         if([[aType name] isEqualToString:name]){
                        return YES;
             }
@@ -104,6 +108,9 @@
     ThreadType *threadT = [[ThreadType alloc]initWithEntity:threadEntity insertIntoManagedObjectContext:[self myContext]];
     [threadT setName:name];
     [threadT setColor:color];
+    
+    
+    [self addThreadTypesObject:threadT];
     return threadT;
 }
 
@@ -119,4 +126,16 @@
 - (void)intersectCardTypes:(NSSet *)otherObjects {
     [self.cardTypes intersectSet:otherObjects]; 
 }
+
+-(void)addThreadTypesObject:(ThreadType *)object{
+    [[self threadTypes]addObject:object];
+}
+
+-(void)removeThreadTypesObject:(ThreadType *)object{
+    [[self threadTypes]removeObject:object];
+}
+-(void)intersectThreadTypes:(NSSet *)objects{
+    [self.threadTypes intersectSet:objects];
+}
+
 @end
