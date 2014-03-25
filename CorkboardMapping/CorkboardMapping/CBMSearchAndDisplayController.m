@@ -82,7 +82,17 @@ NSMutableArray * displayArray;
     NSLog(@"Was hit");
 }
 
+-(void)cardClicked:(id)sender{
+    if([sender isKindOfClass: [CBMCheckboxCard class]]){
+        CBMCheckboxCard *c = (CBMCheckboxCard * )sender;
+        NSLog(@"Color %@ and Name %@", [[c type] color], [[c type] name]);
+        if([[self document] isKindOfClass: [CBMDocument class]]){
+            CBMDocument *doc = [self document];
+            [[doc theState]setCardToCreate:[c type]]; 
+        }
 
+    }
+}
 
 -(void)actionSearchCard:(id)sender{
     
@@ -117,6 +127,8 @@ NSMutableArray * displayArray;
     CBMCheckboxCard * cardSection = [[CBMCheckboxCard alloc]initWithFrame:NSMakeRect(0,0,cardDisplayHolder.frame.size.width,0) andCardType:aType];
     [[cardSection checkbox] setTarget:self];
     [[cardSection checkbox] setAction:selector ];
+    [cardSection setTarget:self];
+    [cardSection setSelector:@selector(cardClicked:)]; 
     return cardSection;
 }
 

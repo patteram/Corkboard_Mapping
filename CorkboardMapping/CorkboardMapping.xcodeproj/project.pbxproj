@@ -38,6 +38,7 @@
 		5EABACF118B931F800B52D24 /* CBMSearchAndDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACEF18B931F800B52D24 /* CBMSearchAndDisplayController.m */; };
 		5EABACF218B931F800B52D24 /* CBMSearchAndDisplayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EABACF018B931F800B52D24 /* CBMSearchAndDisplayController.xib */; };
 		5EDB05C318CC0D9600DB3D54 /* CBMCheckboxCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB05C218CC0D9600DB3D54 /* CBMCheckboxCard.m */; };
+		5EF31A8E18E0D2F900B442AB /* CBMState.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF31A8D18E0D2F900B442AB /* CBMState.m */; };
 		5EF611A618C26E8A00A7AD7F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EABACA618B6C86E00B52D24 /* XCTest.framework */; };
 		5EF611AC18C26E8A00A7AD7F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EF611AA18C26E8A00A7AD7F /* InfoPlist.strings */; };
 		5EF611AE18C26E8A00A7AD7F /* CorkboardMapping_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF611AD18C26E8A00A7AD7F /* CorkboardMapping_Tests.m */; };
@@ -118,6 +119,8 @@
 		5EDB05C018CAEA0100DB3D54 /* CBMTypeAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBMTypeAlert.h; sourceTree = "<group>"; };
 		5EDB05C118CC0D9600DB3D54 /* CBMCheckboxCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMCheckboxCard.h; sourceTree = "<group>"; };
 		5EDB05C218CC0D9600DB3D54 /* CBMCheckboxCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMCheckboxCard.m; sourceTree = "<group>"; };
+		5EF31A8C18E0D2F900B442AB /* CBMState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMState.h; sourceTree = "<group>"; };
+		5EF31A8D18E0D2F900B442AB /* CBMState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMState.m; sourceTree = "<group>"; };
 		5EF611A518C26E8A00A7AD7F /* CorkboardMapping_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CorkboardMapping_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EF611A918C26E8A00A7AD7F /* CorkboardMapping_Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CorkboardMapping_Tests-Info.plist"; sourceTree = "<group>"; };
 		5EF611AB18C26E8A00A7AD7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -299,6 +302,8 @@
 				5E1F1A2518BAA8F500C89AE0 /* Model */,
 				5E1F1A2318BAA88400C89AE0 /* CustomViews */,
 				5E1F1A2218BAA84C00C89AE0 /* WindowControllers */,
+				5EF31A8C18E0D2F900B442AB /* CBMState.h */,
+				5EF31A8D18E0D2F900B442AB /* CBMState.m */,
 			);
 			path = CorkboardMapping;
 			sourceTree = "<group>";
@@ -523,6 +528,7 @@
 				5E1F1A3918BC1B7200C89AE0 /* Card.m in Sources */,
 				5EABACCF18B6D65000B52D24 /* Thread.m in Sources */,
 				5EABACCC18B6D65000B52D24 /* ThreadType.m in Sources */,
+				5EF31A8E18E0D2F900B442AB /* CBMState.m in Sources */,
 				5EAB1C9B18D35F8E00B4CC1A /* CBMThreadView.m in Sources */,
 				5EAB1CA318D3CE2D00B4CC1A /* CBMCheckboxThread.m in Sources */,
 				5EF611B718C29B7600A7AD7F /* CBMCreateCardTypeController.m in Sources */,

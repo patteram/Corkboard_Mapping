@@ -18,12 +18,13 @@
 @synthesize createThreadType;
 @synthesize searchAndDisplay;
 @synthesize createCardType;
-
+@synthesize theState;
 - (id)init
 {
     self = [super init];
     if (self) {
         // Add your subclass-specific initialization here.
+        theState = [[CBMState alloc]init]; 
     }
     return self;
 }
@@ -47,11 +48,9 @@
 }
 
 -(void)makeWindowControllers{
-    
+    createCardType = nil;
    corkboard = [[CBMMainWindowController alloc]initWithWindowNibName:@"CBMDocument"];
    searchAndDisplay = [[CBMSearchAndDisplayController alloc]initWithWindowNibName:@"CBMSearchAndDisplayController"];
-//    createCardType =[[CBMCreateCardTypeController alloc]initWithWindowNibName:@"CreateCardType"];
-//    [self addWindowController:createCardType];
    [searchAndDisplay windowTitleForDocumentDisplayName:[self displayName]];
     cardAndThreadManager = [[CBMCardAndThreadManager alloc] initWithModelContext:[self managedObjectContext]];
     typeManager = [[CBMTypeManager alloc]initWithModelContext:[self managedObjectContext]]; 
@@ -60,12 +59,9 @@
 }
 
 -(IBAction)showSearchAndDisplay:(id)sender{
-  
-   // if(searchAndDisplay )
     if([searchAndDisplay isWindowVisible]){
         [ searchAndDisplay setIsVisible:NO];
     }else{
-  
         [searchAndDisplay setIsVisible:YES];
     }
 }
@@ -88,20 +84,20 @@
     
 }
 -(void)close{
-    [super close];
     searchAndDisplay = nil;
     corkboard = nil;
     createCardType = nil;
+    [super close];
 }
 -(IBAction)createCardType:(id)sender{
-    if(createCardType != nil){
-        if([[self windowControllers] containsObject:createCardType]){
+    NSLog(@"createCardType");
+    if(createCardType != nil && [[self windowControllers] containsObject:createCardType]){
             [[createCardType window] orderFrontRegardless];
-        }else{
-            createCardType = [[CBMCreateCardTypeController alloc]initWithWindowNibName:@"CreateCardType"];
-            [self addWindowController:createCardType];
-            [[createCardType window] orderFront:self];
-        }
+    }else{
+        createCardType = [[CBMCreateCardTypeController alloc]initWithWindowNibName:@"CreateCardType"];
+        NSLog(@"creating window");
+        [self addWindowController:createCardType];
+        [[createCardType window] orderFront:self];
     }
 }
 @end

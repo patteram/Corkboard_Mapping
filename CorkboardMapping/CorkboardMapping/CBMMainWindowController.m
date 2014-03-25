@@ -48,13 +48,13 @@ BOOL createCard = YES;
         CBMDocument *doc = [self document];
         NSManagedObjectContext *myContext = [doc managedObjectContext];
         cardManager = [[CBMCardAndThreadManager alloc]initWithModelContext:myContext];
-        one = [cardManager createCardType:@"Character" AndColor:[NSColor greenColor]];
-        CardType *two =[cardManager createCardType:@"Chapter" AndColor: [NSColor redColor]];
-          
-        ThreadType *th1 = [[doc typeManager] createThreadTypeWithName:@"is in" andColor:[NSColor blueColor]];
-         Card *x =  [cardManager createCardWithType:one AtLocation:NSMakePoint(20, 20) AndTitle:@"Alevia Merst" AndBody:@"Knight-Priest of the Elipric Clan"];
-         Card *y = [cardManager createCardWithType:two AtLocation:NSMakePoint(150,180) AndTitle:@"Chapter 1" AndBody:@"Death of the ruler of Elipric Clan, Alevia accused of murder"];
-          [cardManager createThreadWithType:th1 BetweenCard:x AndCard:y];
+//        one = [cardManager createCardType:@"Character" AndColor:[NSColor greenColor]];
+//        CardType *two =[cardManager createCardType:@"Chapter" AndColor: [NSColor redColor]];
+//          
+//        ThreadType *th1 = [[doc typeManager] createThreadTypeWithName:@"is in" andColor:[NSColor blueColor]];
+//         Card *x =  [cardManager createCardWithType:one AtLocation:NSMakePoint(20, 20) AndTitle:@"Alevia Merst" AndBody:@"Knight-Priest of the Elipric Clan"];
+//         Card *y = [cardManager createCardWithType:two AtLocation:NSMakePoint(150,180) AndTitle:@"Chapter 1" AndBody:@"Death of the ruler of Elipric Clan, Alevia accused of murder"];
+//          [cardManager createThreadWithType:th1 BetweenCard:x AndCard:y];
         NSArray *array = [cardManager getAllCardsAndThreads];
         if(array != nil){
 //            NSLog(@"Not Nil");
@@ -64,6 +64,7 @@ BOOL createCard = YES;
            
                 }
     }
+   
 }
 
 
@@ -72,14 +73,16 @@ BOOL createCard = YES;
 }
 
 -(IBAction)mouseDown:(NSEvent *)theEvent{
-   
-//    if(createCard){
-//  NSPoint p =  [corkboardView convertPoint:[theEvent locationInWindow] fromView:nil];
-//        Card *acard = [cardManager createCardWithType:one AtLocation:NSMakePoint(p.x, p.y)];
-//    CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(p.x-(190/2),p.y-(120/2), 190, 120) AndCBMCard:acard];
-//    [corkboardView addSubview:cardView];
-//        createCard = NO;
-//    }
+    if([[self document] isKindOfClass: [CBMDocument class]]){
+        CBMDocument *doc = [self document];
+        if([[doc theState]creatingCard]){
+            NSPoint p =  [corkboardView convertPoint:[theEvent locationInWindow] fromView:nil];
+            Card *acard = [cardManager createCardWithType:[[doc theState] cardToCreate] AtLocation:NSMakePoint(p.x, p.y)];
+            CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(p.x-(190/2),p.y-(120/2), 190, 120) AndCBMCard:acard];
+            [corkboardView addSubview:cardView];
+            [[doc theState]setCreatingCard:NO];
+        }
+    }
 }
 
 -(NSArray *)createCardViews:(NSArray *)array{
@@ -88,12 +91,6 @@ BOOL createCard = YES;
         NSValue *j = [aCard rect];
         NSPoint point = j.pointValue;
         CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(point.x-(190/2), point.y-(120/2), 190, 120) AndCBMCard:aCard];
-//            NSArray *anArray = [[aCard connections]allObjects];
-//            if(anArray == nil){
-//                NSLog(@"Array is nil");
-//            }else{
-//                NSLog(@"Card has an array of count %lu", [anArray count]);
-//            }
         [corkboardView addSubview:cardView];
         }
     }

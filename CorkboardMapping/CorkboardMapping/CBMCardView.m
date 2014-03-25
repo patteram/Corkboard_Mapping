@@ -119,6 +119,9 @@ const int BUFFER_SPACE = 4;
  \returns a view that contains the body text area
  */
 -(NSView*) CBMsetUpBodyTextAreaWithText:(NSString*)text{
+    if(text == nil){
+        text = @"body";
+    }
     CGFloat x = self.bounds.origin.x+BUFFER_SPACE;
     CGFloat y = self.bounds.origin.y+BUFFER_SPACE;
     // buffer is *2 for width because
@@ -149,6 +152,9 @@ const int BUFFER_SPACE = 4;
  \returns a view that contains the title area
  */
 -(NSView*) CBMsetUpTitleTextAreaWithText:(NSString*)text{
+    if(text == nil){
+        text = @"Title";
+    }
     CGFloat x = self.bounds.origin.x+BUFFER_SPACE;
     CGFloat y =self.bounds.origin.y+(self.bounds.size.height/3)*2-BUFFER_SPACE;
     CGFloat width = self.bounds.size.width-BUFFER_SPACE*2;
@@ -185,9 +191,9 @@ const int BUFFER_SPACE = 4;
             [view setBackgroundColor:cardColor];
         }
     }else if ([keyPath isEqualToString:@"title"]){
-        [title setString:[object valueForKey:keyPath]];
+        //[title setString:[object valueForKey:keyPath]];
     }else if([keyPath isEqualToString:@"body"]){
-        [body setString:[object valueForKey:keyPath]];
+       // [body setString:[object valueForKey:keyPath]];
     }
     
     [self setNeedsDisplay:YES];
@@ -200,6 +206,10 @@ const int BUFFER_SPACE = 4;
     }else if(notification.object == body){
         [cardObject setValue:[body string] forKey:@"body"];
     }
+}
+
+-(void)mouseDown:(NSEvent *)theEvent{
+    
 }
 
 @end

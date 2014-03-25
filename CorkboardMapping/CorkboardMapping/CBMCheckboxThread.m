@@ -33,7 +33,7 @@
             lineDash[2] = 5.0;
             lineDash[3] = 2;
             [path setLineWidth:5];
-            //tutorial says lineDash should work.
+            
             [path setLineDash:lineDash count:4 phase:5];
        
         }
