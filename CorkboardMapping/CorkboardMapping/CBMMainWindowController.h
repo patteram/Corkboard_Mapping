@@ -16,4 +16,5 @@
 -(void)avoidSearchCriteria:(NSArray*)criteria;
 -(void)avoidDisplay:(NSArray *)critieria; 
 -(void)avoidSearchDisplayCritieria:(NSArray *)criteria andDepth:(NSInteger)integer;
+-(void)askToDelete:(id)sender; 
 @end

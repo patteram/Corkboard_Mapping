@@ -67,6 +67,13 @@ BOOL createCard = YES;
    
 }
 
+-(void)askToDelete:(id)sender{
+    if([sender isKindOfClass:[CBMCardView class] ]){
+        NSLog(@"Working");
+        [sender removeFromSuperview];
+        [cardManager deleteCard:[sender cardObject]];
+    }
+}
 
 -(BOOL)shouldCloseDocument{
     return YES;
@@ -79,6 +86,7 @@ BOOL createCard = YES;
             NSPoint p =  [corkboardView convertPoint:[theEvent locationInWindow] fromView:nil];
             Card *acard = [cardManager createCardWithType:[[doc theState] cardToCreate] AtLocation:NSMakePoint(p.x, p.y)];
             CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(p.x-(190/2),p.y-(120/2), 190, 120) AndCBMCard:acard];
+            [cardView setTheController:self];
             [corkboardView addSubview:cardView];
             [[doc theState]setCreatingCard:NO];
         }
@@ -91,6 +99,7 @@ BOOL createCard = YES;
         NSValue *j = [aCard rect];
         NSPoint point = j.pointValue;
         CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(point.x-(190/2), point.y-(120/2), 190, 120) AndCBMCard:aCard];
+              [cardView setTheController:self];
         [corkboardView addSubview:cardView];
         }
     }

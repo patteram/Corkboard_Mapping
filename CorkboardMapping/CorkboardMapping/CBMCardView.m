@@ -14,6 +14,7 @@
 @synthesize cardObject;
 @synthesize title;
 @synthesize body;
+@synthesize theController; 
 
 const int BUFFER_SPACE = 4;
 
@@ -49,6 +50,7 @@ const int BUFFER_SPACE = 4;
 
 
 -(void)dealloc{
+    theController = nil;
     [cardObject removeObserver:self forKeyPath:@"myCardType.color"];
     [cardObject removeObserver:self forKeyPath:@"title"];
     [cardObject removeObserver:self forKeyPath:@"body"]; 
@@ -63,7 +65,7 @@ const int BUFFER_SPACE = 4;
     [cardColor setFill];
     [cardPath fill];
     if(highlight | dragging){
-        NSColor *color = [NSColor blueColor];
+        NSColor *color = [NSColor whiteColor];
         [cardPath setLineWidth:3];
         [color setStroke];
     }else{
@@ -209,7 +211,15 @@ const int BUFFER_SPACE = 4;
 }
 
 -(void)mouseDown:(NSEvent *)theEvent{
-    
+
+}
+-(void)delete:(id)sender{
+    [theController askToDelete:self]; 
+}
+-(void)rightMouseDown:(NSEvent *)theEvent{
+    NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
+    [theMenu insertItemWithTitle:@"Delete" action:@selector(delete:) keyEquivalent:@"" atIndex:0];
+    [NSMenu popUpContextMenu:theMenu withEvent:theEvent forView:self];
 }
 
 @end

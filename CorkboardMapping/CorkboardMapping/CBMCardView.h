@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Card.h"
-
+#import "CBMMainWindowController.h" 
 @interface CBMCardView : NSView <NSTextViewDelegate>{
     BOOL higlight;
     BOOL dragging;
@@ -20,6 +20,7 @@
 @property Card *cardObject;
 @property NSTextView *title;
 @property NSTextView *body;
+@property CBMMainWindowController *theController;
 
 - (id) initWithFrame:(NSRect)frameRect AndCBMCard:(Card*)card;
 
