@@ -11,23 +11,42 @@
 @implementation CBMState
 CardType *cardToCreate;
 ThreadType * threadToCreate;
+CBMCardView *cardSelected;
 @synthesize creatingCard;
 @synthesize creatingThread;
+@synthesize cardOne; 
 
 -(void)setCardToCreate:(CardType*)type{
+    if(cardToCreate != nil){
+        [cardToCreate setToCreate:NO];
+    }
+    if(type == nil){
+         creatingCard = NO;
+    }else{
+        creatingCard = YES;
+        cardToCreate = type;
+        [cardToCreate setToCreate:YES];
+    }
     [self setCreatingThread:NO];
-    creatingCard = YES;
-    cardToCreate = type;
+
+    
 }
 
--(Card*)cardToCreate{
+-(CardType*)cardToCreate{
     return cardToCreate;
 }
 
--(void)setThreadToCreate:(ThreadType *)threadToCreate {
+-(void)setCardSelected:(CBMCardView *)newCardSelected{
+    if(cardSelected != nil){
+        
+    }
+}
+-(void)setThreadToCreate:(ThreadType *)athreadToCreate {
+    NSLog(@"CBM State - thread to create"); 
     [self setCreatingCard:NO];
-    self.threadToCreate = threadToCreate;
-    creatingThread = YES;
+    threadToCreate = athreadToCreate;
+    [self setCreatingThread: YES];
+    cardOne = nil;
 }
 
 -(ThreadType *)threadToCreate{

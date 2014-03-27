@@ -13,6 +13,7 @@
 @property CardType *type;
 @property NSBezierPath *path;
 @property NSObject *target;
+
 @property SEL selector;
 -(id)initWithFrame:(NSRect)frameRect andCardType:(CardType *)type; 
 @end

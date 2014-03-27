@@ -32,6 +32,8 @@ NSMutableArray * displayArray;
 
 -(void)windowDidLoad{
     [super windowDidLoad];
+    [super showWindow:self]; 
+    NSLog(@"TA DA %@", [super window]);
     if([[self document] isKindOfClass: [CBMDocument class]]){
        CBMDocument *doc = [self document];
         self.typeManager = [doc typeManager];
@@ -83,6 +85,7 @@ NSMutableArray * displayArray;
 }
 
 -(void)cardClicked:(id)sender{
+    NSLog(@"Search and Display - card clicked");
     if([sender isKindOfClass: [CBMCheckboxCard class]]){
         CBMCheckboxCard *c = (CBMCheckboxCard * )sender;
         NSLog(@"Color %@ and Name %@", [[c type] color], [[c type] name]);
@@ -94,6 +97,18 @@ NSMutableArray * displayArray;
     }
 }
 
+-(void)threadClickedXYZ:(id)sender{
+    NSLog(@"Search and Display - thread was clicked");
+    if([sender isKindOfClass: [CBMCheckboxThread class]]){
+        CBMCheckboxThread *c = (CBMCheckboxThread * )sender;
+        NSLog(@"Color %@ and Name %@", [[c type] color], [[c type] name]);
+        if([[self document] isKindOfClass: [CBMDocument class]]){
+            CBMDocument *doc = [self document];
+            [[doc theState]setThreadToCreate:[c type]];
+        }
+        
+    }
+}
 -(void)actionSearchCard:(id)sender{
     
 }

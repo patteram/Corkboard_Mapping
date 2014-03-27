@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "ThreadType.h"
 #import "CardType.h"
+#import "CBMCardView.h"
 @interface CBMState : NSObject
 @property BOOL creatingCard;
 @property BOOL creatingThread;
 @property CardType *cardToCreate;
 @property ThreadType *threadToCreate;
+@property Card *cardOne;
 @end

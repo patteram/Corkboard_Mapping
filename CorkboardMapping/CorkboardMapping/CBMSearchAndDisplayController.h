@@ -25,6 +25,7 @@
 
 @property (weak) IBOutlet NSSlider *threadSlider;
 @property (weak) IBOutlet NSTextField *sliderLabel;
+@property (strong) IBOutlet NSPanel *win;
 
 
 @property CBMGrowingView * cardDisplayHolder;

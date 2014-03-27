@@ -15,5 +15,5 @@
 @dynamic color;
 @dynamic name;
 @dynamic cardsOfType;
-
+@synthesize toCreate; 
 @end

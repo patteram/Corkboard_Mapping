@@ -16,7 +16,7 @@
 @property (nonatomic, retain) id color;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *cardsOfType;
-
+@property BOOL toCreate; 
 @end
 
 @interface CardType (CoreDataGeneratedAccessors)
