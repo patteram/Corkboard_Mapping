@@ -7,12 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "CBMState.h"
 #import "CBMCorkboard.h"
-
 @interface CBMMainWindowController : NSWindowController
 
 @property CBMCorkboard *corkboardView;
-
+@property CBMState *state; 
 -(void)avoidSearchCriteria:(NSArray*)criteria;
 -(void)avoidDisplay:(NSArray *)critieria; 
 -(void)avoidSearchDisplayCritieria:(NSArray *)criteria andDepth:(NSInteger)integer;

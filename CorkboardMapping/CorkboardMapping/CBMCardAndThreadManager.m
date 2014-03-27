@@ -46,7 +46,8 @@
 //    [thread addCardsObject:card2];
     //[thread setCards:set];
    // [[thread setCards:[NSSet alloc]initW] ];
-    thread.cards = set;
+    [thread setCards:set];
+   // thread.cards = set;
     [thread setMyThreadType: threadType];
     return thread;
 }

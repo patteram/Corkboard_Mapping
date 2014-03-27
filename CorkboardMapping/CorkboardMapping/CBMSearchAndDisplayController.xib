@@ -17,6 +17,8 @@
                 <outlet property="threadDisplayScrollView" destination="YmJ-Qh-u9a" id="3lV-xb-e9v"/>
                 <outlet property="threadSearchScrollView" destination="1e4-lD-wuT" id="VKY-90-WyV"/>
                 <outlet property="threadSlider" destination="ls6-y5-ms5" id="YpC-x6-GnM"/>
+                <outlet property="win" destination="dcG-2d-dZ8" id="awV-t1-R4b"/>
+                <outlet property="window" destination="dcG-2d-dZ8" id="ohF-Ew-esb"/>
                 <outlet property="windowToName" destination="dcG-2d-dZ8" id="wIm-tJ-fwh"/>
             </connections>
         </customObject>
@@ -77,7 +79,7 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="RMN-fE-SmG">
-                                                <rect key="frame" x="299" y="1" width="15" height="191"/>
+                                                <rect key="frame" x="298" y="1" width="16" height="191"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
@@ -110,7 +112,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="U0d-tQ-g7b">
-                                                                    <rect key="frame" x="249" y="1" width="15" height="209"/>
+                                                                    <rect key="frame" x="248" y="1" width="16" height="209"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                             </scrollView>
@@ -123,7 +125,7 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Om8-UY-14k">
-                                                <rect key="frame" x="299" y="1" width="15" height="229"/>
+                                                <rect key="frame" x="298" y="1" width="16" height="229"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>

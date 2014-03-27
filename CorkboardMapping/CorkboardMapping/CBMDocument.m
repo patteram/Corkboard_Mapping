@@ -100,4 +100,6 @@
         [[createCardType window] orderFront:self];
     }
 }
+
+
 @end

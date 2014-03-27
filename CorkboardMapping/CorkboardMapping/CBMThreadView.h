@@ -10,7 +10,7 @@
 #import "Thread.h"
 #import "Card.h"
 @interface CBMThreadView : NSView
-@property Thread *thread;
+@property Thread *threadObject;
 @property NSPoint startPoint;
 @property NSPoint endPoint;
 @property NSBezierPath *thePath;

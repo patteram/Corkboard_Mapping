@@ -9,8 +9,9 @@
 #import "CBMThreadView.h"
 #import "Card.h"
 #import "Thread.h"
+#import "ThreadType.h"
 @implementation CBMThreadView
-@synthesize thread;
+@synthesize threadObject;
 @synthesize thePath;
 @synthesize card1;
 @synthesize card2;
@@ -18,17 +19,18 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.thread = aThread;
-        NSArray *anArray = [[thread cards]allObjects];
+        self.threadObject = aThread;
+        NSArray *anArray = [[threadObject cards]allObjects];
+        NSLog(@"Thread count %lu", [anArray count]); 
         card1 = [anArray objectAtIndex:0];
         card2 = [anArray objectAtIndex:1];
         thePath = [NSBezierPath bezierPath];
-        [thePath moveToPoint:frame.origin];
-        [thePath lineToPoint:NSMakePoint(frame.size.width-5, frame.size.height - 5)];
-        [thePath setLineWidth:5.0];
+        [self setFrameBasedOnPoints:[card1 getLocation] and:[card2 getLocation]]; 
         [thePath setLineCapStyle:NSRoundLineCapStyle];
         [card1 addObserver:self forKeyPath:@"rect" options:NSKeyValueObservingOptionNew context:nil];
         [card2 addObserver:self forKeyPath:@"rect" options:NSKeyValueObservingOptionNew context:nil];
+        [threadObject addObserver:self forKeyPath:@"cards" options:NSKeyValueObservingOptionNew
+                          context:nil];
         // Initialization code here.
     }
     return self;
@@ -37,7 +39,7 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
 	[super drawRect:dirtyRect];
-	NSColor *aColor = [NSColor blueColor];
+	NSColor *aColor = [[threadObject myThreadType] color];
     [aColor setStroke];
 	[super drawRect:dirtyRect];
 //    // Create the shadow
@@ -67,10 +69,10 @@
     [thePath lineToPoint:endPoint];
     [thePath setLineWidth:5.0];
     [thePath setLineCapStyle:NSRoundLineCapStyle];
-    [[NSColor blueColor] set];
-    NSLog(@"CARD ONE %f, %f", endPoint.x, endPoint.y);
-    NSLog(@"Card TWO %f, %f", startPoint.x, startPoint.y);
-    NSLog(@"Thread created %f,%f,%f,%f", newFrame.origin.x, newFrame.origin.y, newFrame.size.width, newFrame.size.height);
+    
+//    NSLog(@"CARD ONE %f, %f", endPoint.x, endPoint.y);
+//    NSLog(@"Card TWO %f, %f", startPoint.x, startPoint.y);
+//    NSLog(@"Thread created %f,%f,%f,%f", newFrame.origin.x, newFrame.origin.y, newFrame.size.width, newFrame.size.height);
 
 }
 
@@ -78,13 +80,31 @@
     return YES; 
 }
 
+-(void)delete:(id)sender{
+    [self tryToPerform:@selector(askToDelete:) with:self];
+}
+-(void)rightMouseDown:(NSEvent *)theEvent{
+    NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
+    [theMenu insertItemWithTitle:@"Delete" action:@selector(delete:) keyEquivalent:@"" atIndex:0];
+    [NSMenu popUpContextMenu:theMenu withEvent:theEvent forView:self];
+}
+
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if([keyPath isEqualToString:@"rect"]){
+        if(card1 == nil || card2 == nil){
+            [self removeFromSuperview];
+        }
+//        NSLog(@"CARD ONE %f, %f", [card1 getLocation].x, [card1 getLocation].y);
+//        NSLog(@"Card TWO %f, %f", [card2 getLocation].x, [card1 getLocation].y);
         [self setFrameBasedOnPoints:[card1 getLocation] and:[card2 getLocation]];
+    }else if([keyPath isEqualToString:@"cards"]){
+//        NSLog(@"CARDS HAVE CHANGED");
+        [self removeFromSuperview];
     }
 }
 -(void)dealloc{
     [card1 removeObserver:self forKeyPath:@"rect"];
     [card2 removeObserver:self forKeyPath:@"rect"];
+    [threadObject removeObserver:self forKeyPath:@"cards"];
 }
 @end

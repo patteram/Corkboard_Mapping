@@ -14,10 +14,10 @@
 @synthesize cardObject;
 @synthesize title;
 @synthesize body;
-@synthesize theController; 
+
 
 const int BUFFER_SPACE = 4;
-
+NSString *string = @"cardClicked:";
 - (id)initWithFrame:(NSRect)frame
 {
     self = [self initWithFrame:frame AndCBMCard:nil];
@@ -50,7 +50,7 @@ const int BUFFER_SPACE = 4;
 
 
 -(void)dealloc{
-    theController = nil;
+   
     [cardObject removeObserver:self forKeyPath:@"myCardType.color"];
     [cardObject removeObserver:self forKeyPath:@"title"];
     [cardObject removeObserver:self forKeyPath:@"body"]; 
@@ -122,7 +122,7 @@ const int BUFFER_SPACE = 4;
  */
 -(NSView*) CBMsetUpBodyTextAreaWithText:(NSString*)text{
     if(text == nil){
-        text = @"body";
+        text = @" ";
     }
     CGFloat x = self.bounds.origin.x+BUFFER_SPACE;
     CGFloat y = self.bounds.origin.y+BUFFER_SPACE;
@@ -155,7 +155,7 @@ const int BUFFER_SPACE = 4;
  */
 -(NSView*) CBMsetUpTitleTextAreaWithText:(NSString*)text{
     if(text == nil){
-        text = @"Title";
+        text = @" ";
     }
     CGFloat x = self.bounds.origin.x+BUFFER_SPACE;
     CGFloat y =self.bounds.origin.y+(self.bounds.size.height/3)*2-BUFFER_SPACE;
@@ -211,10 +211,10 @@ const int BUFFER_SPACE = 4;
 }
 
 -(void)mouseDown:(NSEvent *)theEvent{
-
+   [self tryToPerform:@selector(cardClicked:) with:self];
 }
 -(void)delete:(id)sender{
-    [theController askToDelete:self]; 
+    [self tryToPerform:@selector(askToDelete:) with:self];
 }
 -(void)rightMouseDown:(NSEvent *)theEvent{
     NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];

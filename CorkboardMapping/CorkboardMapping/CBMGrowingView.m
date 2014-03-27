@@ -9,7 +9,7 @@
 #import "CBMGrowingView.h"
 
 @implementation CBMGrowingView
-const int ROW_HEIGHT = 25;
+const int ROW_HEIGHT = 30;
 - (id)initWithFrame:(NSRect)frame
 {
 
