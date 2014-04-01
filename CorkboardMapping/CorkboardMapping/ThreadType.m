@@ -14,5 +14,5 @@
 @dynamic name;
 @dynamic color;
 @dynamic threadsOfType;
-
+@synthesize toCreate; 
 @end

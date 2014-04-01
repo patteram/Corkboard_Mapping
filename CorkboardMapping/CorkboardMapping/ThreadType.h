@@ -15,6 +15,7 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSColor *color;
 @property (nonatomic, retain) NSSet *threadsOfType;
+@property BOOL toCreate; 
 @end
 
 @interface ThreadType (CoreDataGeneratedAccessors)
