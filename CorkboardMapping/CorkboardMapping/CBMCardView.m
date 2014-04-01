@@ -137,7 +137,7 @@ NSString *string = @"cardClicked:";
     [[body textContainer] setContainerSize:NSMakeSize(width, height*9)];
     [[body textContainer] setHeightTracksTextView:NO];
     [body setString:text];
-    
+    [body setDelegate:self];
     NSScrollView *scrollview = [[NSScrollView alloc]initWithFrame:NSMakeRect(x, y, width, height)];
     [scrollview setHasVerticalScroller:YES];
     [scrollview setAutoresizingMask:NSViewWidthSizable |
@@ -206,6 +206,7 @@ NSString *string = @"cardClicked:";
     if( notification.object == title){
         [cardObject setValue:[title string] forKey:@"title"]; 
     }else if(notification.object == body){
+
         [cardObject setValue:[body string] forKey:@"body"];
     }
 }
