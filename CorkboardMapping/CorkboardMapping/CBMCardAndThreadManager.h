@@ -13,8 +13,10 @@
 @interface CBMCardAndThreadManager : NSObject <CardAndThreadProtocol>
 
 @property NSManagedObjectContext* myContext;
-
+@property NSMutableArray *threads;
+@property NSMutableArray *cards; 
 -(id) initWithModelContext:(NSManagedObjectContext *)context;
--(CardType *)createCardType:(NSString *)string AndColor:(NSColor *)color; 
+//-(CardType *)createCardType:(NSString *)string AndColor:(NSColor *)color;
+
 
 @end

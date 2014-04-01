@@ -16,7 +16,8 @@
 
 @implementation CBMCardAndThreadManager
 @synthesize myContext;
-
+@synthesize cards;
+@synthesize threads;
 -(id)initWithModelContext:(NSManagedObjectContext*)context{
     self = [super init];
     if(self){
@@ -27,10 +28,12 @@
 }
 
 -(void)deleteCard:(Card *)cardToDelete{
+    [cards removeObject:cardToDelete];
     [ [self myContext] deleteObject:cardToDelete];
 
 }
 -(void)deleteThread:(Thread *)threadToDelete{
+    [threads removeObject:threadToDelete];
     [ [self myContext] deleteObject:threadToDelete];
 
 }
@@ -42,13 +45,9 @@
      Thread *thread = [[Thread alloc]
                   initWithEntity:threadEntity insertIntoManagedObjectContext:myContext];
     NSSet *set = [[NSSet alloc]initWithObjects:card,card2, nil];
-//    [thread addCardsObject:card];
-//    [thread addCardsObject:card2];
-    //[thread setCards:set];
-   // [[thread setCards:[NSSet alloc]initW] ];
     [thread setCards:set];
-   // thread.cards = set;
     [thread setMyThreadType: threadType];
+    [threads addObject:thread];
     return thread;
 }
 
@@ -60,32 +59,29 @@
 }
 
 -(NSArray *)getAllCards{
-    NSEntityDescription *description = [NSEntityDescription entityForName:@"Card" inManagedObjectContext: myContext];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:description];
-    NSError *error;
-    NSArray *array = [myContext executeFetchRequest:request error:&error];
-    if (array == nil)
-    {
-        NSLog(@"There was an error %@", [error description]);
-    }
-    return array;
+    if(cards == nil){
+        NSEntityDescription *description = [NSEntityDescription entityForName:@"Card" inManagedObjectContext: myContext];
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        [request setEntity:description];
+        NSError *error;
+        NSArray *array = [myContext executeFetchRequest:request error:&error];
+        if (array == nil)
+        {
+            NSLog(@"There was an error %@", [error description]);
+        }
+        cards = [[NSMutableArray alloc]initWithArray:array];
+        return array;
+    }else
+        return cards;
 }
 
 -(NSArray *)getAllCardsAndAvoid:(NSArray *)criteria{
-    //first get array of all cards
-    NSEntityDescription *description = [NSEntityDescription entityForName:@"Card" inManagedObjectContext: myContext];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:description];
-    NSError *error;
-    NSArray *array = [myContext executeFetchRequest:request error:&error];
-    if (array == nil)
-    {
-        NSLog(@"There was an error %@", [error description]);
+    if(cards == nil){
+        [self getAllCards];
     }
     //now get cards that are not in avoiding criteria
     NSMutableArray *filteredArray = [[NSMutableArray alloc]init];
-    for(Card *aCard in array){
+    for(Card *aCard in cards){
         if(![criteria containsObject:[aCard myCardType]]){
             [filteredArray addObject:aCard];
         }
@@ -94,31 +90,30 @@
 }
 
 -(NSArray *)getAllThreads{
-    NSEntityDescription *description = [NSEntityDescription entityForName:@"Thread" inManagedObjectContext:myContext];
-    NSFetchRequest *request = [[NSFetchRequest alloc]init];
-    [request setEntity:description];
-    NSError *error;
-    NSArray *array = [myContext executeFetchRequest:request error:&error];
-    if (array == nil)
-    {
-        NSLog(@"There was an error in retrieving Cards%@", [error description]);
-    }
-    return array;
+    if(threads == nil){
+        NSEntityDescription *description = [NSEntityDescription entityForName:@"Thread" inManagedObjectContext:myContext];
+        NSFetchRequest *request = [[NSFetchRequest alloc]init];
+        [request setEntity:description];
+        NSError *error;
+        NSArray *array = [myContext executeFetchRequest:request error:&error];
+        if (array == nil)
+        {
+            NSLog(@"There was an error in retrieving Cards%@", [error description]);
+        }
+        threads = [[NSMutableArray alloc]initWithArray:array];
+        return array;
+        }
+    return threads;
 }
 
 -(NSArray *)getAllThreadsAndAvoid:(NSArray *)criteria{
-    NSEntityDescription *description = [NSEntityDescription entityForName:@"Thread" inManagedObjectContext:myContext];
-    NSFetchRequest *request = [[NSFetchRequest alloc]init];
-    [request setEntity:description];
-    NSError *error;
-    NSArray *array = [myContext executeFetchRequest:request error:&error];
-    if (array == nil)
+    if (threads == nil)
     {
-        NSLog(@"There was an error in retrieving Threads%@", [error description]);
+        [self getAllThreads];
     }
 
     NSMutableArray *filteredArray = [[NSMutableArray alloc]init];
-    for(Thread *aThread in array){
+    for(Thread *aThread in threads){
         if(![criteria containsObject:[aThread myThreadType]]){
             [filteredArray addObject:aThread];
         }
@@ -128,7 +123,16 @@
 
 -(NSArray*)getAllCardsAndThreadsAndAvoid:(NSArray *)criteria{
     NSMutableArray *array = [[NSMutableArray alloc]initWithArray:[self getAllCardsAndAvoid:criteria]];
-    [array addObjectsFromArray:[self getAllThreadsAndAvoid:criteria]];
+    NSArray *array2 = [[NSArray alloc]initWithArray:[self getAllThreadsAndAvoid:criteria]];
+
+    NSMutableArray *holdThreads = [[NSMutableArray alloc]init];
+    for(Thread *thread in array2){
+        NSArray *cardHolder = [[thread cards]allObjects];
+        if([array containsObject:[cardHolder objectAtIndex:0]] && [array containsObject:[cardHolder objectAtIndex:1]]){
+            [holdThreads addObject:thread];
+        }
+    }
+    [array addObjectsFromArray:holdThreads];
     return array;
 }
 
@@ -150,23 +154,11 @@
     [card setTitle:title];
     [card setBody:body];
     [card setMyCardType:type];
-    [card setRect:[NSValue valueWithPoint:aPoint]]; 
+    [card setRect:[NSValue valueWithPoint:aPoint]];
+    [cards addObject:card];
     return card;
 }
 
-
--(CardType *)createCardType:(NSString *)string AndColor:(NSColor *)color{
-    NSEntityDescription *cardType = [NSEntityDescription
-                                       entityForName:@"CardType"
-                                       inManagedObjectContext:myContext];
-    CardType *type = [[CardType alloc]
-                  initWithEntity:cardType insertIntoManagedObjectContext:myContext];
-
-    [type setName:string];
-    [type setColor:color];
- 
-    return type;
-}
 
 
 @end
