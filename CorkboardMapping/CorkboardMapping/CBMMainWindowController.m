@@ -50,15 +50,10 @@ BOOL createCard = YES;
         NSManagedObjectContext *myContext = [doc managedObjectContext];
         state = [doc theState];
         cardManager = [[CBMCardAndThreadManager alloc]initWithModelContext:myContext];
-//        one = [cardManager createCardType:@"Character" AndColor:[NSColor greenColor]];
-//        CardType *two =[cardManager createCardType:@"Chapter" AndColor: [NSColor redColor]];
-//          
-//        ThreadType *th1 = [[doc typeManager] createThreadTypeWithName:@"is in" andColor:[NSColor blueColor]];
-//         Card *x =  [cardManager createCardWithType:one AtLocation:NSMakePoint(20, 20) AndTitle:@"Alevia Merst" AndBody:@"Knight-Priest of the Elipric Clan"];
-//         Card *y = [cardManager createCardWithType:two AtLocation:NSMakePoint(150,180) AndTitle:@"Chapter 1" AndBody:@"Death of the ruler of Elipric Clan, Alevia accused of murder"];
-//          [cardManager createThreadWithType:th1 BetweenCard:x AndCard:y];
        [self setUpViews:[cardManager getAllCardsAndThreads]];
     }
+  
+    
    
 }
 
@@ -82,7 +77,7 @@ BOOL createCard = YES;
             //then create thread connecting this card and last card
             [cardManager createThreadWithType:[state threadToCreate] BetweenCard:[state cardOne] AndCard:[(CBMCardView *)sender cardObject]];
             [self setUpViews:[cardManager getAllCardsAndThreads]];
-            [state setCreatingThread:NO]; 
+            [state setThreadToCreate:nil];
         }else{
             NSLog(@"Main Window - cardOne is nil");
             [state setCardOne:[(CBMCardView *)sender cardObject]];
@@ -108,13 +103,13 @@ BOOL createCard = YES;
     return YES;
 }
 
--(IBAction)mouseDown:(NSEvent *)theEvent{
+-(IBAction)mouseDownInCorkboard:(NSEvent *)theEvent{
         if([[self state]creatingCard]){
             NSPoint p =  [corkboardView convertPoint:[theEvent locationInWindow] fromView:nil];
             Card *acard = [cardManager createCardWithType:[state cardToCreate] AtLocation:NSMakePoint(p.x, p.y)];
             CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(p.x-(190/2),p.y-(120/2), 190, 120) AndCBMCard:acard];
                         [corkboardView addSubview:cardView];
-            [state setCreatingCard:NO];
+            [state setCardToCreate:nil];
         }else if ([state creatingThread]){
             [state setCardOne:Nil];
         }
@@ -132,9 +127,10 @@ BOOL createCard = YES;
     return nil;
 }
 -(NSArray *)createThreadViews:(NSArray *)array{
+    NSLog(@"createThreadViews");
     for(Thread *aThread in array){
         if([aThread isKindOfClass:[Thread class]]){
-            
+            NSLog(@"thread found");
         NSArray *anArray = [[aThread cards]allObjects];
             NSLog(@"Thread - %lu", [anArray count]); 
         NSPoint startPoint = [(Card *)[anArray objectAtIndex:0] getLocation];
@@ -144,9 +140,6 @@ BOOL createCard = YES;
         NSRect newFrame = NSMakeRect(origin.x, origin.y, size.width, size.height);
         CBMThreadView *aView = [[CBMThreadView alloc]initWithFrame:newFrame AndThread:aThread];
         [corkboardView addSubview:aView];
-//            NSLog(@"CARD ONE %f, %f", endPoint.x, endPoint.y);
-//            NSLog(@"Card TWO %f, %f", startPoint.x, startPoint.y); 
-//            NSLog(@"Thread created %f,%f,%f,%f", newFrame.origin.x, newFrame.origin.y, newFrame.size.width, newFrame.size.height);
         }
     }
     return nil;
@@ -178,11 +171,16 @@ BOOL createCard = YES;
     NSArray *anArray;
     [corkboardView setSubviews:[[NSArray alloc]initWithObjects:nil]];
     if([criteria count] == 0){
+        NSLog(@"Search Criteria - criteria count is 0");
         anArray = [cardManager getAllCardsAndThreads];
     }else{
+        NSLog(@"Search Criteria - criteria count is more than one");
         anArray = [cardManager getAllCardsAndThreadsAndAvoid:criteria];
     }
+    
+    [self createThreadViews:anArray];
     [self createCardViews:anArray];
+    
 }
 -(void)avoidSearchDisplayCritieria:(NSArray *)criteria andDepth:(NSInteger)integer{
     
@@ -190,14 +188,17 @@ BOOL createCard = YES;
 
 -(void)avoidDisplay:(NSArray *)criteria{
     NSArray *anArray;
-    NSLog(@"%lu", [criteria count]);
     [corkboardView setSubviews:[[NSArray alloc]initWithObjects:nil]];
     if([criteria count] == 0){
         anArray = [cardManager getAllCardsAndThreads];
     }else{
         anArray = [cardManager getAllCardsAndThreadsAndAvoid:criteria];
     }
+     [self createThreadViews:anArray];
     [self createCardViews:anArray];
 }
+
+
+
 
 @end

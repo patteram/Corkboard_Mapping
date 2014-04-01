@@ -15,23 +15,34 @@ CBMCardView *cardSelected;
 @synthesize creatingCard;
 @synthesize creatingThread;
 @synthesize cardOne; 
-
+/*!
+ Changes the state to creating a card. Accepts nil parameter.
+ Modifies the old card to create's parameters to no and modifies the new 
+ if valid type is past in. 
+ thread creation state will be turned off (if it was on)
+ if nil, creatingCard is set to no.
+ \param type: the type of card you wish to create (can be nil)
+*/
 -(void)setCardToCreate:(CardType*)type{
     if(cardToCreate != nil){
         [cardToCreate setToCreate:NO];
     }
+    cardToCreate = type;
     if(type == nil){
          creatingCard = NO;
     }else{
+        [self setThreadToCreate:nil];
         creatingCard = YES;
-        cardToCreate = type;
         [cardToCreate setToCreate:YES];
     }
-    [self setCreatingThread:NO];
+    
 
     
 }
-
+/*!
+ Returns the type of card to be created. 
+ \return the card type to create or nil
+ */
 -(CardType*)cardToCreate{
     return cardToCreate;
 }
@@ -41,14 +52,41 @@ CBMCardView *cardSelected;
         
     }
 }
+
+/*!
+ Changes the state to creating a thread. Accepts nil parameter.
+ Modifies the old thread to create's parameters to no and modifies the new
+ if valid type is past in.
+ card creation state will be turned off (if it was on and type is not nil)
+ if nil, creatingThread is set to no.
+ \param type: the type of thread you wish to create (can be nil)
+ */
 -(void)setThreadToCreate:(ThreadType *)athreadToCreate {
-    NSLog(@"CBM State - thread to create"); 
-    [self setCreatingCard:NO];
-    threadToCreate = athreadToCreate;
-    [self setCreatingThread: YES];
-    cardOne = nil;
+    if(threadToCreate!= nil){//old value set to no
+        [threadToCreate setToCreate:NO];
+    }
+    if(athreadToCreate != nil){ //need to set new value to yes
+        //change pointers, booleans, etc.
+        NSLog(@"CBM State - thread to create");
+      
+    
+       [self setCreatingThread: YES];
+       [ self setCardToCreate:nil];
+       [athreadToCreate setToCreate:YES];
+
+    }else{//just not creating thread
+        creatingThread = NO;
+    }
+    //always set cardOne to nil and threadToCreate to the passed in value
+      cardOne = nil;
+      threadToCreate = athreadToCreate;
+    
 }
 
+/*!
+ Returns the type of thread to create
+ \return the type of thread to be created 
+ */
 -(ThreadType *)threadToCreate{
     return threadToCreate;
 }
