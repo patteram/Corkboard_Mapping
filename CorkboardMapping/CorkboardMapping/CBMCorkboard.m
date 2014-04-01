@@ -23,6 +23,7 @@ const float MIN_ZOOM = .23;
     if (self) {
         NSLog(@"View is being created");
         self.currentScaleFactor = 1.0f;
+        [self CBMsetUpTrackingAreaOnSelf];
     }
     return self;
 }
@@ -89,13 +90,34 @@ const float MIN_ZOOM = .23;
     //plan would be to have a pop up menu
 }
 
-//-(void)mouseDown:(NSEvent *)theEvent{
-//   NSLog(@"Mouse Location %lu, %lu", [theEvent mouseLocation] )
-//}
+-(void)mouseDown:(NSEvent *)theEvent{
+    [self tryToPerform:@selector(mouseDownInCorkboard:) with:theEvent]; 
+}
 
 -(BOOL)isFlipped{
     return YES; 
 }
 
+/**
+ Sets up the tracking area so when crusor enters it can change
+ */
+-(void) CBMsetUpTrackingAreaOnSelf{
+    NSTrackingArea *areaToTrack = [[NSTrackingArea alloc] initWithRect:self.bounds
+                                                               options:(NSTrackingMouseEnteredAndExited | NSTrackingInVisibleRect | NSTrackingActiveInKeyWindow) owner:self userInfo:nil];
+    [self addTrackingArea:areaToTrack];
+}
+
+//-(void)cursorUpdate:(NSEvent *)event{
+//    
+//}
+
+-(void)mouseEntered:(NSEvent *)theEvent{
+    //if state is to create card or thread
+    [[NSCursor crosshairCursor] push];
+    
+}
+-(void)mouseExited:(NSEvent *)theEvent{
+    [NSCursor pop];
+}
 
 @end
