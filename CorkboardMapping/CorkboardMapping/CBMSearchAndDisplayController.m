@@ -81,14 +81,14 @@ NSMutableArray * displayArray;
         }
         [controller avoidDisplay:displayArray]; 
     }
-    NSLog(@"Was hit");
+   // NSLog(@"Was hit");
 }
 
 -(void)cardClicked:(id)sender{
     NSLog(@"Search and Display - card clicked");
     if([sender isKindOfClass: [CBMCheckboxCard class]]){
         CBMCheckboxCard *c = (CBMCheckboxCard * )sender;
-        NSLog(@"Color %@ and Name %@", [[c type] color], [[c type] name]);
+        //NSLog(@"Color %@ and Name %@", [[c type] color], [[c type] name]);
         if([[self document] isKindOfClass: [CBMDocument class]]){
             CBMDocument *doc = [self document];
             [[doc theState]setCardToCreate:[c type]]; 
@@ -118,6 +118,19 @@ NSMutableArray * displayArray;
 }
 
 -(void)actionDisplayThread:(id)sender{
+    if([sender isKindOfClass: [NSButton class]]){
+        NSButton *box = sender;
+        if([[box superview] isKindOfClass: [CBMCheckboxThread class]]){
+            CBMCheckboxThread *c = (CBMCheckboxThread * )[box superview];
+            if([displayArray containsObject:[c type]]){
+                [displayArray removeObject:[c type]];
+            }else{
+                [displayArray addObject:[c type]];
+            }
+        }
+        [controller avoidDisplay:displayArray];
+    }
+
     
 }
 -(void)generateCardTypeButtons:(CBMGrowingView *)view withSelector:(SEL)selector{
@@ -200,10 +213,19 @@ NSMutableArray * displayArray;
     }
 }
 
--(void)close{
+-(void)dealloc{
     [typeManager removeObserver:self forKeyPath:CARD_TYPE_ARRAY];
     [typeManager removeObserver:self forKeyPath:THREAD_SET];
-    [super close];
+    //[super close];
+}
+
+-(void)rightMouseDown:(NSEvent *)theEvent{
+      NSPoint p =  [threadDisplayScrollView convertPoint:[theEvent locationInWindow] fromView:nil];
+    NSLog(@"Mouse Down thread display scroll view- %f %f", p.x, p.y);
+    p =[cardDisplayHolder convertPoint:[theEvent locationInWindow] fromView:nil];
+    NSLog(@"Mouse Down card display scroll view- %f %f", p.x, p.y);
+    
+    
 }
 
 @end
