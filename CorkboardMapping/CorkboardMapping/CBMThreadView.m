@@ -43,13 +43,13 @@
     [aColor setStroke];
 	[super drawRect:dirtyRect];
 //    // Create the shadow
-    NSShadow* theShadow = [[NSShadow alloc] init];
-    [theShadow setShadowOffset:NSMakeSize(4.0, -5.0)];
-    [theShadow setShadowBlurRadius:1.0];
-    [theShadow setShadowColor:[[NSColor blackColor]
-                               colorWithAlphaComponent:0.3]];
-    
-    [theShadow set];
+//    NSShadow* theShadow = [[NSShadow alloc] init];
+//    [theShadow setShadowOffset:NSMakeSize(4.0, -5.0)];
+//    [theShadow setShadowBlurRadius:1.0];
+//    [theShadow setShadowColor:[[NSColor blackColor]
+//                               colorWithAlphaComponent:0.3]];
+//    
+//    [theShadow set];
     
     [thePath stroke];
     // Drawing code here.
@@ -69,11 +69,6 @@
     [thePath lineToPoint:endPoint];
     [thePath setLineWidth:5.0];
     [thePath setLineCapStyle:NSRoundLineCapStyle];
-    
-//    NSLog(@"CARD ONE %f, %f", endPoint.x, endPoint.y);
-//    NSLog(@"Card TWO %f, %f", startPoint.x, startPoint.y);
-//    NSLog(@"Thread created %f,%f,%f,%f", newFrame.origin.x, newFrame.origin.y, newFrame.size.width, newFrame.size.height);
-
 }
 
 -(BOOL)isFlipped{
@@ -94,11 +89,8 @@
         if(card1 == nil || card2 == nil){
             [self removeFromSuperview];
         }
-//        NSLog(@"CARD ONE %f, %f", [card1 getLocation].x, [card1 getLocation].y);
-//        NSLog(@"Card TWO %f, %f", [card2 getLocation].x, [card1 getLocation].y);
         [self setFrameBasedOnPoints:[card1 getLocation] and:[card2 getLocation]];
     }else if([keyPath isEqualToString:@"cards"]){
-//        NSLog(@"CARDS HAVE CHANGED");
         [self removeFromSuperview];
     }
 }
