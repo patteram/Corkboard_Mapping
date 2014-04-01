@@ -48,12 +48,12 @@
                                    colorWithAlphaComponent:0.3]];
         
         [theShadow set];
-        NSLog(@"is red");
+       // NSLog(@"is red");
         NSColor *c = [NSColor highlightColor];
         [c setStroke];
         [path setLineWidth:2.0];
     }else{
-        NSLog(@"is black");
+       // NSLog(@"is black");
         [[NSColor blackColor] setStroke];
         [path setLineWidth:1.0];
     }
