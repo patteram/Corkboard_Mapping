@@ -33,8 +33,8 @@
  \param depth: how many thread connections to follow
  \returns NSArray of all cards and threads that are connected to the original card
  */
--(NSArray*)searchOnCard:(Card *)card AndWithDepth:(NSInteger) depth;
-
+-(NSArray*)searchOnCard:(Card *)card WithDepth:(NSInteger) depth;
+-(NSArray *)searchOnCard:(Card *)card WithDepth:(NSInteger)depth AndAvoid:(NSArray *)anArray;
 /*! Creates a card inside the managed context
  Title of the card will be "Title" and body "Body" by default. To set at creation use other method.
  \param type: the CardType of this card (should be a valid Card Type inside of managed context)

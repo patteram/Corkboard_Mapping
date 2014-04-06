@@ -12,7 +12,7 @@
 #import "Thread.h"
 #import "ThreadType.h"
 #import "CBMTypeAlert.h"
-
+#import "CBMMutableDistinctArray.h"
 
 @implementation CBMCardAndThreadManager
 @synthesize myContext;
@@ -136,8 +136,39 @@
     return array;
 }
 
--(NSArray*)searchOnCard:(Card *)card AndWithDepth:(NSInteger)depth{
-    return nil;
+-(NSArray*)searchOnCard:(Card *)card WithDepth:(NSInteger)depth AndAvoid:(NSArray *)criteria{
+    int currentIndex = 0;
+    int numAtLastLevel = 0;
+    int numAtNewLevel = 0;
+    NSMutableArray *foundItems = [[NSMutableArray alloc]initWithObjects:card, nil];
+    for (int currentLevel = 1; currentLevel <= depth; currentLevel++){
+       NSLog(@"Search On Card - for loop level %i", currentLevel);
+        for( int j = 0; j <= numAtLastLevel; j++){
+            NSObject *o = [foundItems objectAtIndex:(j+currentIndex)];
+            if([o isKindOfClass:[Card class]]){
+                NSLog(@"in j for loop - %@", o);
+                NSArray *connectedThreads = [[(Card *)o connections]allObjects];
+                for(Thread *thread in connectedThreads){
+                    NSArray *cardsOfThread = [[thread cards]allObjects];
+                    //if the cards connected are the card being searched on, or are not the
+                    //avoiding criteria AND the thread is not the avoiding criteria add them in
+                    if((![criteria containsObject:[[cardsOfThread objectAtIndex:0]myCardType]] || [cardsOfThread objectAtIndex:0] == card) && (![criteria containsObject:[[cardsOfThread objectAtIndex:1]myCardType]] || [cardsOfThread objectAtIndex:1] == card) && ![criteria containsObject:[thread myThreadType]]){
+                            NSInteger count = [foundItems count];
+                        [self addObject:[cardsOfThread objectAtIndex:0] ToDistinctArray:foundItems];
+                        [self addObject:thread ToDistinctArray:foundItems];
+                        [self addObject:[cardsOfThread objectAtIndex:1] ToDistinctArray:foundItems];
+                            NSInteger newCount = [foundItems count];
+                            NSInteger itemsAdded = newCount - count;
+                            numAtNewLevel += itemsAdded;
+                    }//end if for adding items to found
+                }//end for loop of all connections of a card
+            }//end if for if object in array is a card
+        }//for loop of items at last level
+        currentIndex += numAtLastLevel;
+        numAtLastLevel = numAtNewLevel;
+        numAtNewLevel = 0;
+    }//for loop for depth
+    return foundItems;
 }
 
 
@@ -159,6 +190,19 @@
     return card;
 }
 
+/*!
+Sets up so that next calls to get cards or thread will recheck the 
+actual model
+ */
+-(void)refresh{
+    cards = nil;
+    threads =nil;
+}
 
+-(void)addObject:(NSObject *)object ToDistinctArray:(NSMutableArray *)array{
+    if(![array containsObject:object]){
+        [array addObject:object];
+    }
+}
 
 @end

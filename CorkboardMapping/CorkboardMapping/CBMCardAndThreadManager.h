@@ -16,6 +16,7 @@
 @property NSMutableArray *threads;
 @property NSMutableArray *cards; 
 -(id) initWithModelContext:(NSManagedObjectContext *)context;
+-(void)refresh; 
 //-(CardType *)createCardType:(NSString *)string AndColor:(NSColor *)color;
 
 

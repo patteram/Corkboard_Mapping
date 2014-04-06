@@ -5,10 +5,14 @@
 //  Created by Ashley Patterson on 2/20/14.
 //  Copyright (c) 2014 Ashley Patterson. All rights reserved.
 //
+// To do: - card color and size, size changing for card, saving card colors,
+// thread type features.
+// Done:
+// removing card types
+// search features
+// merge search and display
 
 #import "CBMDocument.h"
-#import "CBMMainWindowController.h"
-#import "CBMSearchAndDisplayController.h"
 #import "CBMCreateCardTypeController.h"
 
 @implementation CBMDocument
@@ -16,7 +20,6 @@
 @synthesize typeManager;
 @synthesize corkboard;
 @synthesize createThreadType;
-@synthesize searchAndDisplay;
 @synthesize createCardType;
 @synthesize theState;
 - (id)init
@@ -50,21 +53,13 @@
 -(void)makeWindowControllers{
     createCardType = nil;
    corkboard = [[CBMMainWindowController alloc]initWithWindowNibName:@"CBMDocument"];
-   searchAndDisplay = [[CBMSearchAndDisplayController alloc]initWithWindowNibName:@"CBMSearchAndDisplayController"];
-   [searchAndDisplay windowTitleForDocumentDisplayName:[self displayName]];
-    cardAndThreadManager = [[CBMCardAndThreadManager alloc] initWithModelContext:[self managedObjectContext]];
+       cardAndThreadManager = [[CBMCardAndThreadManager alloc] initWithModelContext:[self managedObjectContext]];
     typeManager = [[CBMTypeManager alloc]initWithModelContext:[self managedObjectContext]]; 
-    [self addWindowController:corkboard];
-    [self addWindowController:searchAndDisplay];
+   [self addWindowController:corkboard];
+    
 }
 
--(IBAction)showSearchAndDisplay:(id)sender{
-    if([searchAndDisplay isWindowVisible]){
-        [ searchAndDisplay setIsVisible:NO];
-    }else{
-        [searchAndDisplay setIsVisible:YES];
-    }
-}
+
 -(IBAction)createThreadType:(id)sender{
     NSLog(@"create Thread Type");
     if(createThreadType != nil){
@@ -84,7 +79,6 @@
     
 }
 -(void)close{
-    searchAndDisplay = nil;
     corkboard = nil;
     createCardType = nil;
     [super close];

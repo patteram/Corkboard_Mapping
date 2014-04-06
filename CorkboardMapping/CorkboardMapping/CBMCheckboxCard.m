@@ -12,8 +12,7 @@
 @synthesize checkbox;
 @synthesize type;
 @synthesize path;
-@synthesize target;
-@synthesize selector;
+
 
 - (id)initWithFrame:(NSRect)frame andCardType:(CardType *)aType
 {
@@ -65,11 +64,7 @@
 -(void)mouseDown:(NSEvent *)event{
     if([path containsPoint:[self convertPoint:[event locationInWindow] fromView:nil]]){
        // NSLog(@"hit it");
-        if(target != nil && selector != nil){
-            if([target respondsToSelector:selector]){
-                [target performSelector:selector withObject:self];
-            }
-        }
+         [self tryToPerform:@selector(cardTypeClicked:) with:self];
     }else{
         NSLog(@"No hit");
         [super mouseDown:event];
@@ -91,5 +86,13 @@
 
 -(void)resetThePath{
     path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(self.frame.size.width*3/4-2, 5, self.frame.size.width/6, self.frame.size.height-5) xRadius:3 yRadius:3];
+}
+-(void)delete:(id)sender{
+    [self tryToPerform:@selector(askToDelete:) with:self];
+}
+-(void)rightMouseDown:(NSEvent *)theEvent{
+    NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
+    [theMenu insertItemWithTitle:@"Delete" action:@selector(delete:) keyEquivalent:@"" atIndex:0];
+    [NSMenu popUpContextMenu:theMenu withEvent:theEvent forView:self];
 }
 @end

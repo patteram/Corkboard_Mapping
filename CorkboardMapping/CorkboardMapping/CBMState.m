@@ -11,10 +11,10 @@
 @implementation CBMState
 CardType *cardToCreate;
 ThreadType * threadToCreate;
-CBMCardView *cardSelected;
+@synthesize cardSelected = _cardSelected;
 @synthesize creatingCard;
 @synthesize creatingThread;
-@synthesize cardOne; 
+ 
 /*!
  Changes the state to creating a card. Accepts nil parameter.
  Modifies the old card to create's parameters to no and modifies the new 
@@ -47,10 +47,23 @@ CBMCardView *cardSelected;
     return cardToCreate;
 }
 
--(void)setCardSelected:(CBMCardView *)newCardSelected{
-    if(cardSelected != nil){
-        
+-(void)setCardSelected:(Card *)newCardSelected{
+    if(_cardSelected != nil){
+        [_cardSelected setSelected:NO];
     }
+    if(newCardSelected != nil){
+        if(creatingThread){
+            [newCardSelected setSelectedColor:[threadToCreate color]];
+        }else{
+            [newCardSelected setSelectedColor:[NSColor highlightColor]];
+        }
+        [newCardSelected setSelected:YES];
+    }
+    _cardSelected = newCardSelected; 
+}
+
+-(Card *)cardSelected{
+    return _cardSelected;
 }
 
 /*!
@@ -78,8 +91,8 @@ CBMCardView *cardSelected;
         creatingThread = NO;
     }
     //always set cardOne to nil and threadToCreate to the passed in value
-      cardOne = nil;
-      threadToCreate = athreadToCreate;
+    [self setCardSelected:nil];
+    threadToCreate = athreadToCreate;
     
 }
 

@@ -94,6 +94,8 @@
     return NO;
 }
 
+
+
 -(void)deleteThreadType:(ThreadType *)type{
     [ [self myContext] deleteObject:type];
 }
@@ -137,5 +139,7 @@
 -(void)intersectThreadTypes:(NSSet *)objects{
     [self.threadTypes intersectSet:objects];
 }
+
+
 
 @end

@@ -18,7 +18,8 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSSet *connections;
 @property (nonatomic, retain) CardType *myCardType;
-
+@property BOOL selected;
+@property NSColor *selectedColor;
 @end
 
 @interface Card (CoreDataGeneratedAccessors)

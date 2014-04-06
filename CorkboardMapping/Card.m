@@ -18,7 +18,8 @@
 @dynamic title;
 @dynamic connections;
 @dynamic myCardType;
-
+@synthesize selected;
+@synthesize selectedColor; 
 -(void)setLocation:(NSPoint)aPoint{
     [self setRect:[NSValue valueWithPoint:aPoint]];
 }

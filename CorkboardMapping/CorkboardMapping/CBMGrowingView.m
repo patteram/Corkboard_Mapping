@@ -37,6 +37,21 @@ const int ROW_HEIGHT = 30;
     [self setFrameSize:NSMakeSize(self.frame.size.width, height+ROW_HEIGHT/4)];
 }
 
+
+
+-(void)willRemoveSubview:(NSView *)view{
+    NSUInteger i = [[self subviews]indexOfObject:view];
+    if(i != NSNotFound){
+        CGFloat heightBeforeI = (i) * (ROW_HEIGHT + ROW_HEIGHT/4);
+        for(i = i+1; i < [[self subviews]count]; i++){
+            [[[self subviews]objectAtIndex:i]setFrameOrigin:NSMakePoint(0, heightBeforeI + ROW_HEIGHT/4)];
+            heightBeforeI = heightBeforeI + ROW_HEIGHT + ROW_HEIGHT/4;
+        }
+    
+        [self setFrameSize:NSMakeSize(self.frame.size.width, heightBeforeI)];
+    }
+       [super willRemoveSubview:view];
+}
 -(BOOL)isFlipped{
     return YES;
 }

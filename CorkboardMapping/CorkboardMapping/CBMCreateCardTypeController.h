@@ -14,6 +14,6 @@
 @property (weak) IBOutlet NSTextField *text;
 
 @property CBMTypeManager *manager;
-
+@property NSTextView *aLabel;
 @property (strong) IBOutlet NSWindow *currentWindow;
 @end

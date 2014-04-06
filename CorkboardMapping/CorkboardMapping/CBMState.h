@@ -15,5 +15,6 @@
 @property BOOL creatingThread;
 @property CardType *cardToCreate;
 @property ThreadType *threadToCreate;
-@property Card *cardOne;
+@property Card *cardSelected;
+
 @end

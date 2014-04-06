@@ -73,16 +73,25 @@
     [path removeAllPoints];
     [path moveToPoint:NSMakePoint([self frame].size.width*3/4, [self frame].size.height/2)];
     [path lineToPoint:NSMakePoint([self frame].size.width, [self frame].size.height/2)];
+    
 }
 -(void)mouseDown:(NSEvent *)event{
      NSBezierPath *checkPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(self.frame.size.width*3/4-2, 2, self.frame.size.width/6, self.frame.size.height-2) xRadius:3 yRadius:3];
     if([checkPath containsPoint:[self convertPoint:[event locationInWindow] fromView:nil]]){
        // NSLog(@"hit it");
-        [self tryToPerform:@selector(threadClickedXYZ:) with:self];
+        [self tryToPerform:@selector(threadTypeClicked:) with:self];
     }else{
        // NSLog(@"No hit");
         [super mouseDown:event];
     }
+}
+-(void)delete:(id)sender{
+    [self tryToPerform:@selector(askToDelete:) with:self];
+}
+-(void)rightMouseDown:(NSEvent *)theEvent{
+    NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
+    [theMenu insertItemWithTitle:@"Delete" action:@selector(delete:) keyEquivalent:@"" atIndex:0];
+    [NSMenu popUpContextMenu:theMenu withEvent:theEvent forView:self];
 }
 
 @end
