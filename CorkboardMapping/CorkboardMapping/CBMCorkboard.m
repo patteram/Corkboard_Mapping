@@ -9,6 +9,8 @@
 #import "CBMCorkboard.h"
 @implementation CBMCorkboard
 @synthesize currentScaleFactor;
+@synthesize theState = _theState;
+@synthesize currentMouseLoc;
 const float VARIES = 5;
 const float MAX_ZOOM = 3;
 const float MIN_ZOOM = .23;
@@ -28,7 +30,25 @@ const float MIN_ZOOM = .23;
     return self;
 }
 
+-(CBMState *)theState{
+    return _theState;
+}
 
+
+-(void)setTheState:(CBMState *)theState{
+    _theState = theState;
+    [_theState addObserver:self forKeyPath:@"creatingThread" options:NSKeyValueObservingOptionNew context:nil];
+    [_theState addObserver:self forKeyPath:@"creatingCard" options:NSKeyValueObservingOptionNew context:nil];
+    [_theState addObserver:self forKeyPath:@"cardSelected" options:
+     
+     NSKeyValueObservingOptionNew context:nil];
+}
+
+-(void)dealloc{
+    [_theState removeObserver:self forKeyPath:@"creatingThread"];
+    [_theState removeObserver:self forKeyPath:@"creatingCard"];
+    [_theState removeObserver:self forKeyPath:@"cardSelected"];
+}
 /*
  Draws the corkboard
  */
@@ -37,6 +57,16 @@ const float MIN_ZOOM = .23;
     NSColor *color = [NSColor colorWithCalibratedRed:.6 green:.4 blue:.3 alpha:1.0];
     [color set];
     NSRectFill([self bounds]);
+    if(_theState && [_theState creatingThread] && [_theState cardSelected]){
+        NSLog(@" should be making point");
+      NSPoint thePoint = [[_theState cardSelected]getLocation];
+        NSBezierPath *aPath = [NSBezierPath bezierPath];
+        [aPath moveToPoint:thePoint];
+        [aPath lineToPoint:currentMouseLoc];
+        [[[_theState threadToCreate]color]setStroke];
+        [aPath setLineWidth:4];
+        [aPath stroke];
+    }
     [super drawRect:dirtyRect];
 }
 
@@ -103,7 +133,7 @@ const float MIN_ZOOM = .23;
  */
 -(void) CBMsetUpTrackingAreaOnSelf{
     NSTrackingArea *areaToTrack = [[NSTrackingArea alloc] initWithRect:self.bounds
-                                                               options:(NSTrackingMouseEnteredAndExited | NSTrackingInVisibleRect | NSTrackingActiveInKeyWindow) owner:self userInfo:nil];
+                                                               options:(NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved |NSTrackingInVisibleRect | NSTrackingActiveInKeyWindow) owner:self userInfo:nil];
     [self addTrackingArea:areaToTrack];
 }
 
@@ -111,6 +141,14 @@ const float MIN_ZOOM = .23;
 //    
 //}
 
+-(void)mouseMoved:(NSEvent *)theEvent{
+    currentMouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    NSLog(@"Mouse Moved");
+    if(_theState && [_theState creatingThread]){
+           NSLog(@"Mouse Moved & creating thread");
+        [self setNeedsDisplay:YES]; 
+    }
+}
 -(void)mouseEntered:(NSEvent *)theEvent{
     //if state is to create card or thread
     [[NSCursor crosshairCursor] push];
@@ -118,6 +156,15 @@ const float MIN_ZOOM = .23;
 }
 -(void)mouseExited:(NSEvent *)theEvent{
     [NSCursor pop];
+}
+
+-(void)resetCursorRects{
+    [super resetCursorRects];
+    
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    [self setNeedsDisplay:YES]; 
 }
 
 @end

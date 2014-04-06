@@ -75,12 +75,16 @@
     return YES; 
 }
 
+-(void)edit:(id)sender{
+    [self tryToPerform:@selector(editType:) with:self]; 
+}
 -(void)delete:(id)sender{
     [self tryToPerform:@selector(askToDelete:) with:self];
 }
 -(void)rightMouseDown:(NSEvent *)theEvent{
     NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
     [theMenu insertItemWithTitle:@"Delete" action:@selector(delete:) keyEquivalent:@"" atIndex:0];
+    [theMenu insertItemWithTitle:@"Edit" action:@selector(edit:) keyEquivalent:@"" atIndex:1];
     [NSMenu popUpContextMenu:theMenu withEvent:theEvent forView:self];
 }
 

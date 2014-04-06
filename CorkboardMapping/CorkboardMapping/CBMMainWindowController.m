@@ -97,6 +97,12 @@ BOOL createCard = YES;
     }
  }
 
+//-(void)editType:(id)sender{
+//    if([sender isKindOfClass:[CBMCheckboxThread]]){
+//        
+//    }
+//}
+
 -(void)askToDelete:(id)sender{
     if([sender isKindOfClass:[CBMCardView class] ]){
         NSLog(@"Working");
@@ -185,6 +191,7 @@ BOOL createCard = YES;
     CBMCenteringView *centerView = [[CBMCenteringView alloc]initWithFrame:NSMakeRect(0, 0, 3000, 3000)];
     corkboardView  = [[CBMCorkboard alloc]initWithFrame:NSMakeRect(0, 0, 3000, 3000)];
     [centerView addSubview:corkboardView];
+    [corkboardView setTheState:state]; 
 
     [mainScroller setHasVerticalScroller:YES];
     [mainScroller setHasHorizontalScroller:YES];

@@ -38,6 +38,7 @@ NSString *string = @"cardClicked:";
             
             highlight = NO;
             dragging = NO;
+            [card addObserver:self forKeyPath:@"selected" options:NSKeyValueObservingOptionNew context:nil];
             [card addObserver:self forKeyPath:@"myCardType.color" options:NSKeyValueObservingOptionNew context:nil];
             [card addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
             [card addObserver:self forKeyPath:@"body" options:NSKeyValueObservingOptionNew context:nil];
@@ -50,7 +51,7 @@ NSString *string = @"cardClicked:";
 
 
 -(void)dealloc{
-   
+    [cardObject removeObserver:self forKeyPath:@"selected"];
     [cardObject removeObserver:self forKeyPath:@"myCardType.color"];
     [cardObject removeObserver:self forKeyPath:@"title"];
     [cardObject removeObserver:self forKeyPath:@"body"]; 
@@ -64,7 +65,7 @@ NSString *string = @"cardClicked:";
     NSBezierPath *cardPath = [NSBezierPath bezierPathWithRoundedRect:self.bounds xRadius:5 yRadius:5];
     [cardColor setFill];
     [cardPath fill];
-    if(highlight | dragging){
+    if(dragging){
         NSColor *color = [NSColor whiteColor];
         [cardPath setLineWidth:3];
         [color setStroke];
@@ -77,6 +78,29 @@ NSString *string = @"cardClicked:";
     [color set];
     NSBezierPath *breakPoint = [NSBezierPath bezierPathWithRect:NSMakeRect(self.bounds.origin.x+BUFFER_SPACE, self.bounds.origin.y+self.bounds.size.height/2+BUFFER_SPACE*2, self.bounds.size.width-BUFFER_SPACE*2, BUFFER_SPACE)];
     [breakPoint fill];
+    if([cardObject selected]){
+        
+        NSColor *color = [cardObject selectedColor];
+        
+        NSBezierPath *cardPath2 = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(self.bounds.origin.x + 1, self.bounds.origin.y +1, self.bounds.size.width - 2, self.bounds.size.height - 2) xRadius:5 yRadius:5];
+        
+        [cardPath2 setLineWidth:4];
+        
+        [color setStroke];
+        
+        [cardPath2 stroke];
+        
+        NSBezierPath *cardPathInner = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(self.bounds.origin.x + 3, self.bounds.origin.y + 3, self.bounds.size.width - 6, self.bounds.size.height - 6) xRadius:5 yRadius:5];
+        
+        [cardPathInner setLineWidth:1];
+        
+        color = [NSColor blackColor];
+        
+        [color set];
+        
+        [cardPathInner stroke];
+        
+    }
 	[super drawRect:dirtyRect];
 	
     // Drawing code here.
@@ -93,9 +117,11 @@ NSString *string = @"cardClicked:";
 
 -(void)mouseUp:(NSEvent *)theEvent{
     dragging = NO;
-    highlight = YES; //takes a while for tracking area to catch up. it believes we've left but we know that it hasn't
-    [self setNeedsDisplay:YES];
-}
+    [[NSCursor openHandCursor]set];
+    [self resetCursorRects];
+   }
+
+
 - (void) mouseEntered:(NSEvent *)theEvent{
     highlight = YES;
     [self setNeedsDisplay:YES];
@@ -160,7 +186,7 @@ NSString *string = @"cardClicked:";
     CGFloat x = self.bounds.origin.x+BUFFER_SPACE;
     CGFloat y =self.bounds.origin.y+(self.bounds.size.height/3)*2-BUFFER_SPACE;
     CGFloat width = self.bounds.size.width-BUFFER_SPACE*2;
-    CGFloat height = self.bounds.size.height/4;
+    CGFloat height = self.bounds.size.height/4 - BUFFER_SPACE*1;
     //set up title
     title = [[NSTextView alloc] initWithFrame:NSMakeRect(x,y,width, height)];
     [title setMinSize:NSMakeSize(width, height)];
@@ -213,6 +239,7 @@ NSString *string = @"cardClicked:";
 
 -(void)mouseDown:(NSEvent *)theEvent{
    [self tryToPerform:@selector(cardClicked:) with:self];
+     [[NSCursor closedHandCursor]set];
 }
 -(void)delete:(id)sender{
     [self tryToPerform:@selector(askToDelete:) with:self];
@@ -221,6 +248,15 @@ NSString *string = @"cardClicked:";
     NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
     [theMenu insertItemWithTitle:@"Delete" action:@selector(delete:) keyEquivalent:@"" atIndex:0];
     [NSMenu popUpContextMenu:theMenu withEvent:theEvent forView:self];
+}
+
+-(void)resetCursorRects{
+    [super resetCursorRects];
+    if(dragging){
+        [self addCursorRect:self.bounds cursor:[NSCursor closedHandCursor]];
+    }else{
+        [self addCursorRect:self.bounds cursor:[NSCursor openHandCursor]];
+    }
 }
 
 @end

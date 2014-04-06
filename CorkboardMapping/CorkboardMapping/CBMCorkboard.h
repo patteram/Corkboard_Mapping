@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "CBMState.h"
 extern const float VARIES;
 @interface CBMCorkboard : NSControl{
     
@@ -17,7 +18,7 @@ extern const float VARIES;
  The current magnification/minification of the view 
  */
 @property float currentScaleFactor;
-
-
+@property CBMState *theState;
+@property NSPoint currentMouseLoc; 
 
 @end
