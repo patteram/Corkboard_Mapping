@@ -27,18 +27,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="754" height="585"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <splitView dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q3f-Nd-5Wc">
-                        <rect key="frame" x="0.0" y="0.0" width="754" height="585"/>
+                    <splitView horizontalHuggingPriority="298" misplaced="YES" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q3f-Nd-5Wc">
+                        <rect key="frame" x="20" y="0.0" width="754" height="585"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <customView id="cIt-CQ-VaI">
-                                <rect key="frame" x="0.0" y="0.0" width="169" height="585"/>
+                                <rect key="frame" x="0.0" y="0.0" width="185" height="585"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHN-Zs-xnj">
+                                    <scrollView misplaced="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHN-Zs-xnj">
                                         <rect key="frame" x="14" y="322" width="141" height="223"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <clipView key="contentView" id="2Lr-KT-bH0">
+                                        <clipView key="contentView" misplaced="YES" id="2Lr-KT-bH0">
                                             <rect key="frame" x="1" y="1" width="139" height="221"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
@@ -88,7 +88,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RXo-af-iP5">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RXo-af-iP5">
                                         <rect key="frame" x="12" y="284" width="88" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Thread Types" id="hKT-EQ-g3B">
@@ -127,7 +127,7 @@
                                             <font key="font" metaFont="label"/>
                                         </buttonCell>
                                     </button>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iXM-cu-9dg">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iXM-cu-9dg">
                                         <rect key="frame" x="46" y="25" width="54" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Search" id="VKo-Mo-EHr">
@@ -136,7 +136,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p86-w1-P7U">
+                                    <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p86-w1-P7U">
                                         <rect key="frame" x="139" y="19" width="19" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="RHy-Vs-uWM"/>
@@ -152,7 +152,7 @@
                                             <action selector="searchButtonPressed:" target="-2" id="bRr-G6-L6A"/>
                                         </connections>
                                     </button>
-                                    <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O8E-Bh-E7y">
+                                    <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O8E-Bh-E7y">
                                         <rect key="frame" x="139" y="19" width="19" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="100" doubleValue="1" id="xqs-ec-iKr"/>
@@ -160,7 +160,7 @@
                                             <action selector="stepper:" target="-2" id="A2H-LO-zGH"/>
                                         </connections>
                                     </stepper>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5sr-Vd-uM6">
+                                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5sr-Vd-uM6">
                                         <rect key="frame" x="106" y="22" width="31" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="1" id="bm6-Az-InO">
@@ -216,13 +216,13 @@
                                 </constraints>
                             </customView>
                             <customView fixedFrame="YES" id="MgI-iw-OBM" customClass="NSScrollView">
-                                <rect key="frame" x="179" y="0.0" width="575" height="585"/>
+                                <rect key="frame" x="195" y="0.0" width="559" height="585"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </customView>
                         </subviews>
                         <holdingPriorities>
                             <real value="349"/>
-                            <real value="1"/>
+                            <real value="71"/>
                         </holdingPriorities>
                     </splitView>
                 </subviews>
