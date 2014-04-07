@@ -143,28 +143,52 @@ const float MIN_ZOOM = .23;
 
 -(void)mouseMoved:(NSEvent *)theEvent{
     currentMouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    NSLog(@"Mouse Moved");
+    //NSLog(@"Mouse Moved");
     if(_theState && [_theState creatingThread]){
-           NSLog(@"Mouse Moved & creating thread");
+         //  NSLog(@"Mouse Moved & creating thread");
         [self setNeedsDisplay:YES]; 
     }
 }
 -(void)mouseEntered:(NSEvent *)theEvent{
     //if state is to create card or thread
-    [[NSCursor crosshairCursor] push];
+  //  [[NSCursor crosshairCursor] push];
+    [self resetCursorRects];
     
 }
 -(void)mouseExited:(NSEvent *)theEvent{
-    [NSCursor pop];
+  //  [NSCursor pop];
 }
 
 -(void)resetCursorRects{
     [super resetCursorRects];
+    if([_theState creatingCard]){
+        NSImage *aImage = [[NSImage alloc]initWithSize:NSMakeSize(50, 50)];
+        [aImage lockFocus];
+        NSBezierPath *aPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(0,0, 45, 30) xRadius:5 yRadius:5];
+        [[[_theState cardToCreate]color]setFill];
+        [aPath fill]; 
+        [aPath stroke];
+        [aImage unlockFocus];
+        NSCursor *cardCursor = [[NSCursor alloc]initWithImage:aImage hotSpot:NSMakePoint(25, 25)];
+        [cardCursor set];
+    } else if([_theState creatingThread]){
+        NSImage *aImage = [[NSImage alloc]initWithSize:NSMakeSize(25, 25)];
+        [aImage lockFocus];
+        NSBezierPath *aPath = [NSBezierPath bezierPath];
+        [aPath moveToPoint:NSMakePoint(0, 25)];
+        [aPath lineToPoint:NSMakePoint(25,0)];
+        [[[_theState threadToCreate]color]setStroke];
+        [aPath stroke];
+        [aImage unlockFocus];
+        NSCursor *cardCursor = [[NSCursor alloc]initWithImage:aImage hotSpot:NSMakePoint(0, 0)];
+        [cardCursor set];
+    }
     
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    [self setNeedsDisplay:YES]; 
+    [self setNeedsDisplay:YES];
+    [self resetCursorRects];
 }
 
 @end

@@ -42,7 +42,8 @@ NSMutableArray * displayArray;
 CardType *one;
 CBMCardAndThreadManager * cardManager;
 BOOL createCard = YES;
-
+const CGFloat cardWidth = 250;
+const CGFloat cardHeight = 150;
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
@@ -130,7 +131,7 @@ BOOL createCard = YES;
         if([[self state]creatingCard]){
             NSPoint p =  [corkboardView convertPoint:[theEvent locationInWindow] fromView:nil];
             Card *acard = [cardManager createCardWithType:[state cardToCreate] AtLocation:NSMakePoint(p.x, p.y)];
-            CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(p.x-(190/2),p.y-(120/2), 190, 120) AndCBMCard:acard];
+            CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(p.x-(cardWidth/2),p.y-(cardHeight/2), cardWidth, cardHeight) AndCBMCard:acard];
                         [corkboardView addSubview:cardView];
             [state setCardToCreate:nil];
         }else if ([state creatingThread]){
@@ -153,7 +154,7 @@ BOOL createCard = YES;
         if([aCard isKindOfClass:[Card class]]){
         NSValue *j = [aCard rect];
         NSPoint point = j.pointValue;
-        CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(point.x-(190/2), point.y-(120/2), 190, 120) AndCBMCard:aCard];
+        CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(point.x-(cardWidth/2), point.y-(cardHeight/2), cardWidth, cardHeight) AndCBMCard:aCard];
         [corkboardView addSubview:cardView];
         }
     }

@@ -199,6 +199,7 @@ NSString *string = @"cardClicked:";
     //text container is nessart for controlling size
     [[title textContainer] setContainerSize:NSMakeSize(width*2, height)];
     [[title textContainer] setWidthTracksTextView:NO];
+    [[title textStorage ]setFont:[NSFont boldSystemFontOfSize:16]];
     [title setDelegate:self]; 
     //set up scroll view soif text gets to large
     NSScrollView *scrollview = [[NSScrollView alloc]initWithFrame:NSMakeRect(x, y, width, height-BUFFER_SPACE)];
@@ -254,7 +255,7 @@ NSString *string = @"cardClicked:";
     [super resetCursorRects];
     if(dragging){
         [self addCursorRect:self.bounds cursor:[NSCursor closedHandCursor]];
-    }else{
+    }else if([NSCursor currentCursor] == [NSCursor arrowCursor]){
         [self addCursorRect:self.bounds cursor:[NSCursor openHandCursor]];
     }
 }
