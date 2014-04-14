@@ -143,6 +143,7 @@ const float MIN_ZOOM = .23;
 
 -(void)mouseMoved:(NSEvent *)theEvent{
     currentMouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    //[self resetCursorRects];
     //NSLog(@"Mouse Moved");
     if(_theState && [_theState creatingThread]){
          //  NSLog(@"Mouse Moved & creating thread");
@@ -156,7 +157,7 @@ const float MIN_ZOOM = .23;
     
 }
 -(void)mouseExited:(NSEvent *)theEvent{
-  //  [NSCursor pop];
+ [[NSCursor arrowCursor]set];
 }
 
 -(void)resetCursorRects{
@@ -178,6 +179,7 @@ const float MIN_ZOOM = .23;
         [aPath moveToPoint:NSMakePoint(0, 25)];
         [aPath lineToPoint:NSMakePoint(25,0)];
         [[[_theState threadToCreate]color]setStroke];
+        [aPath setLineWidth:3]; 
         [aPath stroke];
         [aImage unlockFocus];
         NSCursor *cardCursor = [[NSCursor alloc]initWithImage:aImage hotSpot:NSMakePoint(0, 0)];
@@ -189,6 +191,10 @@ const float MIN_ZOOM = .23;
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     [self setNeedsDisplay:YES];
     [self resetCursorRects];
+}
+
+-(void)cursorUpdate:(NSEvent *)event{
+   
 }
 
 @end
