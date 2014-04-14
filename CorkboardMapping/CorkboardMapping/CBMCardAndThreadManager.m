@@ -142,11 +142,9 @@
     int numAtNewLevel = 0;
     NSMutableArray *foundItems = [[NSMutableArray alloc]initWithObjects:card, nil];
     for (int currentLevel = 1; currentLevel <= depth; currentLevel++){
-       NSLog(@"Search On Card - for loop level %i", currentLevel);
-        for( int j = 0; j <= numAtLastLevel; j++){
+             for( int j = 0; j <= numAtLastLevel; j++){
             NSObject *o = [foundItems objectAtIndex:(j+currentIndex)];
             if([o isKindOfClass:[Card class]]){
-                NSLog(@"in j for loop - %@", o);
                 NSArray *connectedThreads = [[(Card *)o connections]allObjects];
                 for(Thread *thread in connectedThreads){
                     NSArray *cardsOfThread = [[thread cards]allObjects];
