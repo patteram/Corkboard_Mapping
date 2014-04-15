@@ -12,7 +12,7 @@
 #import "Thread.h"
 #import "ThreadType.h"
 #import "CBMTypeAlert.h"
-#import "CBMMutableDistinctArray.h"
+
 
 @implementation CBMCardAndThreadManager
 @synthesize myContext;
