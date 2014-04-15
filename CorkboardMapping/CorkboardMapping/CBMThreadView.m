@@ -103,4 +103,11 @@
     [card2 removeObserver:self forKeyPath:@"rect"];
     [threadObject removeObserver:self forKeyPath:@"cards"];
 }
+
+-(void)resetCursorRects{
+    NSLog(@"Thread View - reset Cursors"); 
+    [[self superview]resetCursorRects];
+}
+
+
 @end

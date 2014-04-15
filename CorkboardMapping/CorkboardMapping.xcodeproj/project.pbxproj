@@ -36,7 +36,6 @@
 		5EABACDB18B7C7E000B52D24 /* CBMCardAndThreadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACDA18B7C7E000B52D24 /* CBMCardAndThreadManager.m */; };
 		5EABACE218B9093400B52D24 /* CreateCardType.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EABACE118B9093400B52D24 /* CreateCardType.xib */; };
 		5EDB05C318CC0D9600DB3D54 /* CBMCheckboxCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB05C218CC0D9600DB3D54 /* CBMCheckboxCard.m */; };
-		5EE400B818EF0ACB0010532D /* CBMMutableDistinctArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE400B718EF0ACB0010532D /* CBMMutableDistinctArray.m */; };
 		5EF31A8E18E0D2F900B442AB /* CBMState.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF31A8D18E0D2F900B442AB /* CBMState.m */; };
 		5EF611A618C26E8A00A7AD7F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EABACA618B6C86E00B52D24 /* XCTest.framework */; };
 		5EF611AC18C26E8A00A7AD7F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EF611AA18C26E8A00A7AD7F /* InfoPlist.strings */; };
@@ -115,8 +114,6 @@
 		5EDB05C018CAEA0100DB3D54 /* CBMTypeAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBMTypeAlert.h; sourceTree = "<group>"; };
 		5EDB05C118CC0D9600DB3D54 /* CBMCheckboxCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMCheckboxCard.h; sourceTree = "<group>"; };
 		5EDB05C218CC0D9600DB3D54 /* CBMCheckboxCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMCheckboxCard.m; sourceTree = "<group>"; };
-		5EE400B618EF0ACB0010532D /* CBMMutableDistinctArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMMutableDistinctArray.h; sourceTree = "<group>"; };
-		5EE400B718EF0ACB0010532D /* CBMMutableDistinctArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMMutableDistinctArray.m; sourceTree = "<group>"; };
 		5EF31A8C18E0D2F900B442AB /* CBMState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMState.h; sourceTree = "<group>"; };
 		5EF31A8D18E0D2F900B442AB /* CBMState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMState.m; sourceTree = "<group>"; };
 		5EF611A518C26E8A00A7AD7F /* CorkboardMapping_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CorkboardMapping_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -242,8 +239,6 @@
 		5EABAC7518B6C86E00B52D24 = {
 			isa = PBXGroup;
 			children = (
-				5EE400B618EF0ACB0010532D /* CBMMutableDistinctArray.h */,
-				5EE400B718EF0ACB0010532D /* CBMMutableDistinctArray.m */,
 				5EABAC8718B6C86E00B52D24 /* CorkboardMapping */,
 				5EF611A718C26E8A00A7AD7F /* CorkboardMapping_Tests */,
 				5EF611BE18C2B16800A7AD7F /* CorkboardMapping_ */,
@@ -526,7 +521,6 @@
 				5EABACCC18B6D65000B52D24 /* ThreadType.m in Sources */,
 				5EF31A8E18E0D2F900B442AB /* CBMState.m in Sources */,
 				5EAB1C9B18D35F8E00B4CC1A /* CBMThreadView.m in Sources */,
-				5EE400B818EF0ACB0010532D /* CBMMutableDistinctArray.m in Sources */,
 				5EAB1CA318D3CE2D00B4CC1A /* CBMCheckboxThread.m in Sources */,
 				5EF611B718C29B7600A7AD7F /* CBMCreateCardTypeController.m in Sources */,
 				5EABACC818B6D62300B52D24 /* CBMCardView.m in Sources */,

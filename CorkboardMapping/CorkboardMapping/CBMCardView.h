@@ -19,7 +19,7 @@
 @property Card *cardObject;
 @property NSTextView *title;
 @property NSTextView *body;
-
+@property NSCursor *oldCursor; 
 
 - (id) initWithFrame:(NSRect)frameRect AndCBMCard:(Card*)card;
 

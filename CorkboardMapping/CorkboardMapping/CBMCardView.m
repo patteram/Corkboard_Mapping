@@ -14,7 +14,7 @@
 @synthesize cardObject;
 @synthesize title;
 @synthesize body;
-
+@synthesize oldCursor;
 
 const int BUFFER_SPACE = 4;
 NSString *string = @"cardClicked:";
@@ -124,13 +124,19 @@ NSString *string = @"cardClicked:";
 
 - (void) mouseEntered:(NSEvent *)theEvent{
     highlight = YES;
+    NSLog(@"Mouse Entered");
+   // oldCursor = [NSCursor currentCursor];
     [self setNeedsDisplay:YES];
 }
 
 -(void) mouseExited:(NSEvent *)theEvent{
     highlight = NO;
+   
     [self setNeedsDisplay:YES];
+    [[self superview] resetCursorRects];
+  
 }
+
 
 /**
  Sets up the tracking area so if you go over card you can see the selectable icon.
@@ -239,6 +245,7 @@ NSString *string = @"cardClicked:";
 }
 
 -(void)mouseDown:(NSEvent *)theEvent{
+
    [self tryToPerform:@selector(cardClicked:) with:self];
      [[NSCursor closedHandCursor]set];
 }
@@ -252,13 +259,16 @@ NSString *string = @"cardClicked:";
 }
 
 -(void)resetCursorRects{
+    //NSLog(@"Reset Cursor was called");
     [super resetCursorRects];
+    
     if(dragging){
         [self addCursorRect:self.bounds cursor:[NSCursor closedHandCursor]];
     }else if([NSCursor currentCursor] == [NSCursor arrowCursor]){
         [self addCursorRect:self.bounds cursor:[NSCursor openHandCursor]];
     }
 }
+
 
 @end
 
