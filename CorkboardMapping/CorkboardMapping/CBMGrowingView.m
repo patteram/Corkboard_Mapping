@@ -55,4 +55,14 @@ const int ROW_HEIGHT = 30;
 -(BOOL)isFlipped{
     return YES;
 }
+
+-(void) viewFrameChanged:(NSNotification*)notification{
+  // NSRect arect =  [[self superview]frame];
+    if([[self superview]frame].size.width != self.frame.size.width){
+        [self setFrameSize:NSMakeSize([[self superview]frame].size.width, self.frame.size.height)];
+        for(NSView *aview in [self subviews]){
+            [aview setFrameSize:NSMakeSize(self.frame.size.width, ROW_HEIGHT)];
+        }
+    }
+}
 @end
