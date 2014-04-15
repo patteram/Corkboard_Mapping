@@ -78,6 +78,7 @@ ThreadType * threadToCreate;
     if(threadToCreate!= nil){//old value set to no
         [threadToCreate setToCreate:NO];
     }
+    threadToCreate = athreadToCreate;
     if(athreadToCreate != nil){ //need to set new value to yes
         //change pointers, booleans, etc.
         NSLog(@"CBM State - thread to create");
@@ -92,7 +93,7 @@ ThreadType * threadToCreate;
     }
     //always set cardOne to nil and threadToCreate to the passed in value
     [self setCardSelected:nil];
-    threadToCreate = athreadToCreate;
+    
     
 }
 
