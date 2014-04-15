@@ -69,14 +69,14 @@ const CGFloat cardHeight = 150;
 
     }
     [self setUpMainCorkboardViews];
-    [self setUpViews:[cardManager getAllCardsAndThreads]];
+    [self setUpViewsOnCorkboard:[cardManager getAllCardsAndThreads]];
     [self setUpSideScrollViews];
     [[super window] makeKeyAndOrderFront:self];
     
    
 }
 
--(void)setUpViews:(NSArray *)array{
+-(void)setUpViewsOnCorkboard:(NSArray *)array{
     if(array != nil){
        [corkboardView setSubviews:[[NSArray alloc]initWithObjects:nil]];
         [self createThreadViews:array];
@@ -88,7 +88,7 @@ const CGFloat cardHeight = 150;
     if([state creatingThread]){
         if([state cardSelected] != nil && [state cardSelected] != [(CBMCardView *)sender cardObject]){
             [cardManager createThreadWithType:[state threadToCreate] BetweenCard:[state cardSelected] AndCard:[(CBMCardView *)sender cardObject]];
-            [self setUpViews:[cardManager getAllCardsAndThreads]];
+            [self setUpViewsOnCorkboard:[cardManager getAllCardsAndThreads]];
             [state setThreadToCreate:nil];
             
         }
@@ -98,11 +98,7 @@ const CGFloat cardHeight = 150;
     }
  }
 
-//-(void)editType:(id)sender{
-//    if([sender isKindOfClass:[CBMCheckboxThread]]){
-//        
-//    }
-//}
+
 
 -(void)askToDelete:(id)sender{
     if([sender isKindOfClass:[CBMCardView class] ]){
@@ -205,25 +201,30 @@ const CGFloat cardHeight = 150;
     [[NSNotificationCenter defaultCenter]addObserver:corkboardView selector:@selector(viewFrameChanged:) name:NSViewFrameDidChangeNotification object:mainScroller];
 }
 
-/*!
- Method to call when avoid Search Criteria Changes
- */
--(void)avoidSearchCriteria:(NSArray *)criteria{
-    NSArray *anArray;
-    [corkboardView setSubviews:[[NSArray alloc]initWithObjects:nil]];
-    if([criteria count] == 0){
-        NSLog(@"Search Criteria - criteria count is 0");
-        anArray = [cardManager getAllCardsAndThreads];
-    }else{
-        NSLog(@"Search Criteria - criteria count is more than one");
-        anArray = [cardManager getAllCardsAndThreadsAndAvoid:criteria];
-    }
-    
-    [self createThreadViews:anArray];
-    [self createCardViews:anArray];
-    
-}
+///*!
+// Method to call when avoid Search Criteria Changes
+// */
+//-(void)avoidSearchCriteria:(NSArray *)criteria{
+//    NSArray *anArray;
+//    [corkboardView setSubviews:[[NSArray alloc]initWithObjects:nil]];
+//    if([criteria count] == 0){
+//        NSLog(@"Search Criteria - criteria count is 0");
+//        anArray = [cardManager getAllCardsAndThreads];
+//    }else{
+//        NSLog(@"Search Criteria - criteria count is more than one");
+//        anArray = [cardManager getAllCardsAndThreadsAndAvoid:criteria];
+//    }
+//    
+//    [self createThreadViews:anArray];
+//    [self createCardViews:anArray];
+//    
+//}
 
+/*! 
+ redraws corkboard by getting model objects accroding to the criteria and with the specific depth. 
+ @param criteria - NSArray that contains types (Card or Thread) that should be avoided 
+ @param integer - NSInteger depth that should be how deep the BFS should go
+ */
 -(void)avoidSearchCriteria:(NSArray *)criteria WithDepth:(NSInteger)integer{
     if([state cardSelected] != nil){
      
@@ -251,15 +252,26 @@ const CGFloat cardHeight = 150;
 
 /*! Sets up all the card and thread type scrollers */
 -(void)setUpSideScrollViews{
-    displayArray = [[NSMutableArray alloc]init];
+    //set up card type display 
     cardDisplayHolder =[[CBMGrowingView alloc]initWithFrame:NSMakeRect(0,0,cardDisplayScrollView.frame.size.width, 0.0)];
-    [cardDisplayScrollView setDocumentView:cardDisplayHolder];
+       [cardDisplayScrollView setDocumentView:cardDisplayHolder];
     [self generateCardTypeButtons:cardDisplayHolder withSelector:@selector(actionDisplayCard:)];
     
+    //set up thread type display
     threadDisplayHolder = [[CBMGrowingView alloc]initWithFrame:NSMakeRect(0,0,threadDisplayScrollView.frame.size.width, 0)];
     [threadDisplayScrollView setDocumentView:threadDisplayHolder];
     [self generateThreadTypeButtons:threadDisplayHolder withSelector:@selector(actionDisplayThread:)];
+    
+    //set up notifications
+    [[NSNotificationCenter defaultCenter]addObserver:cardDisplayHolder selector:@selector(viewFrameChanged:) name:NSViewFrameDidChangeNotification object:cardDisplayScrollView];
+    [[NSNotificationCenter defaultCenter]addObserver:threadDisplayHolder selector:@selector(viewFrameChanged:) name:NSViewFrameDidChangeNotification object:threadDisplayScrollView];
    }
+
+/*!action method, if a checkbox for a card is clicked this method should be called. 
+ Adds the card type to the display array or removes it (on or off state)
+ redraws the corkboard after the change in display
+ @param sender - NSButton (checkbox button) 
+ */
 -(void)actionDisplayCard:(id)sender{
     if([sender isKindOfClass: [NSButton class]]){
         NSButton *box = sender;
@@ -274,7 +286,10 @@ const CGFloat cardHeight = 150;
         [self redrawCorkboard];
     }
 }
-
+/*! action method, if checkbox card is double clicked it will change the state to
+ create a card on the corkboard
+ @param sender - CBMCheckboxCard 
+ */
 -(void)cardTypeClicked:(id)sender{
     NSLog(@"Search and Display - card clicked");
     if([sender isKindOfClass: [CBMCheckboxCard class]]){
@@ -288,6 +303,10 @@ const CGFloat cardHeight = 150;
     }
 }
 
+/*! action method, if checkbox thread is clicked it will change the state to create
+ a thread on the corkboard. 
+ @param sender - CBMCheckboxThread 
+ */
 -(void)threadTypeClicked:(id)sender{
     NSLog(@"Search and Display - thread was clicked");
     if([sender isKindOfClass: [CBMCheckboxThread class]]){
@@ -301,7 +320,10 @@ const CGFloat cardHeight = 150;
     }
 }
 
-
+/*! action method, if thread types to display changes it will add/remove
+ the type to the display array and then redraw the corkboard
+ @param sender - NSButton (check box)
+ */
 -(void)actionDisplayThread:(id)sender{
     if([sender isKindOfClass: [NSButton class]]){
         NSButton *box = sender;
@@ -318,7 +340,8 @@ const CGFloat cardHeight = 150;
     
     
 }
-
+/*! Redraws the corkboard according to the state
+ */
 -(void)redrawCorkboard{
     if([searchButton state] == NSOnState){
         [self avoidSearchCriteria:displayArray WithDepth:[stepper intValue]];
@@ -326,24 +349,45 @@ const CGFloat cardHeight = 150;
         [self avoidDisplay:displayArray];
     }
 }
+
+/*! 
+ generates a card type button with a particular selector and puts them into the given growing view
+ */
 -(void)generateCardTypeButtons:(CBMGrowingView *)view withSelector:(SEL)selector{
     for(CardType *aType in [typeManager getAllCardTypes]){
         [view addSubview:[self getCardButton:aType setAction:selector] ];
     }
 }
 
+/*!
+generates thread type buttons with a particular selector and puts them into the given
+growing view
+*/
 -(void)generateThreadTypeButtons:(CBMGrowingView *)view withSelector:(SEL)selector{
     for(ThreadType *aType in [typeManager getAllThreadTypes]){
         [view addSubview:[self getThreadButton:aType setAction:selector]];
     }
 }
-
+/*!returns a CBMCheckboxThread view that was created from 
+ the thread type and selector. Selector is used to set the action of the 
+ ns button within the view
+ @param aType - thread type used to create view 
+ @param selector - selector to set the NSButton inside of the view
+ @return NSView - CBMCheckboxThread view. 
+ */
 -(NSView *)getThreadButton:(ThreadType *)aType setAction:(SEL)selector{
     CBMCheckboxThread *threadSection = [[CBMCheckboxThread alloc]initWithFrame:NSMakeRect(0, 0, threadDisplayHolder.frame.size.width, 0) andThreadType:aType];
     [[threadSection checkbox]setTarget:self];
     [[threadSection checkbox]setAction:selector];
     return threadSection;
 }
+/*!returns a CBMCheckboxCard view that was created from
+ the card type and selector. Selector is used to set the action of the
+ ns button within the view
+ @param aType - card type used to create view
+ @param selector - selector to set the NSButton inside of the view
+ @return NSView - CBMCheckboxCard view.
+ */
 -(NSView *)getCardButton:(CardType *)aType setAction:(SEL)selector{
     CBMCheckboxCard * cardSection = [[CBMCheckboxCard alloc]initWithFrame:NSMakeRect(0,0,cardDisplayHolder.frame.size.width,0) andCardType:aType];
     [[cardSection checkbox] setTarget:self];
@@ -373,10 +417,16 @@ const CGFloat cardHeight = 150;
     }
     
 }
-
+/*!
+ adds a new CBMCheckboxThread to the thread growing view if the new set has 
+ greater count than the old. else it does nothing (implying that a delete occured) and 
+ deletion handling happens during the actual even
+ @param new - the new NSSet of threads
+ @param old - the old NSSet of threads
+ */
 -(void)threadKeyPathChangedSetNew:(NSSet *)new andOldSet:(NSSet *)old{
     if([old count] > [new count]){
-        //remove code
+        //removal code is handled when the delete event is called.
     }else{
         NSSet* changed = [new filteredSetUsingPredicate:
                           [NSPredicate predicateWithFormat:@"NOT objectID IN %@",old]];
@@ -385,6 +435,11 @@ const CGFloat cardHeight = 150;
             }
     }
 }
+/*! 
+ Action method, the search button was pressed 
+ Redraws the corkboard according to the action pressed
+ @param sender - NSButton that represents the search button on GUI
+ */
 - (IBAction)searchButtonPressed:(NSButton *)sender {
     
     if ([sender state] == NSOnState){
@@ -393,6 +448,10 @@ const CGFloat cardHeight = 150;
         [self avoidDisplay:displayArray]; 
     }
 }
+/*!
+ Action method, the stepper's value changed, redraws the corkbard is the search state is on
+ @param sender - NSStepper that's value has changed 
+ */
 - (IBAction)stepper:(NSStepper *)sender {
     [textForStepper setStringValue:[NSString stringWithFormat:@"%li",[sender integerValue] ]];
     if([searchButton state] == NSOnState){
@@ -400,13 +459,16 @@ const CGFloat cardHeight = 150;
     }
 }
 
+/*! Code handling deallocation, removing observations and notifications
+ */
 -(void)dealloc{
     [typeManager removeObserver:self forKeyPath:CARD_TYPE_ARRAY];
     [typeManager removeObserver:self forKeyPath:THREAD_SET];
     
     [[NSNotificationCenter defaultCenter]removeObserver:corkboardView];
     [[NSNotificationCenter defaultCenter]removeObserver:corkboardView.superview];
-    
+    [[NSNotificationCenter defaultCenter]removeObserver:threadDisplayHolder];
+    [[NSNotificationCenter defaultCenter]removeObserver:cardDisplayHolder];
 }
 
 
