@@ -67,9 +67,21 @@
 }
 
 -(BOOL)cardTypeExistsWithName:(id)name andColor:(NSColor *)color{
+    return ([self cardTypeExistsWithName:name] || [self cardTypeExistsWithColor:color]);
+}
+
+-(BOOL)cardTypeExistsWithName:(NSString *)name{
     NSArray *cardTypesArray = [self getAllCardTypes];
     for(CardType *aType in cardTypesArray){
         if([[aType name] isEqualToString:name]){
+            return YES;
+        } }
+    return NO;
+}
+-(BOOL)cardTypeExistsWithColor:(NSColor*)aColor{
+    NSArray *cardTypesArray = [self getAllCardTypes];
+    for(CardType *aType in cardTypesArray){
+        if([[aType color] isEqualTo:aColor]){
             return YES;
         } }
     return NO;
@@ -80,7 +92,7 @@
     [self removeCardTypesObject:type];
 }
 
--(BOOL)threadTypeExistsWithName:(NSString *)name andColor:(NSColor *)color{
+-(BOOL)threadTypeExistsWithName:(NSString *)name OrColor:(NSColor *)color{
     NSArray *threadTypesArray = [self getAllThreadTypes];
     for(ThreadType *aType in threadTypesArray){
         if([[aType name] isEqualToString:name]){
@@ -94,6 +106,26 @@
     return NO;
 }
 
+-(BOOL)threadTypeExistsWithName:(NSString *)name{
+    NSArray *threadTypesArray = [self getAllThreadTypes];
+    for(ThreadType *aType in threadTypesArray){
+        if([[aType name] isEqualToString:name]){
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+-(BOOL)threadTypeExistsWithColor:(NSColor *)color{
+    NSArray *threadTypesArray = [self getAllThreadTypes];
+    for(ThreadType *aType in threadTypesArray){
+         if([[aType color]isEqualTo:color]){
+            return YES;
+        }
+    }
+    
+    return NO;
+}
 
 
 -(void)deleteThreadType:(ThreadType *)type{

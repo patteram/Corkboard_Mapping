@@ -96,6 +96,22 @@
         [[createCardType window] orderFront:self];
     }
 }
+//
+//-(NSPrintOperation *)printOperationWithSettings:(NSDictionary *)printSettings error:(NSError *__autoreleasing *)outError{
+//    NSString *allText = [self typeText];
+//    
+//    NSTextView *view = [NSTextView alloc]init
+////    NSMutableData *mutableData = [[NSMutableData alloc]init];
+////    NSPrintOperation *thePrintOperation = [NSPrintOperation printOperationWithView: [corkboard corkboardView] printInfo:[self printInfo]];
+//    return thePrintOperation;
+//}
 
-
+//
+//-(NSString *)typeText{
+//    NSString *types = @"";
+//    for(CardType *type in [typeManager getAllCardTypes]){
+//        types = [types stringByAppendingString:[type name]];
+//    }
+//    return types;
+//}
 @end

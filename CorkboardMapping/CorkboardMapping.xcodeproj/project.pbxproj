@@ -14,6 +14,7 @@
 		5E1F1A3018BAE64B00C89AE0 /* CBMGrowingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A2F18BAE64B00C89AE0 /* CBMGrowingView.m */; };
 		5E1F1A3618BC1B5500C89AE0 /* CardType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A3518BC1B5500C89AE0 /* CardType.m */; };
 		5E1F1A3918BC1B7200C89AE0 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1F1A3818BC1B7200C89AE0 /* Card.m */; };
+		5E74A5C11904AEB400554AB3 /* CBMTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E74A5C01904AEB400554AB3 /* CBMTextView.m */; };
 		5EAB1C9B18D35F8E00B4CC1A /* CBMThreadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB1C9A18D35F8E00B4CC1A /* CBMThreadView.m */; };
 		5EAB1C9F18D3781200B4CC1A /* CBMCreateThreadTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB1C9D18D3781200B4CC1A /* CBMCreateThreadTypeController.m */; };
 		5EAB1CA018D3781200B4CC1A /* CBMCreateThreadTypeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EAB1C9E18D3781200B4CC1A /* CBMCreateThreadTypeController.xib */; };
@@ -71,6 +72,8 @@
 		5E1F1A3518BC1B5500C89AE0 /* CardType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardType.m; sourceTree = "<group>"; };
 		5E1F1A3718BC1B7200C89AE0 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Card.h; path = ../Card.h; sourceTree = "<group>"; };
 		5E1F1A3818BC1B7200C89AE0 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Card.m; path = ../Card.m; sourceTree = "<group>"; };
+		5E74A5BF1904AEB400554AB3 /* CBMTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMTextView.h; sourceTree = "<group>"; };
+		5E74A5C01904AEB400554AB3 /* CBMTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMTextView.m; sourceTree = "<group>"; };
 		5EAB1C9918D35F8E00B4CC1A /* CBMThreadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMThreadView.h; sourceTree = "<group>"; };
 		5EAB1C9A18D35F8E00B4CC1A /* CBMThreadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMThreadView.m; sourceTree = "<group>"; };
 		5EAB1C9C18D3781200B4CC1A /* CBMCreateThreadTypeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMCreateThreadTypeController.h; sourceTree = "<group>"; };
@@ -174,9 +177,9 @@
 			children = (
 				5EF611B618C29B7600A7AD7F /* CBMCreateCardTypeController.m */,
 				5EF611B518C29B7600A7AD7F /* CBMCreateCardTypeController.h */,
+				5EABACE118B9093400B52D24 /* CreateCardType.xib */,
 				5EABACBB18B6D3C400B52D24 /* CBMMainWindowController.h */,
 				5EABACBC18B6D3C400B52D24 /* CBMMainWindowController.m */,
-				5EABACE118B9093400B52D24 /* CreateCardType.xib */,
 				5EAB1C9C18D3781200B4CC1A /* CBMCreateThreadTypeController.h */,
 				5EAB1C9D18D3781200B4CC1A /* CBMCreateThreadTypeController.m */,
 				5EAB1C9E18D3781200B4CC1A /* CBMCreateThreadTypeController.xib */,
@@ -201,6 +204,8 @@
 				5EAB1C9A18D35F8E00B4CC1A /* CBMThreadView.m */,
 				5EAB1CA118D3CE2D00B4CC1A /* CBMCheckboxThread.h */,
 				5EAB1CA218D3CE2D00B4CC1A /* CBMCheckboxThread.m */,
+				5E74A5BF1904AEB400554AB3 /* CBMTextView.h */,
+				5E74A5C01904AEB400554AB3 /* CBMTextView.m */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -244,10 +249,10 @@
 				5EF611BE18C2B16800A7AD7F /* CorkboardMapping_ */,
 				5EF611E118C2B16800A7AD7F /* CorkboardMapping_Tests */,
 				5EABAC8018B6C86E00B52D24 /* Frameworks */,
-				5EABAC7F18B6C86E00B52D24 /* Products */,
 				5E16831118CE69E200EEC4E6 /* add.png */,
 				5E16831318CE74BC00EEC4E6 /* rightArrow.png */,
 				5E16831518CE74C700EEC4E6 /* leftArrow.png */,
+				5EABAC7F18B6C86E00B52D24 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -522,6 +527,7 @@
 				5EF31A8E18E0D2F900B442AB /* CBMState.m in Sources */,
 				5EAB1C9B18D35F8E00B4CC1A /* CBMThreadView.m in Sources */,
 				5EAB1CA318D3CE2D00B4CC1A /* CBMCheckboxThread.m in Sources */,
+				5E74A5C11904AEB400554AB3 /* CBMTextView.m in Sources */,
 				5EF611B718C29B7600A7AD7F /* CBMCreateCardTypeController.m in Sources */,
 				5EABACC818B6D62300B52D24 /* CBMCardView.m in Sources */,
 				5EABACDB18B7C7E000B52D24 /* CBMCardAndThreadManager.m in Sources */,

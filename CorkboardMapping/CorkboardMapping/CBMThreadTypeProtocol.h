@@ -33,5 +33,8 @@
  \param color: color of a type
  returns true if there is a card type that has the name OR color. False otherwise
  */
--(BOOL)threadTypeExistsWithName:(NSString *)name andColor:(NSColor *)color;
+-(BOOL)threadTypeExistsWithName:(NSString *)name OrColor:(NSColor *)color;
+
+-(BOOL)threadTypeExistsWithName:(NSString *)name;
+-(BOOL)threadTypeExistsWithColor:(NSColor *)color;
 @end

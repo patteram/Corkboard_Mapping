@@ -15,13 +15,14 @@
 @synthesize thePath;
 @synthesize card1;
 @synthesize card2;
+@synthesize threadTypeManager;
 - (id)initWithFrame:(NSRect)frame AndThread:(Thread *)aThread
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.threadObject = aThread;
         NSArray *anArray = [[threadObject cards]allObjects];
-        NSLog(@"Thread count %lu", [anArray count]); 
+        //NSLog(@"Thread count %lu", [anArray count]);
         card1 = [anArray objectAtIndex:0];
         card2 = [anArray objectAtIndex:1];
         thePath = [NSBezierPath bezierPath];
@@ -31,6 +32,7 @@
         [card2 addObserver:self forKeyPath:@"rect" options:NSKeyValueObservingOptionNew context:nil];
         [threadObject addObserver:self forKeyPath:@"cards" options:NSKeyValueObservingOptionNew
                           context:nil];
+        [threadObject addObserver:self forKeyPath:@"myThreadType" options:NSKeyValueObservingOptionNew context:nil];
         // Initialization code here.
     }
     return self;
@@ -82,10 +84,28 @@
     [self tryToPerform:@selector(askToDelete:) with:self];
 }
 -(void)rightMouseDown:(NSEvent *)theEvent{
-    NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
+    NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Card Menu"];
     [theMenu insertItemWithTitle:@"Delete" action:@selector(delete:) keyEquivalent:@"" atIndex:0];
-    [theMenu insertItemWithTitle:@"Edit" action:@selector(edit:) keyEquivalent:@"" atIndex:1];
+    NSMenuItem *item = [[NSMenuItem alloc]initWithTitle:@"Set Thread Type:" action:nil keyEquivalent:@""];
+    NSMenu *subMenu = [[NSMenu alloc]initWithTitle:@"Thread Type Selection"];
+    NSArray *threadTypes = [threadTypeManager getAllThreadTypes];
+    for(int i = 0; i < [threadTypes count]; i++){
+        [subMenu addItemWithTitle:[[threadTypes objectAtIndex:i]name] action:@selector(changeType:) keyEquivalent:@""];
+    }
+    
+    [item setSubmenu:subMenu];
+    [theMenu addItem:item];
     [NSMenu popUpContextMenu:theMenu withEvent:theEvent forView:self];
+}
+
+-(void)changeType:(id)sender{
+    NSArray *threadTypes = [threadTypeManager getAllThreadTypes];
+    NSString *threadClickedName = [(NSMenuItem *)sender title];
+    for(ThreadType *athread in threadTypes){
+        if([[athread name]isEqualTo: threadClickedName]){
+            [threadObject setMyThreadType:athread];
+        }
+    }
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -96,18 +116,17 @@
         [self setFrameBasedOnPoints:[card1 getLocation] and:[card2 getLocation]];
     }else if([keyPath isEqualToString:@"cards"]){
         [self removeFromSuperview];
+    }else{
+        [self setNeedsDisplay:YES]; 
     }
 }
 -(void)dealloc{
     [card1 removeObserver:self forKeyPath:@"rect"];
     [card2 removeObserver:self forKeyPath:@"rect"];
     [threadObject removeObserver:self forKeyPath:@"cards"];
+    [threadObject removeObserver:self forKeyPath:@"myThreadType"];
 }
 
--(void)resetCursorRects{
-    NSLog(@"Thread View - reset Cursors"); 
-    [[self superview]resetCursorRects];
-}
 
 
 @end

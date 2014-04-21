@@ -27,14 +27,14 @@
             path = [NSBezierPath bezierPath];
             [path moveToPoint:NSMakePoint(frame.size.width*3/4, frame.size.height/2)];
             [path lineToPoint:NSMakePoint(frame.size.width, frame.size.height/2)];
-            CGFloat lineDash[4];
-            lineDash[0] = 2;
-            lineDash[1] = 3;
-            lineDash[2] = 5.0;
-            lineDash[3] = 1;
+//            CGFloat lineDash[4];
+//            lineDash[0] = 2;
+//            lineDash[1] = 3;
+//            lineDash[2] = 5.0;
+//            lineDash[3] = 1;
             [path setLineWidth:5];
-            
-            [path setLineDash:lineDash count:4 phase:5];
+//            
+//            [path setLineDash:lineDash count:4 phase:5];
        
         }
         return self;  
@@ -76,7 +76,7 @@
     
 }
 -(void)mouseDown:(NSEvent *)event{
-     NSBezierPath *checkPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(self.frame.size.width*3/4-2, 2, self.frame.size.width/6, self.frame.size.height-2) xRadius:3 yRadius:3];
+     NSBezierPath *checkPath = [NSBezierPath bezierPathWithRect:NSMakeRect(self.frame.size.width*3/4-2, 2, self.frame.size.width, self.frame.size.height-2)];
     if([checkPath containsPoint:[self convertPoint:[event locationInWindow] fromView:nil]]){
        // NSLog(@"hit it");
         [self tryToPerform:@selector(threadTypeClicked:) with:self];

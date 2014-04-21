@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Thread.h"
 #import "Card.h"
+#import "CBMTypeManager.h"
 @interface CBMThreadView : NSView
 @property Thread *threadObject;
 @property NSPoint startPoint;
@@ -16,5 +17,6 @@
 @property NSBezierPath *thePath;
 @property Card *card1;
 @property Card *card2;
+@property CBMTypeManager *threadTypeManager;
 -(id)initWithFrame:(NSRect)frameRect AndThread:(Thread *)thread;
 @end

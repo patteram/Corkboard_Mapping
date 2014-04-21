@@ -27,12 +27,15 @@ ThreadType * threadToCreate;
     if(cardToCreate != nil){
         [cardToCreate setToCreate:NO];
     }
+    if(cardToCreate == type){ //turn off 
+        type = nil;
+    }
     cardToCreate = type;
     if(type == nil){
-         creatingCard = NO;
+        [self setCreatingCard:NO]; 
     }else{
         [self setThreadToCreate:nil];
-        creatingCard = YES;
+        [self setCreatingCard:YES];
         [cardToCreate setToCreate:YES];
     }
     
@@ -51,6 +54,7 @@ ThreadType * threadToCreate;
     if(_cardSelected != nil){
         [_cardSelected setSelected:NO];
     }
+    
     if(newCardSelected != nil){
         if(creatingThread){
             [newCardSelected setSelectedColor:[threadToCreate color]];
@@ -78,10 +82,14 @@ ThreadType * threadToCreate;
     if(threadToCreate!= nil){//old value set to no
         [threadToCreate setToCreate:NO];
     }
+    if(threadToCreate == athreadToCreate){ //if same item then reset
+        athreadToCreate = nil;
+    }
     threadToCreate = athreadToCreate;
+    
     if(athreadToCreate != nil){ //need to set new value to yes
         //change pointers, booleans, etc.
-        NSLog(@"CBM State - thread to create");
+       // NSLog(@"CBM State - thread to create");
       
     
        [self setCreatingThread: YES];

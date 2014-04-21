@@ -182,8 +182,10 @@ const float MIN_ZOOM = .23;
         [aPath setLineWidth:3]; 
         [aPath stroke];
         [aImage unlockFocus];
-        NSCursor *cardCursor = [[NSCursor alloc]initWithImage:aImage hotSpot:NSMakePoint(0, 0)];
-        [cardCursor set];
+        NSCursor *threadCursor = [[NSCursor alloc]initWithImage:aImage hotSpot:NSMakePoint(0, 0)];
+        [threadCursor set];
+    }else{
+        [[NSCursor arrowCursor]set];
     }
     
 }

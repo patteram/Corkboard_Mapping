@@ -31,4 +31,7 @@
  \returns YES if a cardType with name OR string exists, else NO
  */
 -(BOOL)cardTypeExistsWithName:(NSString *)name andColor:(NSColor *)color;
+
+-(BOOL)cardTypeExistsWithName:(NSString *)name;
+-(BOOL)cardTypeExistsWithColor:(NSColor *)color; 
 @end

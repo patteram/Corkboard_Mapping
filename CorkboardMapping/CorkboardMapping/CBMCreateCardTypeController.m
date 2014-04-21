@@ -17,6 +17,8 @@
 @synthesize text;
 @synthesize manager;
 @synthesize currentWindow;
+@synthesize colorLabel;
+@synthesize nameLabel;
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
@@ -39,8 +41,20 @@
     if(![manager cardTypeExistsWithName:typeName andColor:color]){
         NSLog(@"Type created");
         [manager createCardTypeWithName:typeName andColor:color];
+        [colorWell deactivate]; 
         [currentWindow performClose:self];
+    }else {
+        if([manager cardTypeExistsWithName:typeName]){
+            [nameLabel setTextColor:[NSColor redColor]];
+        }else{
+            [nameLabel setTextColor:[NSColor blackColor]];
         }
+        if([manager cardTypeExistsWithColor:color]){
+            [colorLabel setTextColor:[NSColor redColor]];
+        }else{
+            [colorLabel setTextColor:[NSColor blackColor]];
+        }
+    }
     
 }
 

@@ -12,6 +12,9 @@
 @property CBMTypeManager *manager;
 @property (weak) IBOutlet NSTextField *threadNameField;
 @property (weak) IBOutlet NSColorWell *threadColor;
+@property (weak) IBOutlet NSTextFieldCell *warningCell;
 
+@property (weak) IBOutlet NSTextField *colorLabel;
+@property (weak) IBOutlet NSTextField *nameLabel;
 
 @end

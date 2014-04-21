@@ -26,4 +26,9 @@
     // Drawing code here.
 }
 
+-(void)mouseDown:(NSEvent *)theEvent{
+    [super mouseDown:theEvent];
+    [[self superview]mouseDown:theEvent]; 
+}
+
 @end

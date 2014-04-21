@@ -15,7 +15,7 @@
 @synthesize title;
 @synthesize body;
 @synthesize oldCursor;
-
+@synthesize cardTypeManager; 
 const int BUFFER_SPACE = 4;
 NSString *string = @"cardClicked:";
 - (id)initWithFrame:(NSRect)frame
@@ -106,16 +106,27 @@ NSString *string = @"cardClicked:";
     // Drawing code here.
 }
 
-- (void)mouseDragged:(NSEvent *)theEvent{ 
-    CGFloat x = self.frame.origin.x + theEvent.deltaX;
-    CGFloat y = self.frame.origin.y + theEvent.deltaY;
-    [cardObject setLocation:NSMakePoint(x + self.frame.size.width/2, y + self.frame.size.height/2)];
-    [self setFrameOrigin: NSMakePoint(x, y) ];
+- (void)mouseDragged:(NSEvent *)theEvent{
     dragging = YES;
+       NSPoint theNewPoint = [[self superview] convertPoint:[theEvent locationInWindow] fromView:nil];
+  //  NSLog(@"%f, %f", theNewPoint.x, theNewPoint.y);
+  //  NSLog(@"%f, %f", [self superview].bounds.size.width,[self superview].bounds.size.height);
+    if(theNewPoint.x > 0 && theNewPoint.y > 0){
+        if(theNewPoint.x < [self superview].bounds.size.width&& theNewPoint.y < [self superview].bounds.size.height){
+            [self setFrameOrigin:theNewPoint];
+            [cardObject setLocation:NSMakePoint(theNewPoint.x + self.frame.size.width/2, theNewPoint.y +self.frame.size.height/2)];
+        }
+    }
+ 
+    
     [self setNeedsDisplay:YES];
 }
 
+
+
+
 -(void)mouseUp:(NSEvent *)theEvent{
+    //NSLog(@"Mouse up Dragging NO");
     dragging = NO;
     [[NSCursor openHandCursor]set];
     [self resetCursorRects];
@@ -124,9 +135,10 @@ NSString *string = @"cardClicked:";
 
 - (void) mouseEntered:(NSEvent *)theEvent{
     highlight = YES;
-    NSLog(@"Mouse Entered");
-   // oldCursor = [NSCursor currentCursor];
-    [self setNeedsDisplay:YES];
+  //  NSLog(@"Mouse Entered Dragging No");
+    dragging = NO;
+    [[NSCursor openHandCursor]set];
+    [self resetCursorRects];
 }
 
 -(void) mouseExited:(NSEvent *)theEvent{
@@ -161,7 +173,7 @@ NSString *string = @"cardClicked:";
     // buffer is *2 for width because
     CGFloat width = self.bounds.size.width-BUFFER_SPACE*2;
     CGFloat height =  self.bounds.size.height/2;
-    body = [[NSTextView alloc]initWithFrame:NSMakeRect(x, y, width, height)];
+    body = [[CBMTextView alloc]initWithFrame:NSMakeRect(x, y, width, height)];
     [body setMinSize:NSMakeSize(width, height)];
     [body setMaxSize:NSMakeSize(width, height*9)];
     [body setBackgroundColor:[NSColor clearColor]];
@@ -192,35 +204,29 @@ NSString *string = @"cardClicked:";
     CGFloat x = self.bounds.origin.x+BUFFER_SPACE;
     CGFloat y =self.bounds.origin.y+(self.bounds.size.height/3)*2-BUFFER_SPACE;
     CGFloat width = self.bounds.size.width-BUFFER_SPACE*2;
-    CGFloat height = self.bounds.size.height/4 - BUFFER_SPACE*1;
+    CGFloat height = self.bounds.size.height/4; //- BUFFER_SPACE*1;
     //set up title
-    title = [[NSTextView alloc] initWithFrame:NSMakeRect(x,y,width, height)];
+    title = [[CBMTextView alloc] initWithFrame:NSMakeRect(x,y,width, height)];
     [title setMinSize:NSMakeSize(width, height)];
-    [title setMaxSize:NSMakeSize(width*2, height)];
+    [title setMaxSize:NSMakeSize(width, height*2)];
     [title setVerticallyResizable:NO];
     [title setHorizontallyResizable:YES];
     [title setBackgroundColor:[NSColor clearColor]];
     [title setString:text];
     [title alignCenter:self];
     //text container is nessart for controlling size
-    [[title textContainer] setContainerSize:NSMakeSize(width*2, height)];
+    [[title textContainer] setContainerSize:NSMakeSize(width, height*2)];
     [[title textContainer] setWidthTracksTextView:NO];
     [[title textStorage ]setFont:[NSFont boldSystemFontOfSize:16]];
     [title setDelegate:self]; 
-    //set up scroll view soif text gets to large
-    NSScrollView *scrollview = [[NSScrollView alloc]initWithFrame:NSMakeRect(x, y, width, height-BUFFER_SPACE)];
-    [scrollview setHasHorizontalScroller:YES];
-    [scrollview setAutoresizingMask:NSViewWidthSizable |
-     NSViewHeightSizable];
-    [scrollview setDocumentView:title];
-    [scrollview setBackgroundColor:cardColor];
-    return scrollview;
+    
+    return title;
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     NSLog(@"key path: %@", keyPath);
-    if([keyPath isEqualToString:@"cardType.color"]){
-        NSLog(@"string right");
+    if([keyPath isEqualToString:@"myCardType.color"]){
+      //  NSLog(@"string right");
         cardColor = [object valueForKeyPath:keyPath];
         for (NSScrollView *view in [self subviews]){
             [view setBackgroundColor:cardColor];
@@ -247,28 +253,60 @@ NSString *string = @"cardClicked:";
 -(void)mouseDown:(NSEvent *)theEvent{
 
    [self tryToPerform:@selector(cardClicked:) with:self];
-     [[NSCursor closedHandCursor]set];
+   // NSLog(@"Mouse Down");
 }
 -(void)delete:(id)sender{
     [self tryToPerform:@selector(askToDelete:) with:self];
 }
 -(void)rightMouseDown:(NSEvent *)theEvent{
-    NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
+    NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Card PopUp Menu"];
     [theMenu insertItemWithTitle:@"Delete" action:@selector(delete:) keyEquivalent:@"" atIndex:0];
+    NSMenuItem *cardTypeList = [[NSMenuItem alloc]initWithTitle:@"Change Card Type:" action:nil keyEquivalent:@""];
+    NSMenu *subMenu = [[NSMenu alloc]initWithTitle:@"Card Type Selector"];
+    NSArray *cardList = [cardTypeManager getAllCardTypes];
+    if(cardList != nil){
+        for(int i = 0; i < [cardList count]; i++){
+            [subMenu insertItemWithTitle:[[cardList objectAtIndex:i]name] action:@selector(changeType:) keyEquivalent:@"" atIndex:i];
+            }
+    }
+    [cardTypeList setSubmenu:subMenu];
+    [theMenu addItem:cardTypeList];
     [NSMenu popUpContextMenu:theMenu withEvent:theEvent forView:self];
 }
 
+-(void)changeType:(id)sender{
+    NSLog(@"Change type hit");
+   NSString *title =  [(NSMenuItem *)sender title];
+    NSArray *cardList = [cardTypeManager getAllCardTypes];
+    if(cardList != nil){
+        for(int i = 0; i < [cardList count]; i++){
+            if([[[cardList objectAtIndex:i]name]isEqualToString:title]){
+                NSLog(@"Type should have changed");
+                [cardObject setMyCardType:[cardList objectAtIndex:i]];
+            }
+        }
+    }
+    
+   // NSLog(sender);
+}
+
 -(void)resetCursorRects{
-    //NSLog(@"Reset Cursor was called");
+   // NSLog(@"Reset Cursor was called");
     [super resetCursorRects];
     
     if(dragging){
+       // NSLog(@"Is Dragging");
         [self addCursorRect:self.bounds cursor:[NSCursor closedHandCursor]];
-    }else if([NSCursor currentCursor] == [NSCursor arrowCursor]){
-        [self addCursorRect:self.bounds cursor:[NSCursor openHandCursor]];
-    }
+    }else{ //if([NSCursor currentCursor] == [NSCursor arrowCursor] || [NSCursor currentCursor] == [NSCursor closedHandCursor] || [NSCursor currentCursor] == [NSCursor IBeamCursor]){
+        [self addCursorRect:self.bounds cursor:[NSCursor openHandCursor]];}
+    
 }
 
+-(void)cursorUpdate:(NSEvent *)event{
+   // NSLog(@"update called?");
+    [super cursorUpdate:event];
+   // NSLog(@"NSCursor is %@", [NSCursor currentCursor]);
+}
 
 @end
 

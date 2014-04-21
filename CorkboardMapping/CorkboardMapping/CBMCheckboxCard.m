@@ -66,7 +66,7 @@
        // NSLog(@"hit it");
          [self tryToPerform:@selector(cardTypeClicked:) with:self];
     }else{
-        NSLog(@"No hit");
+       // NSLog(@"No hit");
         [super mouseDown:event];
     }
     
@@ -74,7 +74,7 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if([keyPath isEqualToString:@"toCreate"]){
-        NSLog(@"Alert went out");
+        //NSLog(@"Alert went out");
         [self setNeedsDisplay:YES];
     }
 }

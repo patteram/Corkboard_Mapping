@@ -27,8 +27,10 @@
 @property (weak) IBOutlet NSTextField *textForStepper;
 @property (weak) IBOutlet NSButton *searchButton;
 
+
 @property CBMCorkboard *corkboardView;
-@property CBMState *state; 
+@property CBMState *state;
+@property NSManagedObjectContext *myManagedObjectContext;
 -(void)avoidSearchCriteria:(NSArray*)criteria;
 -(void)avoidDisplay:(NSArray *)critieria; 
 -(void)avoidSearchCriteria:(NSArray *)criteria WithDepth:(NSInteger)integer;
