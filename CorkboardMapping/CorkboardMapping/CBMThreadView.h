@@ -10,7 +10,7 @@
 #import "Thread.h"
 #import "Card.h"
 #import "CBMTypeManager.h"
-@interface CBMThreadView : NSView
+@interface CBMThreadView : NSView <NSMenuDelegate>
 @property Thread *threadObject;
 @property NSPoint startPoint;
 @property NSPoint endPoint;
@@ -18,5 +18,8 @@
 @property Card *card1;
 @property Card *card2;
 @property CBMTypeManager *threadTypeManager;
+@property BOOL isHighlighted;
+@property NSBezierPath *clickPath;
+
 -(id)initWithFrame:(NSRect)frameRect AndThread:(Thread *)thread;
 @end

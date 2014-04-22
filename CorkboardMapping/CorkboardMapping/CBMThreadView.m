@@ -15,7 +15,9 @@
 @synthesize thePath;
 @synthesize card1;
 @synthesize card2;
+@synthesize isHighlighted;
 @synthesize threadTypeManager;
+@synthesize clickPath;
 - (id)initWithFrame:(NSRect)frame AndThread:(Thread *)aThread
 {
     self = [super initWithFrame:frame];
@@ -33,6 +35,7 @@
         [threadObject addObserver:self forKeyPath:@"cards" options:NSKeyValueObservingOptionNew
                           context:nil];
         [threadObject addObserver:self forKeyPath:@"myThreadType" options:NSKeyValueObservingOptionNew context:nil];
+        isHighlighted = NO;
         // Initialization code here.
     }
     return self;
@@ -42,17 +45,20 @@
 {
 	[super drawRect:dirtyRect];
 	NSColor *aColor = [[threadObject myThreadType] color];
+   
     [aColor setStroke];
 	[super drawRect:dirtyRect];
-//    // Create the shadow
-//    NSShadow* theShadow = [[NSShadow alloc] init];
-//    [theShadow setShadowOffset:NSMakeSize(4.0, -5.0)];
-//    [theShadow setShadowBlurRadius:1.0];
-//    [theShadow setShadowColor:[[NSColor blackColor]
-//                               colorWithAlphaComponent:0.3]];
-//    
-//    [theShadow set];
+    if(isHighlighted){
+    // Create the shadow
+    NSShadow* theShadow = [[NSShadow alloc] init];
+    [theShadow setShadowOffset:NSMakeSize(4.0, -5.0)];
+    [theShadow setShadowBlurRadius:1.0];
+    [theShadow setShadowColor:[[NSColor blackColor]
+                               colorWithAlphaComponent:0.3]];
     
+    [theShadow set];
+    }
+    //[clickPath fill];
     [thePath stroke];
     // Drawing code here.
 }
@@ -71,6 +77,14 @@
     [thePath lineToPoint:endPoint];
     [thePath setLineWidth:5.0];
     [thePath setLineCapStyle:NSRoundLineCapStyle];
+    clickPath = [NSBezierPath bezierPath];
+    [clickPath moveToPoint:NSMakePoint(startPoint.x+6, startPoint.y+6)];
+    [clickPath lineToPoint:NSMakePoint(startPoint.x-6, startPoint.y-6)];
+    [clickPath lineToPoint:NSMakePoint(endPoint.x  - 6, endPoint.y-6)];
+     [clickPath lineToPoint:NSMakePoint(endPoint.x + 6, endPoint.y+6)];
+    [clickPath lineToPoint:NSMakePoint(startPoint.x+6, startPoint.y+6)];
+    [clickPath closePath];
+    
 }
 
 -(BOOL)isFlipped{
@@ -84,6 +98,11 @@
     [self tryToPerform:@selector(askToDelete:) with:self];
 }
 -(void)rightMouseDown:(NSEvent *)theEvent{
+    NSPoint loc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+   // NSLog(@" %f, %f", loc.x, loc.y);
+    if([clickPath containsPoint:loc]){
+        isHighlighted = YES;
+     [self setNeedsDisplay:YES];
     NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Card Menu"];
     [theMenu insertItemWithTitle:@"Delete" action:@selector(delete:) keyEquivalent:@"" atIndex:0];
     NSMenuItem *item = [[NSMenuItem alloc]initWithTitle:@"Set Thread Type:" action:nil keyEquivalent:@""];
@@ -95,8 +114,18 @@
     
     [item setSubmenu:subMenu];
     [theMenu addItem:item];
+    [theMenu setDelegate:self]; 
     [NSMenu popUpContextMenu:theMenu withEvent:theEvent forView:self];
+    }else{
+        [super rightMouseDown:theEvent];
+    }
+   
 }
+-(void)menuDidClose:(NSMenu *)menu{
+    isHighlighted = NO;
+    [self setNeedsDisplay:YES];
+}
+
 
 -(void)changeType:(id)sender{
     NSArray *threadTypes = [threadTypeManager getAllThreadTypes];
