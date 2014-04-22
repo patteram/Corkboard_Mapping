@@ -91,7 +91,7 @@ const CGFloat cardHeight = 150;
     if([state creatingThread]){
         if([state cardSelected] != nil && [state cardSelected] != [(CBMCardView *)sender cardObject]){
             [cardManager createThreadWithType:[state threadToCreate] BetweenCard:[state cardSelected] AndCard:[(CBMCardView *)sender cardObject]];
-            [self setUpViewsOnCorkboard:[cardManager getAllCardsAndThreads]];
+            [self redrawCorkboard];
             [state setThreadToCreate:nil];
             
         }
@@ -194,8 +194,8 @@ const CGFloat cardHeight = 150;
  Creates the centering and corkboard view, modifys main scroller, and then sets up notifications
  */
 -(void)setUpMainCorkboardViews{
-    CBMCenteringView *centerView = [[CBMCenteringView alloc]initWithFrame:NSMakeRect(0, 0, 3000, 3000)];
-    corkboardView  = [[CBMCorkboard alloc]initWithFrame:NSMakeRect(0, 0, 3000, 3000)];
+    CBMCenteringView *centerView = [[CBMCenteringView alloc]initWithFrame:NSMakeRect(0, 0, 5000, 3000)];
+    corkboardView  = [[CBMCorkboard alloc]initWithFrame:NSMakeRect(0, 0, 5000, 3000)];
     [centerView addSubview:corkboardView];
     [corkboardView setTheState:state]; 
 

@@ -113,8 +113,8 @@ NSString *string = @"cardClicked:";
   //  NSLog(@"%f, %f", [self superview].bounds.size.width,[self superview].bounds.size.height);
     if(theNewPoint.x > 0 && theNewPoint.y > 0){
         if(theNewPoint.x < [self superview].bounds.size.width&& theNewPoint.y < [self superview].bounds.size.height){
-            [self setFrameOrigin:theNewPoint];
-            [cardObject setLocation:NSMakePoint(theNewPoint.x + self.frame.size.width/2, theNewPoint.y +self.frame.size.height/2)];
+            [self setFrameOrigin:NSMakePoint(theNewPoint.x - self.frame.size.width/2, theNewPoint.y -self.frame.size.height/2)];
+            [cardObject setLocation:NSMakePoint(theNewPoint.x + self.frame.size.width/4, theNewPoint.y +self.frame.size.height/4)];
         }
     }
  
@@ -298,7 +298,8 @@ NSString *string = @"cardClicked:";
        // NSLog(@"Is Dragging");
         [self addCursorRect:self.bounds cursor:[NSCursor closedHandCursor]];
     }else{ //if([NSCursor currentCursor] == [NSCursor arrowCursor] || [NSCursor currentCursor] == [NSCursor closedHandCursor] || [NSCursor currentCursor] == [NSCursor IBeamCursor]){
-        [self addCursorRect:self.bounds cursor:[NSCursor openHandCursor]];}
+        [self addCursorRect:self.bounds cursor:[NSCursor openHandCursor]];
+    }
     
 }
 

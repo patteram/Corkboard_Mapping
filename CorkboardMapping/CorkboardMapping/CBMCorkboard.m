@@ -13,7 +13,7 @@
 @synthesize currentMouseLoc;
 const float VARIES = 5;
 const float MAX_ZOOM = 3;
-const float MIN_ZOOM = .23;
+const float MIN_ZOOM = .1;
 
 /**
  initializes the frame and sets the scalefactor to 1
