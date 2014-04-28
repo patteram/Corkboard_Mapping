@@ -18,6 +18,7 @@
 @synthesize isHighlighted;
 @synthesize threadTypeManager;
 @synthesize clickPath;
+@synthesize slope, yIntercept; 
 - (id)initWithFrame:(NSRect)frame AndThread:(Thread *)aThread
 {
     self = [super initWithFrame:frame];
@@ -35,28 +36,52 @@
         [threadObject addObserver:self forKeyPath:@"cards" options:NSKeyValueObservingOptionNew
                           context:nil];
         [threadObject addObserver:self forKeyPath:@"myThreadType" options:NSKeyValueObservingOptionNew context:nil];
+         [threadObject addObserver:self forKeyPath:@"myThreadType.visible" options:NSKeyValueObservingOptionNew context:nil];
+         [card1 addObserver:self forKeyPath:@"visible" options:NSKeyValueObservingOptionNew context:nil];
+        [card2 addObserver:self forKeyPath:@"visible" options:NSKeyValueObservingOptionNew context:nil];
         isHighlighted = NO;
         // Initialization code here.
     }
     return self;
 }
 
+-(void)dealloc{
+    [card1 removeObserver:self forKeyPath:@"rect"];
+    [card1 removeObserver:self forKeyPath:@"visible"];
+    [card2 removeObserver:self forKeyPath:@"visible"];
+    [card2 removeObserver:self forKeyPath:@"rect"];
+    [threadObject removeObserver:self forKeyPath:@"cards"];
+    [threadObject removeObserver:self forKeyPath:@"myThreadType"];
+    [threadObject removeObserver:self forKeyPath:@"myThreadType.visible"];
+}
+
+
 - (void)drawRect:(NSRect)dirtyRect
 {
 	[super drawRect:dirtyRect];
 	NSColor *aColor = [[threadObject myThreadType] color];
    
-    [aColor setStroke];
+    [aColor set];
 	[super drawRect:dirtyRect];
     if(isHighlighted){
     // Create the shadow
+        if(slope > 0){
     NSShadow* theShadow = [[NSShadow alloc] init];
-    [theShadow setShadowOffset:NSMakeSize(4.0, -5.0)];
+    [theShadow setShadowOffset:NSMakeSize(4.0, 2.0)];
     [theShadow setShadowBlurRadius:1.0];
     [theShadow setShadowColor:[[NSColor blackColor]
                                colorWithAlphaComponent:0.3]];
     
     [theShadow set];
+        }else{
+            NSShadow* theShadow = [[NSShadow alloc] init];
+            [theShadow setShadowOffset:NSMakeSize(4.0, -5.0)];
+            [theShadow setShadowBlurRadius:1.0];
+            [theShadow setShadowColor:[[NSColor blackColor]
+                                       colorWithAlphaComponent:0.3]];
+            
+            [theShadow set];
+        }
     }
     //[clickPath fill];
     [thePath stroke];
@@ -78,11 +103,18 @@
     [thePath setLineWidth:5.0];
     [thePath setLineCapStyle:NSRoundLineCapStyle];
     clickPath = [NSBezierPath bezierPath];
+//    [clickPath moveToPoint:NSMakePoint(startPoint.x - 12, startPoint.y - 16)];
+//    [clickPath lineToPoint:NSMakePoint(startPoint.x -16, startPoint.y - 12)];
+//     [clickPath lineToPoint:NSMakePoint(endPoint.x -16, endPoint.y - 12)];
+//      [clickPath lineToPoint:NSMakePoint(endPoint.x -12, endPoint.y - 16)];
+//    [clickPath lineToPoint:NSMakePoint(startPoint.x -12, startPoint.y - 8)];
     [clickPath moveToPoint:NSMakePoint(startPoint.x+6, startPoint.y+6)];
     [clickPath lineToPoint:NSMakePoint(startPoint.x-6, startPoint.y-6)];
     [clickPath lineToPoint:NSMakePoint(endPoint.x  - 6, endPoint.y-6)];
      [clickPath lineToPoint:NSMakePoint(endPoint.x + 6, endPoint.y+6)];
     [clickPath lineToPoint:NSMakePoint(startPoint.x+6, startPoint.y+6)];
+    slope = (startPoint.y - endPoint.y)/ (startPoint.x - endPoint.x);
+    yIntercept = startPoint.y - (startPoint.x*slope);
     [clickPath closePath];
     
 }
@@ -100,6 +132,9 @@
 -(void)rightMouseDown:(NSEvent *)theEvent{
     NSPoint loc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
    // NSLog(@" %f, %f", loc.x, loc.y);
+    //NSLog(@"YIntercept = %f, Slope = %f", yIntercept, slope);
+   // NSLog(@"Points %f, %f and yIntercept = %f", loc.y, loc.x, (loc.y) - (loc.x*slope));
+    //if(yIntercept+.05 > (loc.y)-(loc.x*slope) &&  (loc.y)-(loc.x*slope) > yIntercept - .05){
     if([clickPath containsPoint:loc]){
         isHighlighted = YES;
      [self setNeedsDisplay:YES];
@@ -119,6 +154,7 @@
     }else{
         [super rightMouseDown:theEvent];
     }
+    
    
 }
 -(void)menuDidClose:(NSMenu *)menu{
@@ -146,14 +182,14 @@
     }else if([keyPath isEqualToString:@"cards"]){
         [self removeFromSuperview];
     }else{
-        [self setNeedsDisplay:YES]; 
+        //NSLog(threadObject.myThreadType.visible ? @"It is nil" : @"It is not nil" );
+        if(threadObject.myThreadType.visible && card1.visible && card2.visible){
+            [self setHidden:NO];
+        }else{
+            [self setHidden:YES];
+        }
     }
-}
--(void)dealloc{
-    [card1 removeObserver:self forKeyPath:@"rect"];
-    [card2 removeObserver:self forKeyPath:@"rect"];
-    [threadObject removeObserver:self forKeyPath:@"cards"];
-    [threadObject removeObserver:self forKeyPath:@"myThreadType"];
+      [self setNeedsDisplay:YES];
 }
 
 

@@ -40,6 +40,7 @@
 NSString *CARD_TYPE_ARRAY = @"cardTypes";
 NSString *THREAD_SET = @"threadTypes";
 NSMutableArray * displayArray;
+NSString *logString = @"CBMMainWindowController";
 CardType *one;
 CBMCardAndThreadManager * cardManager;
 BOOL createCard = YES;
@@ -90,14 +91,18 @@ const CGFloat cardHeight = 150;
 -(void)cardClicked:(id)sender{
     if([state creatingThread]){
         if([state cardSelected] != nil && [state cardSelected] != [(CBMCardView *)sender cardObject]){
-            [cardManager createThreadWithType:[state threadToCreate] BetweenCard:[state cardSelected] AndCard:[(CBMCardView *)sender cardObject]];
+            Thread *athread = [cardManager createThreadWithType:[state threadToCreate] BetweenCard:[state cardSelected] AndCard:[(CBMCardView *)sender cardObject]];
             [self redrawCorkboard];
             [state setThreadToCreate:nil];
+            [corkboardView addSubviewToBack:[self createThreadView:athread]];
             
         }
        [state setCardSelected:[(CBMCardView *)sender cardObject]];
     }else{
             [state setCardSelected:[(CBMCardView *)sender cardObject]];
+    }
+    if([searchButton state]== NSOnState){
+        [self redrawCorkboard];
     }
  }
 
@@ -170,27 +175,32 @@ const CGFloat cardHeight = 150;
  @param array can be filled with any objects, there is a check for threads
  */
 -(NSArray *)createThreadViews:(NSArray *)array{
-   // NSLog(@"createThreadViews");
+   
     for(Thread *aThread in array){
         if([aThread isKindOfClass:[Thread class]]){
-           // NSLog(@"thread found");
-        NSArray *anArray = [[aThread cards]allObjects];
-          //  NSLog(@"Thread - %lu", [anArray count]);
-        NSPoint startPoint = [(Card *)[anArray objectAtIndex:0] getLocation];
-        NSPoint endPoint = [(Card *)[anArray objectAtIndex:1]getLocation];
-        NSPoint origin = NSMakePoint(MIN(startPoint.x, endPoint.x), MIN(startPoint.y, endPoint.y));
-        NSSize size = NSMakeSize(MAX(startPoint.x, endPoint.x)-MIN(startPoint.x, endPoint.x), MAX(startPoint.x, endPoint.x)-MIN(startPoint.x, endPoint.x));
-        NSRect newFrame = NSMakeRect(origin.x, origin.y, size.width, size.height);
-        CBMThreadView *aView = [[CBMThreadView alloc]initWithFrame:newFrame AndThread:aThread];
-            [aView setThreadTypeManager:typeManager]; 
-        [corkboardView addSubview:aView];
+            NSView *aView = [self createThreadView: aThread];
+            [corkboardView addSubview:aView];
+        
         }
     }
     return nil;
 }
 
-/*! 
- Sets up the Main Corkboard, right hand side of the application. 
+-(NSView *)createThreadView:(Thread *)aThread{
+    NSArray *anArray = [[aThread cards]allObjects];
+
+    NSPoint startPoint = [(Card *)[anArray objectAtIndex:0] getLocation];
+    NSPoint endPoint = [(Card *)[anArray objectAtIndex:1]getLocation];
+    NSPoint origin = NSMakePoint(MIN(startPoint.x, endPoint.x), MIN(startPoint.y, endPoint.y));
+    NSSize size = NSMakeSize(MAX(startPoint.x, endPoint.x)-MIN(startPoint.x, endPoint.x), MAX(startPoint.x, endPoint.x)-MIN(startPoint.x, endPoint.x));
+    NSRect newFrame = NSMakeRect(origin.x, origin.y, size.width, size.height);
+    CBMThreadView *aView = [[CBMThreadView alloc]initWithFrame:newFrame AndThread:aThread];
+    [aView setThreadTypeManager:typeManager];
+
+    return aView;
+}
+/*!
+ Sets up the Main Corkboard, right hand side of the application.
  Creates the centering and corkboard view, modifys main scroller, and then sets up notifications
  */
 -(void)setUpMainCorkboardViews{
@@ -219,29 +229,46 @@ const CGFloat cardHeight = 150;
  */
 -(void)avoidSearchCriteria:(NSArray *)criteria WithDepth:(NSInteger)integer{
     if([state cardSelected] != nil){
-     
+        NSArray *array = [cardManager getAllCardsAndThreads];
         NSArray *anArray = [cardManager searchOnCard:[state cardSelected] WithDepth:integer AndAvoid:displayArray];
-        [corkboardView setSubviews:[[NSArray alloc]initWithObjects: nil]];
-        [self createThreadViews:anArray];
-        [self createCardViews:anArray];
-        //NSLog(@"searchCriteria - %lu", [anArray count]);
+        [self setStateToInvisible:array];
+        [self setStateToVisible:anArray];
+//        [corkboardView setSubviews:[[NSArray alloc]initWithObjects: nil]];
+//        [self createThreadViews:anArray];
+//        [self createCardViews:anArray];
+       
     }
 }
 /*!
  Method to call when display has changed
  */
 -(void)avoidDisplay:(NSArray *)criteria{
-    NSArray *anArray;
-    [corkboardView setSubviews:[[NSArray alloc]initWithObjects:nil]];
-    if([criteria count] == 0){
-        NSLog(@"avoid display count is zero");
-        anArray = [cardManager getAllCardsAndThreads];
-    }else{
-        NSLog(@"avoid display - criteria used");
-        anArray = [cardManager getAllCardsAndThreadsAndAvoid:criteria];
+    NSArray *array = [typeManager getAllCardTypes];
+    for(CardType *type in array){
+        [type setVisible:[type visible]]; 
     }
-     [self createThreadViews:anArray];
-    [self createCardViews:anArray];
+//    NSArray *anArray;
+//    //copied to get time
+//    NSDate * now = [NSDate date];
+//    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+//    [outputFormatter setDateFormat:@"HH:mm:ss"];
+//    NSString *newDateString = [outputFormatter stringFromDate:now];
+//    // to get time
+//    
+//    NSLog(@"%@ Avoid Display- Pre-Array - %@", logString, newDateString);
+//
+//    [corkboardView setSubviews:[[NSArray alloc]initWithObjects:nil]];
+//    if([criteria count] == 0){
+//      
+//        anArray = [cardManager getAllCardsAndThreads];
+//    }else{
+//
+//            anArray = [cardManager getAllCardsAndThreadsAndAvoid:criteria];
+//    }
+//     NSLog(@"%@ Avoid Display - Pre-Creation - %@", logString, newDateString);
+//     [self createThreadViews:anArray];
+//    [self createCardViews:anArray];
+//     NSLog(@"%@ Avoid Display - After Creation - %@", logString, newDateString);
 }
 
 /*! Sets up all the card and thread type scrollers */
@@ -273,7 +300,9 @@ const CGFloat cardHeight = 150;
             CBMCheckboxCard *c = (CBMCheckboxCard * )[box superview];
             if([displayArray containsObject:[c type]]){
                 [displayArray removeObject:[c type]];
+                [[c type]setVisible:YES];
             }else{
+                [[c type]setVisible:NO];
                 [displayArray addObject:[c type]];
             }
         }
@@ -285,11 +314,10 @@ const CGFloat cardHeight = 150;
  @param sender - CBMCheckboxCard 
  */
 -(void)cardTypeClicked:(id)sender{
-    //NSLog(@"Search and Display - card clicked");
+    
     if([sender isKindOfClass: [CBMCheckboxCard class]]){
         CBMCheckboxCard *c = (CBMCheckboxCard * )sender;
-        //NSLog(@"Color %@ and Name %@", [[c type] color], [[c type] name]);
-        if([[self document] isKindOfClass: [CBMDocument class]]){
+                if([[self document] isKindOfClass: [CBMDocument class]]){
             CBMDocument *doc = [self document];
             [[doc theState]setCardToCreate:[c type]];
         }
@@ -302,10 +330,10 @@ const CGFloat cardHeight = 150;
  @param sender - CBMCheckboxThread 
  */
 -(void)threadTypeClicked:(id)sender{
-    //NSLog(@"Search and Display - thread was clicked");
+ 
     if([sender isKindOfClass: [CBMCheckboxThread class]]){
         CBMCheckboxThread *c = (CBMCheckboxThread * )sender;
-       // NSLog(@"Color %@ and Name %@", [[c type] color], [[c type] name]);
+      
         if([[self document] isKindOfClass: [CBMDocument class]]){
             CBMDocument *doc = [self document];
             [[doc theState]setThreadToCreate:[c type]];
@@ -324,11 +352,11 @@ const CGFloat cardHeight = 150;
         if([[box superview] isKindOfClass: [CBMCheckboxThread class]]){
             CBMCheckboxThread *c = (CBMCheckboxThread * )[box superview];
             if([displayArray containsObject:[c type]]){
-                  NSLog(@"action display thread removed object");
                 [displayArray removeObject:[c type]];
+                [[c type]setVisible:YES];
             }else{
-                   NSLog(@"action display thread added object");
                 [displayArray addObject:[c type]];
+                [[c type]setVisible:NO];
             }
         }
       
@@ -341,11 +369,9 @@ const CGFloat cardHeight = 150;
  */
 -(void)redrawCorkboard{
     if([searchButton state] == NSOnState){
-        NSLog(@"Search Redraw Corkboard");
         [self avoidSearchCriteria:displayArray WithDepth:[stepper intValue]];
     }else{
-        NSLog(@"Display Redraw Corkboard"); 
-        [self avoidDisplay:displayArray];
+       // [self avoidDisplay:displayArray];
     }
 }
 
@@ -412,9 +438,7 @@ growing view
         NSSet *old =  [change objectForKey:NSKeyValueChangeOldKey];
         NSSet *new = [change objectForKey:NSKeyValueChangeNewKey];
         [self threadKeyPathChangedSetNew:new andOldSet:old];
-        
     }
-    
 }
 /*!
  adds a new CBMCheckboxThread to the thread growing view if the new set has 
@@ -469,6 +493,29 @@ growing view
     [[NSNotificationCenter defaultCenter]removeObserver:threadDisplayHolder];
     [[NSNotificationCenter defaultCenter]removeObserver:cardDisplayHolder];
 }
+
+-(void)setStateToVisible:(NSArray *)array{
+    for(Card *aCard in array){
+        if([aCard isKindOfClass:[Card class]]){
+            [aCard setVisible:YES];
+//            NSValue *j = [aCard rect];
+//            NSPoint point = j.pointValue;
+//            CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(point.x-(cardWidth/2), point.y-(cardHeight/2), cardWidth, cardHeight) AndCBMCard:aCard];
+           // [corkboardView addSubview:cardView];
+           // [cardView setCardTypeManager:typeManager];
+        }
+    }
+}
+-(void)setStateToInvisible:(NSArray *)array{
+    for(Card *aCard in array){
+        if([aCard isKindOfClass:[Card class]]){
+            [aCard setVisible:NO];
+        }
+    }
+
+    
+}
+
 
 
 

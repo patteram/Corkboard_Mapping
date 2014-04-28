@@ -20,5 +20,5 @@ extern const float VARIES;
 @property float currentScaleFactor;
 @property CBMState *theState;
 @property NSPoint currentMouseLoc; 
-
+-(void)addSubviewToBack:(NSView *)view; 
 @end

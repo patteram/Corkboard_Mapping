@@ -14,5 +14,14 @@
 @dynamic name;
 @dynamic color;
 @dynamic threadsOfType;
-@synthesize toCreate; 
+@synthesize toCreate;
+@synthesize visible;
+-(id)initWithEntity:(NSEntityDescription *)entity insertIntoManagedObjectContext:(NSManagedObjectContext *)context{
+    self = [super initWithEntity:entity insertIntoManagedObjectContext:context];
+    if(self){
+        visible = YES;
+        toCreate = NO;
+    }
+    return self;
+}
 @end

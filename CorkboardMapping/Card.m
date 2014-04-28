@@ -19,7 +19,8 @@
 @dynamic connections;
 @dynamic myCardType;
 @synthesize selected;
-@synthesize selectedColor; 
+@synthesize selectedColor;
+@synthesize visible;
 -(void)setLocation:(NSPoint)aPoint{
     [self setRect:[NSValue valueWithPoint:aPoint]];
 }
@@ -27,4 +28,12 @@
     return [[self rect] pointValue];
 }
 
+-(id)initWithEntity:(NSEntityDescription *)entity insertIntoManagedObjectContext:(NSManagedObjectContext *)context{
+    self = [super initWithEntity:entity insertIntoManagedObjectContext:context];
+    if(self){
+        visible = YES;
+        selected = NO;
+    }
+    return self; 
+}
 @end

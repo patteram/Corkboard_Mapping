@@ -44,6 +44,12 @@ const float MIN_ZOOM = .1;
      NSKeyValueObservingOptionNew context:nil];
 }
 
+-(void)addSubviewToBack:(NSView *)view{
+    NSMutableArray *array =[[NSMutableArray alloc]initWithObjects:view, nil];
+    [array addObjectsFromArray:[self subviews]];
+    [self setSubviews:array];
+   
+}
 -(void)dealloc{
     [_theState removeObserver:self forKeyPath:@"creatingThread"];
     [_theState removeObserver:self forKeyPath:@"creatingCard"];

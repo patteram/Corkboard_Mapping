@@ -20,6 +20,6 @@
 @property CBMTypeManager *threadTypeManager;
 @property BOOL isHighlighted;
 @property NSBezierPath *clickPath;
-
+@property CGFloat slope, yIntercept; 
 -(id)initWithFrame:(NSRect)frameRect AndThread:(Thread *)thread;
 @end

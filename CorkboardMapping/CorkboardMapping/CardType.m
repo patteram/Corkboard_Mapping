@@ -15,5 +15,14 @@
 @dynamic color;
 @dynamic name;
 @dynamic cardsOfType;
-@synthesize toCreate; 
+@synthesize toCreate;
+@synthesize visible;
+-(id)initWithEntity:(NSEntityDescription *)entity insertIntoManagedObjectContext:(NSManagedObjectContext *)context{
+    self = [super initWithEntity:entity insertIntoManagedObjectContext:context];
+    if(self){
+        visible = YES;
+    }
+    return self;
+}
+
 @end

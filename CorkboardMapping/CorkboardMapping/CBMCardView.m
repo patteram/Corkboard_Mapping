@@ -42,6 +42,8 @@ NSString *string = @"cardClicked:";
             [card addObserver:self forKeyPath:@"myCardType.color" options:NSKeyValueObservingOptionNew context:nil];
             [card addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
             [card addObserver:self forKeyPath:@"body" options:NSKeyValueObservingOptionNew context:nil];
+            [card addObserver:self forKeyPath:@"myCardType.visible" options:NSKeyValueObservingOptionNew context:nil];
+             [card addObserver:self forKeyPath:@"visible" options:NSKeyValueObservingOptionNew context:nil];
             cardObject = card; 
         }
     }
@@ -54,7 +56,9 @@ NSString *string = @"cardClicked:";
     [cardObject removeObserver:self forKeyPath:@"selected"];
     [cardObject removeObserver:self forKeyPath:@"myCardType.color"];
     [cardObject removeObserver:self forKeyPath:@"title"];
-    [cardObject removeObserver:self forKeyPath:@"body"]; 
+    [cardObject removeObserver:self forKeyPath:@"body"];
+    [cardObject removeObserver:self forKeyPath:@"myCardType.visible"];
+    [cardObject removeObserver:self forKeyPath:@"visible"];
 }
 
 
@@ -224,7 +228,7 @@ NSString *string = @"cardClicked:";
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    NSLog(@"key path: %@", keyPath);
+ //   NSLog(@"key path: %@", keyPath);
     if([keyPath isEqualToString:@"myCardType.color"]){
       //  NSLog(@"string right");
         cardColor = [object valueForKeyPath:keyPath];
@@ -235,6 +239,23 @@ NSString *string = @"cardClicked:";
         //[title setString:[object valueForKey:keyPath]];
     }else if([keyPath isEqualToString:@"body"]){
        // [body setString:[object valueForKey:keyPath]];
+    }else if([keyPath isEqualToString:@"myCardType.visible"]){
+        if(cardObject.myCardType.visible){
+            [self setHidden:NO];
+            [cardObject setVisible:YES];
+        }else{
+            [self setHidden:YES];
+            [cardObject setVisible:NO];
+        }
+    }else if([keyPath isEqualToString:@"visible"]){
+       // NSLog(@"CardView - observeValue - Visible Key path");
+        if(cardObject.visible){
+            [self setHidden:NO];
+           // [cardObject setVisible:YES];
+        }else{
+            [self setHidden:YES];
+           // [cardObject setVisible:NO];
+        }
     }
     
     [self setNeedsDisplay:YES];
@@ -275,13 +296,13 @@ NSString *string = @"cardClicked:";
 }
 
 -(void)changeType:(id)sender{
-    NSLog(@"Change type hit");
+   // NSLog(@"Change type hit");
    NSString *title =  [(NSMenuItem *)sender title];
     NSArray *cardList = [cardTypeManager getAllCardTypes];
     if(cardList != nil){
         for(int i = 0; i < [cardList count]; i++){
             if([[[cardList objectAtIndex:i]name]isEqualToString:title]){
-                NSLog(@"Type should have changed");
+               // NSLog(@"Type should have changed");
                 [cardObject setMyCardType:[cardList objectAtIndex:i]];
             }
         }

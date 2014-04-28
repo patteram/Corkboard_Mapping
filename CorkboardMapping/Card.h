@@ -20,6 +20,7 @@
 @property (nonatomic, retain) CardType *myCardType;
 @property BOOL selected;
 @property NSColor *selectedColor;
+@property BOOL visible;
 @end
 
 @interface Card (CoreDataGeneratedAccessors)
