@@ -9,14 +9,14 @@
 #import <Cocoa/Cocoa.h>
 #import "CBMCardAndThreadManager.h"
 #import "CBMTypeManager.h"
-#import "CBMMainWindowController.h"
+#import "CBMMainController.h"
 #import "CBMCreateCardTypeController.h"
 #import "CBMCreateThreadTypeController.h"
 #import "CBMState.h"
 @interface CBMDocument : NSPersistentDocument
 @property CBMTypeManager * typeManager;
 @property CBMCardAndThreadManager * cardAndThreadManager;
-@property CBMMainWindowController  *corkboard;
+@property CBMMainController  *corkboard;
 @property CBMCreateCardTypeController *createCardType;
 @property CBMCreateThreadTypeController *createThreadType;
 @property CBMState *theState;

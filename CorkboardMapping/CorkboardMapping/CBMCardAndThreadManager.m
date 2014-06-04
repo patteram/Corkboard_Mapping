@@ -175,6 +175,10 @@
 }
 
 -(Card *)createCardWithType:(CardType *)type AtLocation:(NSPoint)aPoint AndTitle:(NSString *) title AndBody:(NSString *)body{
+   // NSLog(@"---------------------------------");
+    NSLog(@"%@", myContext);
+    NSLog(@"%@", self); 
+   // NSLog(@"---------------------------------");
     NSEntityDescription *cardEntity = [NSEntityDescription
                                            entityForName:@"Card"
                                            inManagedObjectContext:myContext];
@@ -201,6 +205,9 @@ actual model
     if(![array containsObject:object]){
         [array addObject:object];
     }
+}
+-(void)dealloc{
+    NSLog(@"Typemanager dealloc"); 
 }
 
 @end

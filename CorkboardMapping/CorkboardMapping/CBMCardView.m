@@ -15,7 +15,9 @@
 @synthesize title;
 @synthesize body;
 @synthesize oldCursor;
-@synthesize cardTypeManager; 
+@synthesize deleteDelegate;
+@synthesize cardTypeManager;
+@synthesize clickDelegate;
 const int BUFFER_SPACE = 4;
 NSString *string = @"cardClicked:";
 - (id)initWithFrame:(NSRect)frame
@@ -229,6 +231,7 @@ NSString *string = @"cardClicked:";
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
  //   NSLog(@"key path: %@", keyPath);
+ 
     if([keyPath isEqualToString:@"myCardType.color"]){
       //  NSLog(@"string right");
         cardColor = [object valueForKeyPath:keyPath];
@@ -236,9 +239,9 @@ NSString *string = @"cardClicked:";
             [view setBackgroundColor:cardColor];
         }
     }else if ([keyPath isEqualToString:@"title"]){
-        //[title setString:[object valueForKey:keyPath]];
+        [title setString:[object valueForKey:keyPath]];
     }else if([keyPath isEqualToString:@"body"]){
-       // [body setString:[object valueForKey:keyPath]];
+        [body setString:[object valueForKey:keyPath]];
     }else if([keyPath isEqualToString:@"myCardType.visible"]){
         if(cardObject.myCardType.visible){
             [self setHidden:NO];
@@ -248,13 +251,10 @@ NSString *string = @"cardClicked:";
             [cardObject setVisible:NO];
         }
     }else if([keyPath isEqualToString:@"visible"]){
-       // NSLog(@"CardView - observeValue - Visible Key path");
         if(cardObject.visible){
             [self setHidden:NO];
-           // [cardObject setVisible:YES];
         }else{
             [self setHidden:YES];
-           // [cardObject setVisible:NO];
         }
     }
     
@@ -264,20 +264,24 @@ NSString *string = @"cardClicked:";
 
 -(void)textDidChange:(NSNotification *)notification{
     if( notification.object == title){
-        [cardObject setValue:[title string] forKey:@"title"]; 
+        [clickDelegate titleTextChange:[title string] onCard:cardObject];
     }else if(notification.object == body){
-
-        [cardObject setValue:[body string] forKey:@"body"];
+        [clickDelegate bodyTextChange:[body string] onCard:cardObject];
     }
 }
 
 -(void)mouseDown:(NSEvent *)theEvent{
-
-   [self tryToPerform:@selector(cardClicked:) with:self];
-   // NSLog(@"Mouse Down");
+  
+    if([clickDelegate respondsToSelector:@selector(clicked:)]){
+        [self.clickDelegate clicked:self];
+    }
 }
 -(void)delete:(id)sender{
-    [self tryToPerform:@selector(askToDelete:) with:self];
+    if([deleteDelegate respondsToSelector:@selector(askToDelete:)]){
+        [self.deleteDelegate askToDelete:self];
+        // [self tryToPerform:@selector(mouseDownInCorkboard:) with:theEvent];
+    }
+
 }
 -(void)rightMouseDown:(NSEvent *)theEvent{
     NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Card PopUp Menu"];
@@ -296,29 +300,23 @@ NSString *string = @"cardClicked:";
 }
 
 -(void)changeType:(id)sender{
-   // NSLog(@"Change type hit");
    NSString *title =  [(NSMenuItem *)sender title];
     NSArray *cardList = [cardTypeManager getAllCardTypes];
     if(cardList != nil){
         for(int i = 0; i < [cardList count]; i++){
             if([[[cardList objectAtIndex:i]name]isEqualToString:title]){
-               // NSLog(@"Type should have changed");
-                [cardObject setMyCardType:[cardList objectAtIndex:i]];
+                [clickDelegate typeChange:[cardList objectAtIndex:i] onCard:cardObject];
             }
         }
     }
     
-   // NSLog(sender);
 }
 
 -(void)resetCursorRects{
-   // NSLog(@"Reset Cursor was called");
     [super resetCursorRects];
-    
     if(dragging){
-       // NSLog(@"Is Dragging");
         [self addCursorRect:self.bounds cursor:[NSCursor closedHandCursor]];
-    }else{ //if([NSCursor currentCursor] == [NSCursor arrowCursor] || [NSCursor currentCursor] == [NSCursor closedHandCursor] || [NSCursor currentCursor] == [NSCursor IBeamCursor]){
+    }else{
         [self addCursorRect:self.bounds cursor:[NSCursor openHandCursor]];
     }
     

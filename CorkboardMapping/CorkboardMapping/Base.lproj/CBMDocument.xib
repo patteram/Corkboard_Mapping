@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="CBMMainWindowController">
+        <customObject id="-2" userLabel="File's Owner" customClass="CBMMainController">
             <connections>
                 <outlet property="cardDisplayScrollView" destination="KHN-Zs-xnj" id="L4g-Cp-TTW"/>
                 <outlet property="mainScroller" destination="MgI-iw-OBM" id="L39-b9-5Jy"/>

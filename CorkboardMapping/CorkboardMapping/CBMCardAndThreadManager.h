@@ -10,7 +10,7 @@
 #import "CardAndThreadProtocol.h"
 #import "CardType.h"
 
-@interface CBMCardAndThreadManager : NSObject <CardAndThreadProtocol>
+@interface CBMCardAndThreadManager : NSObject <CBMCardAndThreadProtocol>
 
 @property NSManagedObjectContext* myContext;
 @property NSMutableArray *threads;

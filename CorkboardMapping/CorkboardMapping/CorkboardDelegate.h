@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @protocol CorkboardDelegate <NSObject>
-
+-(void)mouseDownInCorkboard:(NSEvent *) theEvent;
 @end

@@ -27,8 +27,11 @@
     self = [super init];
     if (self) {
         // Add your subclass-specific initialization here.
-        theState = [[CBMState alloc]init]; 
+        theState = [[CBMState alloc]init];
+        cardAndThreadManager = [[CBMCardAndThreadManager alloc] initWithModelContext:[self managedObjectContext]];
+        typeManager = [[CBMTypeManager alloc]initWithModelContext:[self managedObjectContext]];
     }
+     NSLog(@"%@", self);
     return self;
 }
 
@@ -49,21 +52,22 @@
 {
     return YES;
 }
-
-
+-(void)setManagedObjectContext:(NSManagedObjectContext *)context{
+    
+    [super setManagedObjectContext:context];
+}
 
 -(void)makeWindowControllers{
     createCardType = nil;
-   corkboard = [[CBMMainWindowController alloc]initWithWindowNibName:@"CBMDocument"];
-       cardAndThreadManager = [[CBMCardAndThreadManager alloc] initWithModelContext:[self managedObjectContext]];
-    typeManager = [[CBMTypeManager alloc]initWithModelContext:[self managedObjectContext]]; 
+   corkboard = [[CBMMainController alloc]initWithWindowNibName:@"CBMDocument"];
+
    [self addWindowController:corkboard];
     
 }
 
 
 -(IBAction)createThreadType:(id)sender{
-    NSLog(@"create Thread Type");
+   // NSLog(@"create Thread Type");
     if(createThreadType != nil){
         if([[self windowControllers] containsObject:createThreadType]){
             [[createThreadType window] orderFrontRegardless];
@@ -86,12 +90,12 @@
     [super close];
 }
 -(IBAction)createCardType:(id)sender{
-    NSLog(@"createCardType");
+   // NSLog(@"createCardType");
     if(createCardType != nil && [[self windowControllers] containsObject:createCardType]){
             [[createCardType window] orderFrontRegardless];
     }else{
         createCardType = [[CBMCreateCardTypeController alloc]initWithWindowNibName:@"CreateCardType"];
-        NSLog(@"creating window");
+       // NSLog(@"creating window");
         [self addWindowController:createCardType];
         [[createCardType window] orderFront:self];
     }
@@ -114,4 +118,7 @@
 //    }
 //    return types;
 //}
+-(void)dealloc{
+    NSLog(@"Deallocated"); 
+}
 @end

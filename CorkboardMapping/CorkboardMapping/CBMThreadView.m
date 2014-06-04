@@ -140,11 +140,13 @@
      [self setNeedsDisplay:YES];
     NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Card Menu"];
     [theMenu insertItemWithTitle:@"Delete" action:@selector(delete:) keyEquivalent:@"" atIndex:0];
-    NSMenuItem *item = [[NSMenuItem alloc]initWithTitle:@"Set Thread Type:" action:nil keyEquivalent:@""];
+    NSMenuItem *item = [[NSMenuItem alloc]initWithTitle:@"Change Thread Type:" action:nil keyEquivalent:@""];
     NSMenu *subMenu = [[NSMenu alloc]initWithTitle:@"Thread Type Selection"];
     NSArray *threadTypes = [threadTypeManager getAllThreadTypes];
     for(int i = 0; i < [threadTypes count]; i++){
+        if([[threadTypes objectAtIndex:i]name] != nil){
         [subMenu addItemWithTitle:[[threadTypes objectAtIndex:i]name] action:@selector(changeType:) keyEquivalent:@""];
+        }
     }
     
     [item setSubmenu:subMenu];

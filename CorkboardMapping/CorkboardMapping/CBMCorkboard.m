@@ -11,6 +11,7 @@
 @synthesize currentScaleFactor;
 @synthesize theState = _theState;
 @synthesize currentMouseLoc;
+@synthesize delegate; 
 const float VARIES = 5;
 const float MAX_ZOOM = 3;
 const float MIN_ZOOM = .1;
@@ -23,7 +24,7 @@ const float MIN_ZOOM = .1;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        NSLog(@"View is being created");
+       // NSLog(@"View is being created");
         self.currentScaleFactor = 1.0f;
         [self CBMsetUpTrackingAreaOnSelf];
     }
@@ -64,7 +65,7 @@ const float MIN_ZOOM = .1;
     [color set];
     NSRectFill([self bounds]);
     if(_theState && [_theState creatingThread] && [_theState cardSelected]){
-        NSLog(@" should be making point");
+       // NSLog(@" should be making point");
       NSPoint thePoint = [[_theState cardSelected]getLocation];
         NSBezierPath *aPath = [NSBezierPath bezierPath];
         [aPath moveToPoint:thePoint];
@@ -127,7 +128,11 @@ const float MIN_ZOOM = .1;
 }
 
 -(void)mouseDown:(NSEvent *)theEvent{
-    [self tryToPerform:@selector(mouseDownInCorkboard:) with:theEvent]; 
+    if([delegate respondsToSelector:@selector(mouseDownInCorkboard:)]){
+        [self.delegate mouseDownInCorkboard:theEvent];
+       // [self tryToPerform:@selector(mouseDownInCorkboard:) with:theEvent];
+    }
+    
 }
 
 -(BOOL)isFlipped{

@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @protocol CBMDeletionDelegate <NSObject>
-
+-(void)askToDelete: (id) itemThatAskedForDeletion;
 @end

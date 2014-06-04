@@ -12,6 +12,7 @@
 @synthesize checkbox;
 @synthesize type;
 @synthesize path;
+@synthesize deletionDelegate; 
 - (id)initWithFrame:(NSRect)frame andThreadType:(ThreadType *)aType
 {
 

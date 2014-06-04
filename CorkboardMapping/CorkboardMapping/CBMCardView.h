@@ -9,7 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "Card.h"
 #import "CBMTypeManager.h"
-#import "CBMTextView.h"; 
+#import "CBMTextView.h"
+#import "CBMDeletionDelegate.h"
+#import "CBMClickedDelegate.h"
 @interface CBMCardView : NSView <NSTextViewDelegate>{
     BOOL higlight;
     BOOL dragging;
@@ -23,6 +25,8 @@
 @property NSTextView *body;
 @property NSCursor *oldCursor; 
 @property CBMTypeManager *cardTypeManager;
+@property id <CBMDeletionDelegate> deleteDelegate;
+@property id <CBMCardViewDelegate> clickDelegate;
 - (id) initWithFrame:(NSRect)frameRect AndCBMCard:(Card*)card;
 
 @end

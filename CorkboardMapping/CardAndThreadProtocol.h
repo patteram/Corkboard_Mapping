@@ -11,7 +11,7 @@
 #import "CardType.h"
 #import "ThreadType.h"
 #import "ThreadType.h"
-@protocol CardAndThreadProtocol <NSObject>
+@protocol CBMCardAndThreadProtocol <NSObject>
 
 @required
 /*!
@@ -67,4 +67,6 @@ Deletes the given thread
  returns the newly created thread
  */
 -(Thread *)createThreadWithType:(ThreadType *)threadType BetweenCard:(Card *)card AndCard:(Card *)card2;
+
+-(void)refresh; 
 @end

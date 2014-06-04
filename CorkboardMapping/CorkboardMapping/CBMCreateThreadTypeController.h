@@ -7,9 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "CBMTypeManager.h"
+#import "CBMThreadTypeProtocol.h"
 @interface CBMCreateThreadTypeController : NSWindowController
-@property CBMTypeManager *manager;
+@property id <CBMThreadTypeProtocol> manager;
 @property (weak) IBOutlet NSTextField *threadNameField;
 @property (weak) IBOutlet NSColorWell *threadColor;
 @property (weak) IBOutlet NSTextFieldCell *warningCell;

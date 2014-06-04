@@ -11,7 +11,10 @@
 #import "CBMCorkboard.h"
 #import "CBMGrowingView.h"
 #import "CBMTypeManager.h"
-@interface CBMMainWindowController : NSWindowController
+#import "CorkboardDelegate.h"
+#import "CBMCardAndThreadManager.h"
+#import "CBMClickedDelegate.h"
+@interface CBMMainController : NSWindowController <CorkboardDelegate, CBMDeletionDelegate, CBMCardViewDelegate>
 
 @property (weak) IBOutlet NSScrollView *mainScroller;
 @property (weak) IBOutlet NSScrollView *cardDisplayScrollView;
@@ -22,6 +25,7 @@
 @property CBMGrowingView * cardSearchHolder;
 @property CBMGrowingView * threadSearchHolder;
 @property CBMTypeManager * typeManager;
+@property id <CBMCardAndThreadProtocol> cardManager;
 
 @property (weak) IBOutlet NSStepper *stepper;
 @property (weak) IBOutlet NSTextField *textForStepper;
@@ -31,7 +35,6 @@
 @property CBMCorkboard *corkboardView;
 @property CBMState *state;
 @property NSManagedObjectContext *myManagedObjectContext;
--(void)avoidSearchCriteria:(NSArray*)criteria;
 -(void)avoidDisplay:(NSArray *)critieria; 
 -(void)avoidSearchCriteria:(NSArray *)criteria WithDepth:(NSInteger)integer;
 -(void)askToDelete:(id)sender; 

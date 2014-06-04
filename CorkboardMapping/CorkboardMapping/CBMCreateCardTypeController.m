@@ -8,6 +8,7 @@
 
 #import "CBMCreateCardTypeController.h"
 #import "CBMDocument.h"
+
 @interface CBMCreateCardTypeController ()
 
 @end
@@ -25,7 +26,7 @@
     if (self) {
         // Initialization code here.
         currentWindow = window;
-        NSLog(@"Should be on screen");
+        //NSLog(@"Should be on screen");
     }
     return self;
 }
@@ -39,7 +40,7 @@
     NSString * typeName = [text stringValue];
     NSColor * color = [colorWell color];
     if(![manager cardTypeExistsWithName:typeName andColor:color]){
-        NSLog(@"Type created");
+        //NSLog(@"Type created");
         [manager createCardTypeWithName:typeName andColor:color];
         [colorWell deactivate]; 
         [currentWindow performClose:self];
@@ -70,10 +71,6 @@
 }
 
 
-//-(BOOL)windowShouldClose:(id)sender{
-//    NSLog(@"Window closing");
-//    return NO; 
-//}
 
 - (void)windowDidLoad
 {
