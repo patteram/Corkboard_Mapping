@@ -11,13 +11,14 @@
 #import "Card.h"
 #import "Thread.h"
 #import "ThreadType.h"
-#import "CBMTypeAlert.h"
+
 
 
 @implementation CBMCardAndThreadManager
 @synthesize myContext;
 @synthesize cards;
 @synthesize threads;
+
 -(id)initWithModelContext:(NSManagedObjectContext*)context{
     self = [super init];
     if(self){
@@ -175,10 +176,6 @@
 }
 
 -(Card *)createCardWithType:(CardType *)type AtLocation:(NSPoint)aPoint AndTitle:(NSString *) title AndBody:(NSString *)body{
-   // NSLog(@"---------------------------------");
-    NSLog(@"%@", myContext);
-    NSLog(@"%@", self); 
-   // NSLog(@"---------------------------------");
     NSEntityDescription *cardEntity = [NSEntityDescription
                                            entityForName:@"Card"
                                            inManagedObjectContext:myContext];
@@ -187,7 +184,8 @@
     [card setTitle:title];
     [card setBody:body];
     [card setMyCardType:type];
-    [card setRect:[NSValue valueWithPoint:aPoint]];
+    [Card ]
+    [card setRectangle:NSMakeRect(aPoint.x, aPoint.y, Card.DEFAULT_CARD_WIDTH, DEFAULT_CARD_HEIGHT)];
     [cards addObject:card];
     return card;
 }

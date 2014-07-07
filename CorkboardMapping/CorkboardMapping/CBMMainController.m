@@ -42,7 +42,7 @@ NSString *logString = @"CBMMainController";
 CardType *one;
 @synthesize cardManager;
 BOOL createCard = YES;
-const CGFloat cardWidth = 250;
+const CGFloat cardWidth = 280;
 const CGFloat cardHeight = 150;
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -75,8 +75,14 @@ const CGFloat cardHeight = 150;
     [self setUpSideScrollViews];
     displayArray = [[NSMutableArray alloc]initWithObjects: nil]; 
     [[super window] makeKeyAndOrderFront:self];
-    
-   
+}
+
+-(void)sizeChange:(NSSize)newSize onCard:(Card *)cardChanged{
+    [cardChanged setSize:newSize];
+}
+
+-(void)originChange:(NSPoint)newOrigin onCard:(Card *)cardChanged{
+    [cardChanged setLocation:newOrigin]; 
 }
 
 -(void)setUpViewsOnCorkboard:(NSArray *)array{
@@ -124,7 +130,7 @@ const CGFloat cardHeight = 150;
             CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(p.x-(cardWidth/2),p.y-(cardHeight/2), cardWidth, cardHeight) AndCBMCard:acard];
                         [corkboardView addSubview:cardView];
             [cardView setCardTypeManager:typeManager];
-            [cardView setClickDelegate:self];
+            [cardView setCardDelegate:self];
             [cardView setDeleteDelegate:self]; 
             [state setCardToCreate:nil];
         }else if ([state creatingThread]){
@@ -148,13 +154,14 @@ const CGFloat cardHeight = 150;
 -(NSArray *)createCardViews:(NSArray *)array{
     for(Card *aCard in array){
         if([aCard isKindOfClass:[Card class]]){
-        NSValue *j = [aCard rect];
-        NSPoint point = j.pointValue;
-        CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(point.x-(cardWidth/2), point.y-(cardHeight/2), cardWidth, cardHeight) AndCBMCard:aCard];
+        //NSValue *j = [aCard rect];
+       // NSPoint point = j.pointValue;
+        CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:[aCard getRectangle] AndCBMCard:aCard];
+//        CBMCardView *cardView = [[CBMCardView alloc]initWithFrame:NSMakeRect(point.x-(cardWidth/2), point.y-(cardHeight/2), cardWidth, cardHeight) AndCBMCard:aCard];
         [corkboardView addSubview:cardView];
         [cardView setCardTypeManager:typeManager];
         [cardView setDeleteDelegate:self];
-        [cardView setClickDelegate:self];
+        [cardView setCardDelegate:self];
         }
     }
     return nil;

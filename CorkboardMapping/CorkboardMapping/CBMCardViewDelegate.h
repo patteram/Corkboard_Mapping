@@ -26,5 +26,8 @@
  @param newType- the type that was seleted
  @param cardChanged - teh actual model Card object associated with the view.
  */
--(void)typeChange:(CardType *)newType onCard:(Card *)cardType; 
+-(void)typeChange:(CardType *)newType onCard:(Card *)cardChanged;
+
+-(void)originChange:(NSPoint)newOrigin onCard:(Card*)cardChanged;
+-(void)sizeChange:(NSSize)newSize onCard:(Card*)cardChanged;
 @end

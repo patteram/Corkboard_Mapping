@@ -11,14 +11,15 @@
 #import "CBMTypeManager.h"
 #import "CBMTextView.h"
 #import "CBMDeletionDelegate.h"
-#import "CBMClickedDelegate.h"
+#import "CBMCardViewDelegate.h"
 @interface CBMCardView : NSView <NSTextViewDelegate>{
     BOOL higlight;
     BOOL dragging;
 }
-@property NSPoint oldPoint; 
+@property NSPoint mousePoint;
 @property BOOL highlight;
 @property BOOL dragging;
+@property BOOL resizing; 
 @property NSColor *cardColor;
 @property Card *cardObject;
 @property NSTextView *title;
@@ -26,7 +27,7 @@
 @property NSCursor *oldCursor; 
 @property CBMTypeManager *cardTypeManager;
 @property id <CBMDeletionDelegate> deleteDelegate;
-@property id <CBMCardViewDelegate> clickDelegate;
+@property id <CBMCardViewDelegate> cardDelegate;
 - (id) initWithFrame:(NSRect)frameRect AndCBMCard:(Card*)card;
 
 @end

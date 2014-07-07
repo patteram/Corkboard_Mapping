@@ -21,11 +21,23 @@
 @synthesize selected;
 @synthesize selectedColor;
 @synthesize visible;
+ const float DEFAULT_CARD_HEIGHT = 150;
+ const float DEFAULT_CARD_WIDTH = 280;
 -(void)setLocation:(NSPoint)aPoint{
-    [self setRect:[NSValue valueWithPoint:aPoint]];
+     NSRect r = [[self rect]rectValue];
+    [self setRect: [NSValue valueWithRect:(NSMakeRect(aPoint.x, aPoint.y,r.size.width, r.size.height))]];
 }
 -(NSPoint)getLocation{
-    return [[self rect] pointValue];
+   return [[self rect]rectValue].origin;
+}
+
+-(NSSize)getSize{
+    NSRect r = [[self rect]rectValue];
+    return r.size;
+}
+-(void)setSize:(NSSize)aSize{
+    NSRect r = [[self rect]rectValue];
+    [self setRect: [NSValue valueWithRect:(NSMakeRect(r.origin.x, r.origin.y, aSize.width, aSize.height))]];
 }
 
 -(id)initWithEntity:(NSEntityDescription *)entity insertIntoManagedObjectContext:(NSManagedObjectContext *)context{
@@ -35,5 +47,12 @@
         selected = NO;
     }
     return self; 
+}
+
+-(NSRect)getRectangle{
+    return [[self rect]rectValue];
+}
+-(void)setRectangle:(NSRect)rectangle{
+    [self setRect: [NSValue valueWithRect:rectangle]]; 
 }
 @end

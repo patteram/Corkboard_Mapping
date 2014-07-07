@@ -13,7 +13,7 @@
 #import "CBMTypeManager.h"
 #import "CorkboardDelegate.h"
 #import "CBMCardAndThreadManager.h"
-#import "CBMClickedDelegate.h"
+#import "CBMCardViewDelegate.h"
 @interface CBMMainController : NSWindowController <CorkboardDelegate, CBMDeletionDelegate, CBMCardViewDelegate>
 
 @property (weak) IBOutlet NSScrollView *mainScroller;

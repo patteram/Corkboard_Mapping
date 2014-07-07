@@ -30,5 +30,10 @@
 - (void)addConnections:(NSSet *)values;
 - (void)removeConnections:(NSSet *)values;
 -(void)setLocation:(NSPoint)aPoint;
--(NSPoint)getLocation; 
+-(NSPoint)getLocation;
+-(void)setSize:(NSSize)aSize;
+-(NSSize)getSize;
+-(NSRect)getRectangle;
+-(void)setRectangle:(NSRect)rectangle;
+
 @end

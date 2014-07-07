@@ -7,7 +7,7 @@
 //
 
 #import "CBMTypeManager.h"
-#import "CBMTypeAlert.h"
+
 @implementation CBMTypeManager
 @synthesize cardTypes;
 @synthesize threadTypes;

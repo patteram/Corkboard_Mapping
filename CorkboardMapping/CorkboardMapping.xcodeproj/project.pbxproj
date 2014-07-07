@@ -28,7 +28,7 @@
 		5EABAC9B18B6C86E00B52D24 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EABAC9918B6C86E00B52D24 /* MainMenu.xib */; };
 		5EABAC9E18B6C86E00B52D24 /* CBMDocument.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5EABAC9C18B6C86E00B52D24 /* CBMDocument.xcdatamodeld */; };
 		5EABACA018B6C86E00B52D24 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EABAC9F18B6C86E00B52D24 /* Images.xcassets */; };
-		5EABACBD18B6D3C400B52D24 /* CBMMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACBC18B6D3C400B52D24 /* CBMMainWindowController.m */; };
+		5EABACBD18B6D3C400B52D24 /* CBMMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACBC18B6D3C400B52D24 /* CBMMainController.m */; };
 		5EABACC218B6D61200B52D24 /* CBMCenteringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACBF18B6D61200B52D24 /* CBMCenteringView.m */; };
 		5EABACC318B6D61200B52D24 /* CBMCorkboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACC118B6D61200B52D24 /* CBMCorkboard.m */; };
 		5EABACC818B6D62300B52D24 /* CBMCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EABACC518B6D62300B52D24 /* CBMCardView.m */; };
@@ -62,6 +62,7 @@
 		5E16831118CE69E200EEC4E6 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		5E16831318CE74BC00EEC4E6 /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightArrow.png; sourceTree = "<group>"; };
 		5E16831518CE74C700EEC4E6 /* leftArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftArrow.png; sourceTree = "<group>"; };
+		5E16C61619196CD9004C9C66 /* CorkboardDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CorkboardDelegate.h; sourceTree = "<group>"; };
 		5E1F1A1F18B9690400C89AE0 /* CBMTypeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBMTypeManager.h; path = ../CBMTypeManager.h; sourceTree = "<group>"; };
 		5E1F1A2018B9690400C89AE0 /* CBMTypeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CBMTypeManager.m; path = ../CBMTypeManager.m; sourceTree = "<group>"; };
 		5E1F1A2918BAB5FF00C89AE0 /* CBMThreadTypeProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBMThreadTypeProtocol.h; sourceTree = "<group>"; };
@@ -72,6 +73,8 @@
 		5E1F1A3518BC1B5500C89AE0 /* CardType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardType.m; sourceTree = "<group>"; };
 		5E1F1A3718BC1B7200C89AE0 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Card.h; path = ../Card.h; sourceTree = "<group>"; };
 		5E1F1A3818BC1B7200C89AE0 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Card.m; path = ../Card.m; sourceTree = "<group>"; };
+		5E45A0A11921DA1500228F1C /* CBMDeletionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBMDeletionDelegate.h; sourceTree = "<group>"; };
+		5E45A0A31921DCAA00228F1C /* CBMCardViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBMCardViewDelegate.h; sourceTree = "<group>"; };
 		5E74A5BF1904AEB400554AB3 /* CBMTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMTextView.h; sourceTree = "<group>"; };
 		5E74A5C01904AEB400554AB3 /* CBMTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMTextView.m; sourceTree = "<group>"; };
 		5EAB1C9918D35F8E00B4CC1A /* CBMThreadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMThreadView.h; sourceTree = "<group>"; };
@@ -98,8 +101,8 @@
 		5EABAC9D18B6C86E00B52D24 /* CBMDocument.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CBMDocument.xcdatamodel; sourceTree = "<group>"; };
 		5EABAC9F18B6C86E00B52D24 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5EABACA618B6C86E00B52D24 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		5EABACBB18B6D3C400B52D24 /* CBMMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMMainWindowController.h; sourceTree = "<group>"; };
-		5EABACBC18B6D3C400B52D24 /* CBMMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMMainWindowController.m; sourceTree = "<group>"; };
+		5EABACBB18B6D3C400B52D24 /* CBMMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMMainController.h; sourceTree = "<group>"; };
+		5EABACBC18B6D3C400B52D24 /* CBMMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMMainController.m; sourceTree = "<group>"; };
 		5EABACBE18B6D61200B52D24 /* CBMCenteringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMCenteringView.h; sourceTree = "<group>"; };
 		5EABACBF18B6D61200B52D24 /* CBMCenteringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMCenteringView.m; sourceTree = "<group>"; };
 		5EABACC018B6D61200B52D24 /* CBMCorkboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMCorkboard.h; sourceTree = "<group>"; };
@@ -172,17 +175,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E16C6151913EE59004C9C66 /* xib files */ = {
+			isa = PBXGroup;
+			children = (
+				5EABAC9618B6C86E00B52D24 /* CBMDocument.xib */,
+				5EABAC9918B6C86E00B52D24 /* MainMenu.xib */,
+				5EABACE118B9093400B52D24 /* CreateCardType.xib */,
+				5EAB1C9E18D3781200B4CC1A /* CBMCreateThreadTypeController.xib */,
+			);
+			name = "xib files";
+			sourceTree = "<group>";
+		};
 		5E1F1A2218BAA84C00C89AE0 /* WindowControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5E16C61619196CD9004C9C66 /* CorkboardDelegate.h */,
+				5E45A0A31921DCAA00228F1C /* CBMCardViewDelegate.h */,
+				5E45A0A11921DA1500228F1C /* CBMDeletionDelegate.h */,
 				5EF611B618C29B7600A7AD7F /* CBMCreateCardTypeController.m */,
 				5EF611B518C29B7600A7AD7F /* CBMCreateCardTypeController.h */,
-				5EABACE118B9093400B52D24 /* CreateCardType.xib */,
-				5EABACBB18B6D3C400B52D24 /* CBMMainWindowController.h */,
-				5EABACBC18B6D3C400B52D24 /* CBMMainWindowController.m */,
+				5EABACBB18B6D3C400B52D24 /* CBMMainController.h */,
+				5EABACBC18B6D3C400B52D24 /* CBMMainController.m */,
 				5EAB1C9C18D3781200B4CC1A /* CBMCreateThreadTypeController.h */,
 				5EAB1C9D18D3781200B4CC1A /* CBMCreateThreadTypeController.m */,
-				5EAB1C9E18D3781200B4CC1A /* CBMCreateThreadTypeController.xib */,
 			);
 			name = WindowControllers;
 			sourceTree = "<group>";
@@ -291,8 +306,6 @@
 			children = (
 				5EABAC9318B6C86E00B52D24 /* CBMDocument.h */,
 				5EABAC9418B6C86E00B52D24 /* CBMDocument.m */,
-				5EABAC9618B6C86E00B52D24 /* CBMDocument.xib */,
-				5EABAC9918B6C86E00B52D24 /* MainMenu.xib */,
 				5EABAC9F18B6C86E00B52D24 /* Images.xcassets */,
 				5EABAC8818B6C86E00B52D24 /* Supporting Files */,
 				5E1F1A2618BAABB200C89AE0 /* Managers */,
@@ -301,6 +314,7 @@
 				5E1F1A2218BAA84C00C89AE0 /* WindowControllers */,
 				5EF31A8C18E0D2F900B442AB /* CBMState.h */,
 				5EF31A8D18E0D2F900B442AB /* CBMState.m */,
+				5E16C6151913EE59004C9C66 /* xib files */,
 			);
 			path = CorkboardMapping;
 			sourceTree = "<group>";
@@ -532,7 +546,7 @@
 				5EABACC818B6D62300B52D24 /* CBMCardView.m in Sources */,
 				5EABACDB18B7C7E000B52D24 /* CBMCardAndThreadManager.m in Sources */,
 				5EABAC9518B6C86E00B52D24 /* CBMDocument.m in Sources */,
-				5EABACBD18B6D3C400B52D24 /* CBMMainWindowController.m in Sources */,
+				5EABACBD18B6D3C400B52D24 /* CBMMainController.m in Sources */,
 				5EABACC218B6D61200B52D24 /* CBMCenteringView.m in Sources */,
 				5EABAC9E18B6C86E00B52D24 /* CBMDocument.xcdatamodeld in Sources */,
 			);
