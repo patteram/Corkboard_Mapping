@@ -177,12 +177,12 @@ NSString *string = @"cardClicked:";
 
 
 - (BOOL)checkIsPointSpecial:(NSPoint) point{
-    NSBezierPath *rect = [NSBezierPath bezierPathWithRect:NSMakeRect(self.frame.size.width-10, 0, self.frame.size.width, 10)];
-    if([rect containsPoint:point]){
-        return YES;
-    }else{
+//    NSBezierPath *rect = [NSBezierPath bezierPathWithRect:NSMakeRect(self.frame.size.width-10, 0, self.frame.size.width, 10)];
+//    if([rect containsPoint:point]){
+//        return YES;
+//    }else{
         return NO;
-    }
+//    }
 }
 -(void)mouseUp:(NSEvent *)theEvent{
     //NSLog(@"Mouse up Dragging NO");
