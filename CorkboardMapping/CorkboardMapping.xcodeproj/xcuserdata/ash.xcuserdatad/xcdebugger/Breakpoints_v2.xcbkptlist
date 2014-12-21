@@ -27,13 +27,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CorkboardMapping/CBMCardView.m"
-            timestampString = "425424683.32536"
+            timestampString = "427443178.792324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "-checkIsPointSpecial:"
-            landmarkType = "5">
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "@implementation CBMCardView"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

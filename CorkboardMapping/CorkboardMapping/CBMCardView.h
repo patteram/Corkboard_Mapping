@@ -22,6 +22,7 @@
 @property BOOL resizing; 
 @property NSColor *cardColor;
 @property Card *cardObject;
+@property NSScrollView *titleScrollView; 
 @property NSTextView *title;
 @property NSTextView *body;
 @property NSCursor *oldCursor; 

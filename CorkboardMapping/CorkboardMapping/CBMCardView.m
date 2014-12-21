@@ -19,14 +19,15 @@
 @synthesize deleteDelegate;
 @synthesize cardTypeManager;
 @synthesize cardDelegate;
+@synthesize titleScrollView;
 @synthesize resizing;
 const int BUFFER_SPACE = 4;
-const float MIN_LENGTH = 150;
+const float MIN_HEIGHT = 150;
 const float MIN_WIDTH = 250;
 const float MAX_WIDTH = 450;
 const float MAX_HEIGHT = 400;
-const float DEFAULT_CARD_HEIGHT = 150;
-const float DEFAULT_CARD_WIDTH = 280;
+//const float DEFAULT_CARD_HEIGHT = 150;
+//const float DEFAULT_CARD_WIDTH = 280;
 NSString *string = @"cardClicked:";
 - (id)initWithFrame:(NSRect)frame
 {
@@ -44,8 +45,17 @@ NSString *string = @"cardClicked:";
             cardColor = [card valueForKeyPath:@"myCardType.color"];
             [self CBMsetUpTrackingAreaOnSelf];
             [self addSubview:[self CBMsetUpBodyTextAreaWithText:[card body]]];
+          
             [self addSubview:[self CBMsetUpTitleTextAreaWithText:[card title]]];
-            
+            NSDictionary *views = NSDictionaryOfVariableBindings(titleScrollView);
+            [self addConstraints:
+             [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[titleScrollView]-10-|"
+                                                     options:0
+                                                     metrics:nil
+                                                       views:views]];
+//            [self addConstraint: [NSLayoutConstraint constraintsWithVisualFormat:@"V:[titleScrollView]-5-|" options:0 metrics:nil views:views]];
+//              [self addConstraint: [NSLayoutConstraint constraintWithItem:titleScrollView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeRight multiplier:6 constant:8]];
+//            
             highlight = NO;
             dragging = NO;
             [card addObserver:self forKeyPath:@"selected" options:NSKeyValueObservingOptionNew context:nil];
@@ -137,8 +147,8 @@ NSString *string = @"cardClicked:";
     if(newWidth < MIN_WIDTH){
         newWidth = MIN_WIDTH;
     }
-    if(newHeight < MIN_LENGTH){
-        newHeight = MIN_LENGTH;
+    if(newHeight < MIN_HEIGHT){
+        newHeight = MIN_HEIGHT;
     }
     [cardDelegate sizeChange:NSMakeSize(newWidth, newHeight) onCard:cardObject];
    // [self setFrame:NSMakeRect(self.frame.origin.x, self.frame.origin.y, newWidth, newHeight)];
@@ -239,17 +249,17 @@ NSString *string = @"cardClicked:";
     [body setBackgroundColor:[NSColor clearColor]];
     [body setVerticallyResizable:YES];
     [[body textContainer] setContainerSize:NSMakeSize(width, height*9)];
-    [[body textContainer] setHeightTracksTextView:NO];
+    [[body textContainer] setHeightTracksTextView:YES];
     [body setString:text];
     [body setDelegate:self];
-    NSScrollView *scrollview = [[NSScrollView alloc]initWithFrame:NSMakeRect(x, y, width, height)];
-    [scrollview setHasVerticalScroller:YES];
-    [scrollview setAutoresizingMask:NSViewWidthSizable |
+    NSScrollView *scrollView = [[NSScrollView alloc]initWithFrame:NSMakeRect(x, y, width-8, height)];
+    [scrollView setHasVerticalScroller:YES];
+    [scrollView setAutoresizingMask:NSViewWidthSizable |
      NSViewHeightSizable];
-    [scrollview setDocumentView:body];
-    [scrollview setBackgroundColor:cardColor];
+    [scrollView setDocumentView:body];
+    [scrollView setBackgroundColor:cardColor];
     
-    return scrollview;
+    return scrollView;
 }
 
 /*!
@@ -262,9 +272,9 @@ NSString *string = @"cardClicked:";
         text = @" ";
     }
     CGFloat x = self.bounds.origin.x+BUFFER_SPACE;
-    CGFloat y = self.frame.size.height - 54; //self.bounds.origin.y+(DEFAULT_CARD_HEIGHT/3)*2-BUFFER_SPACE;
-    CGFloat width = self.bounds.size.width-BUFFER_SPACE*2;
-    CGFloat height = DEFAULT_CARD_HEIGHT/4; //- BUFFER_SPACE*1;
+    CGFloat y = self.frame.size.height - 50; //self.bounds.origin.y+(DEFAULT_CARD_HEIGHT/3)*2-BUFFER_SPACE;
+    CGFloat width = MAX_WIDTH-BUFFER_SPACE*2;
+    CGFloat height = MIN_HEIGHT/4; //- BUFFER_SPACE*1;
     //set up title
     title = [[CBMTextView alloc] initWithFrame:NSMakeRect(x,y,width, height)];
     [title setMinSize:NSMakeSize(width, height)];
@@ -273,14 +283,19 @@ NSString *string = @"cardClicked:";
     [title setHorizontallyResizable:YES];
     [title setBackgroundColor:[NSColor clearColor]];
     [title setString:text];
-    [title alignCenter:self];
+    titleScrollView = [[NSScrollView alloc]initWithFrame:NSMakeRect(x, y, width-4, height)];
+    [titleScrollView setHasHorizontalScroller:YES];
+    [titleScrollView setAutoresizingMask:NSViewWidthSizable];
+    [titleScrollView setDocumentView:title];
+    [titleScrollView setBackgroundColor:cardColor];
+   // [title alignCenter:titleScrollView];
     //text container is nessart for controlling size
-    [[title textContainer] setContainerSize:NSMakeSize(width, height*2)];
-    [[title textContainer] setWidthTracksTextView:NO];
+   // [[title textContainer] setContainerSize:NSMakeSize(width-8, height*2)];
+   // [[title textContainer] setWidthTracksTextView:YES];
     [[title textStorage ]setFont:[NSFont boldSystemFontOfSize:16]];
-    [title setDelegate:self]; 
+    [title setDelegate:self];
     
-    return title;
+    return titleScrollView;
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
@@ -312,12 +327,20 @@ NSString *string = @"cardClicked:";
         }
     }else if([keyPath isEqualToString:@"rect"]){
         [self setFrame:[cardObject getRectangle]];
+        [self repositionTextFields];
         //[title setFrameOrigin:NSMakePoint(title.frame.origin.x, self.frame.size.height - 54)];
         //[title setFrameSize:NSMakeSize(self.frame.size.width - BUFFER_SPACE, title.frame.size.height)];
 
     }
     
     [self setNeedsDisplay:YES];
+    
+}
+
+-(void)repositionTextFields{
+    CGFloat x = self.bounds.origin.x+BUFFER_SPACE;
+    CGFloat y = self.frame.size.height - 50;
+    [titleScrollView setFrameOrigin:NSMakePoint(x, y)];
     
 }
 
@@ -381,6 +404,8 @@ NSString *string = @"cardClicked:";
     [super cursorUpdate:event];
    // NSLog(@"NSCursor is %@", [NSCursor currentCursor]);
 }
+
+
 
 @end
 

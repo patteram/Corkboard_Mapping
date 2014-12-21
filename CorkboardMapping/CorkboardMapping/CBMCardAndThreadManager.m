@@ -184,8 +184,7 @@
     [card setTitle:title];
     [card setBody:body];
     [card setMyCardType:type];
-    [Card ]
-    [card setRectangle:NSMakeRect(aPoint.x, aPoint.y, Card.DEFAULT_CARD_WIDTH, DEFAULT_CARD_HEIGHT)];
+    [card setRectangle:NSMakeRect(aPoint.x, aPoint.y, DEFAULT_CARD_WIDTH, DEFAULT_CARD_HEIGHT)];
     [cards addObject:card];
     return card;
 }

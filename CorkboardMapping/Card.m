@@ -21,8 +21,8 @@
 @synthesize selected;
 @synthesize selectedColor;
 @synthesize visible;
- const float DEFAULT_CARD_HEIGHT = 150;
- const float DEFAULT_CARD_WIDTH = 280;
+const float DEFAULT_CARD_HEIGHT = 150;
+const float DEFAULT_CARD_WIDTH = 280;
 -(void)setLocation:(NSPoint)aPoint{
      NSRect r = [[self rect]rectValue];
     [self setRect: [NSValue valueWithRect:(NSMakeRect(aPoint.x, aPoint.y,r.size.width, r.size.height))]];

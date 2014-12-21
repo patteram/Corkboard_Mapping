@@ -21,6 +21,8 @@
 @property BOOL selected;
 @property NSColor *selectedColor;
 @property BOOL visible;
+extern const float DEFAULT_CARD_HEIGHT;
+extern const float DEFAULT_CARD_WIDTH;
 @end
 
 @interface Card (CoreDataGeneratedAccessors)
