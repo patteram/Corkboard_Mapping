@@ -136,7 +136,7 @@ const float MIN_ZOOM = .1;
 }
 
 -(BOOL)isFlipped{
-    return YES; 
+    return NO;
 }
 
 /**

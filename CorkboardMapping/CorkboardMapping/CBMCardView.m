@@ -161,10 +161,7 @@ NSString *string = @"cardClicked:";
     if(!resizing){
     if(theNewPoint.x > 0 && theNewPoint.y > 0){
         if(theNewPoint.x < [self superview].bounds.size.width&& theNewPoint.y < [self superview].bounds.size.height){
-//        [self setFrameOrigin:NSMakePoint(theNewPoint.x - mousePoint.x, theNewPoint.y - self.frame.size.height + mousePoint.y )];
-            [cardDelegate originChange:NSMakePoint(theNewPoint.x - mousePoint.x, theNewPoint.y - self.frame.size.height + mousePoint.y ) onCard:cardObject];
-//        [cardDelegate originChange:NSMakePoint((theNewPoint.x - mousePoint.x)+self.bounds.size.width/2, (theNewPoint.y - self.frame.size.height + mousePoint.y )+self.bounds.size.height/2) onCard:cardObject  ];
-            //TODO - Change Card Object Location to by MVC
+            [cardDelegate originChange:NSMakePoint(theNewPoint.x - mousePoint.x, theNewPoint.y - mousePoint.y ) onCard:cardObject];
         }
     }
     }else{
@@ -272,8 +269,9 @@ NSString *string = @"cardClicked:";
         text = @" ";
     }
     CGFloat x = self.bounds.origin.x+BUFFER_SPACE;
-    CGFloat y = self.frame.size.height - 50; //self.bounds.origin.y+(DEFAULT_CARD_HEIGHT/3)*2-BUFFER_SPACE;
-    CGFloat width = MAX_WIDTH-BUFFER_SPACE*2;
+    CGFloat y = self.frame.size.height - 50; //
+//    CGFloat y = self.bounds.origin.y+(DEFAULT_CARD_HEIGHT/3)*2-BUFFER_SPACE;
+    CGFloat width = 280-BUFFER_SPACE*2;
     CGFloat height = MIN_HEIGHT/4; //- BUFFER_SPACE*1;
     //set up title
     title = [[CBMTextView alloc] initWithFrame:NSMakeRect(x,y,width, height)];
